@@ -1,0 +1,10 @@
+SELECT 
+    itd.name,
+    COUNT(CASE WHEN t.create_department_id = 1 THEN 1 END) AS "contact_center",
+    COUNT(CASE WHEN t.create_department_id = 2 THEN 1 END) AS "kc"
+FROM tickets t
+JOIN inbound_type_sub_category_details itd ON t.ticket_subcategory_id = itd.id
+WHERE t.create_date >= CURDATE() AND t.create_date < CURDATE() + INTERVAL 1 DAY
+AND t.ticket_type_id = 2
+GROUP BY itd.name
+ORDER BY itd.name;

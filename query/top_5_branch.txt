@@ -1,0 +1,7 @@
+SELECT b.name, COUNT(t.id) AS total
+FROM tickets t
+JOIN branches b ON t.create_branch_id = b.id
+WHERE t.create_date >= CURDATE() AND t.create_date < CURDATE() + INTERVAL 1 DAY
+GROUP BY b.name
+ORDER BY total DESC
+LIMIT 5;

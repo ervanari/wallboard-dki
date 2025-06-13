@@ -1,0 +1,7 @@
+SELECT d.name, COUNT(t.id) AS total
+FROM tickets t
+JOIN departments d ON t.create_department_id = d.id
+WHERE t.create_date >= CURDATE() AND t.create_date < CURDATE() + INTERVAL 1 DAY
+GROUP BY d.name
+ORDER BY total DESC
+LIMIT 5;

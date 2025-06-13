@@ -1,0 +1,11 @@
+SELECT
+  ROW_NUMBER() OVER (ORDER BY ts.id) AS no,
+  ts.name AS ticket_status,
+  COUNT(t.id) AS total
+FROM ticket_statuses ts
+LEFT JOIN tickets t
+  ON t.ticket_status_id = ts.id
+   AND t.create_date >= CURDATE()
+  AND t.create_date < CURDATE() + INTERVAL 1 DAY
+WHERE ts.id IN (1, 2,4,5,6,11)
+GROUP BY ts.id, ts.name;

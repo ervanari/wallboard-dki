@@ -1,0 +1,66 @@
+SELECT
+    -- login_count
+    (SELECT COUNT(`users`.`id`) 
+     FROM `users`
+     JOIN `user_levels` ON `users`.`user_level_id` = `user_levels`.`id`
+     WHERE `users`.`user_activity_id` > 1
+     AND `users`.`last_activity_time` >= CURDATE() 
+     AND `users`.`last_activity_time` < CURDATE() + INTERVAL 1 DAY
+     AND `users`.`ext_inbound` <> 0
+     AND `users`.`department_id` = 1
+     AND (`user_levels`.`is_agent` = 1 OR `user_levels`.`is_spv` = 1)) AS `login_count`,
+
+    -- not_available
+    (SELECT COUNT(`users`.`id`) 
+     FROM `users`
+     JOIN `user_levels` ON `users`.`user_level_id` = `user_levels`.`id`
+     WHERE `users`.`user_activity_id` = 2
+     AND `users`.`last_activity_time` >= CURDATE() 
+     AND `users`.`last_activity_time` < CURDATE() + INTERVAL 1 DAY
+     AND `users`.`ext_inbound` <> 0
+     AND `users`.`department_id` = 1
+     AND (`user_levels`.`is_agent` = 1 OR `user_levels`.`is_spv` = 1)) AS `not_available`,
+
+    -- ready_in
+    (SELECT COUNT(`users`.`id`) 
+     FROM `users`
+     JOIN `user_levels` ON `users`.`user_level_id` = `user_levels`.`id`
+     WHERE `users`.`user_activity_id` = 3
+     AND `users`.`last_activity_time` >= CURDATE() 
+     AND `users`.`last_activity_time` < CURDATE() + INTERVAL 1 DAY
+     AND `users`.`ext_inbound` <> 0
+     AND `users`.`department_id` = 1
+     AND (`user_levels`.`is_agent` = 1 OR `user_levels`.`is_spv` = 1)) AS `ready_in`,
+
+    -- online_in
+    (SELECT COUNT(`users`.`id`) 
+     FROM `users`
+     JOIN `user_levels` ON `users`.`user_level_id` = `user_levels`.`id`
+     WHERE `users`.`user_activity_id` = 4
+     AND `users`.`last_activity_time` >= CURDATE() 
+     AND `users`.`last_activity_time` < CURDATE() + INTERVAL 1 DAY
+     AND `users`.`ext_inbound` <> 0
+     AND `users`.`department_id` = 1
+     AND (`user_levels`.`is_agent` = 1 OR `user_levels`.`is_spv` = 1)) AS `online_in`,
+
+    -- paperwork
+    (SELECT COUNT(`users`.`id`) 
+     FROM `users`
+     JOIN `user_levels` ON `users`.`user_level_id` = `user_levels`.`id`
+     WHERE `users`.`user_activity_id` = 14
+     AND `users`.`last_activity_time` >= CURDATE() 
+     AND `users`.`last_activity_time` < CURDATE() + INTERVAL 1 DAY
+     AND `users`.`ext_inbound` <> 0
+     AND `users`.`department_id` = 1
+     AND (`user_levels`.`is_agent` = 1 OR `user_levels`.`is_spv` = 1)) AS `paperwork`,
+
+    -- break_user
+    (SELECT COUNT(`users`.`id`) 
+     FROM `users`
+     JOIN `user_levels` ON `users`.`user_level_id` = `user_levels`.`id`
+     WHERE `users`.`user_activity_id` = 6
+     AND `users`.`last_activity_time` >= CURDATE() 
+     AND `users`.`last_activity_time` < CURDATE() + INTERVAL 1 DAY
+     AND `users`.`ext_inbound` <> 0
+     AND `users`.`department_id` = 1
+     AND (`user_levels`.`is_agent` = 1 OR `user_levels`.`is_spv` = 1)) AS `break_user`;

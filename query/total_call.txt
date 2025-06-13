@@ -1,0 +1,7 @@
+SELECT
+rci.call_hour,
+rci.call_date,
+rci.answered,
+rci.abandon    
+FROM report_call_in_summaries rci
+WHERE rci.call_date >= CURDATE() AND rci.call_date < CURDATE() + INTERVAL 1 DAY

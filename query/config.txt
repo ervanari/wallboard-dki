@@ -1,0 +1,4 @@
+'username' => 'rootdev',
+'password' => '-productD3v3l0pm3nt-',
+'host' => '192.168.3.5',
+'dbname' => 'synergix_bdki'

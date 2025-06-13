@@ -1,0 +1,12 @@
+SELECT
+  ROW_NUMBER() OVER (ORDER BY it.id) AS no,
+  it.name AS inbound_type,
+  COUNT(t.id) AS total
+FROM inbound_types it
+LEFT JOIN tickets t
+  ON t.ticket_type_id = it.id
+   AND t.create_date >= CURDATE()
+  AND t.create_date < CURDATE() + INTERVAL 1 DAY
+	AND t.create_department_id = 1
+WHERE it.id IN (2,3)
+GROUP BY it.id, it.name;

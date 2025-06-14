@@ -3,31 +3,25 @@ import { query } from '@/lib/db';
 
 export async function GET() {
   try {
-    // In a real application, this would fetch data from the database
-    // For now, we'll return dummy data
-    
-    // Example of how to fetch from the database:
-    // const result = await query(`
-    //   SELECT
-    //     b.name,
-    //     COUNT(t.id) as count
-    //   FROM tickets t
-    //   JOIN branch_offices b ON t.branch_id = b.id
-    //   WHERE t.created_date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
-    //   GROUP BY b.name
-    //   ORDER BY count DESC
-    //   LIMIT 5
-    // `);
-    
-    // Return dummy data for now
-    const branchData = [
-      { name: 'Cabang Utama', count: 125 },
-      { name: 'Cabang Kelapa Gading', count: 87 },
-      { name: 'Cabang Kemang', count: 72 },
-      { name: 'Cabang Sudirman', count: 58 },
-      { name: 'Cabang Pondok Indah', count: 45 }
-    ];
-    
+    // Fetch data from the database using the query from top_5_branch.txt
+    const result = await query(`
+      SELECT b.name, COUNT(t.id) AS total
+      FROM tickets t
+      JOIN branches b ON t.create_branch_id = b.id
+      WHERE t.create_date
+      GROUP BY b.name
+      ORDER BY total DESC
+      LIMIT 3;
+    `);
+
+    console.log('Top Kantor Cabang Data:', result);
+
+    // Transform the data to match the expected format in the component
+    const branchData = result.map((item: any) => ({
+      name: item.name,
+      count: item.total
+    }));
+
     return NextResponse.json({
       branchData,
       success: true

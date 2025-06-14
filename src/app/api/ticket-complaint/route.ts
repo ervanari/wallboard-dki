@@ -3,37 +3,33 @@ import { query } from '@/lib/db';
 
 export async function GET() {
   try {
-    // In a real application, this would fetch data from the database
-    // For now, we'll return dummy data
-    
-    // Example of how to fetch from the database:
-    // const result = await query(`
-    //   SELECT
-    //     c.name,
-    //     COUNT(t.id) as count
-    //   FROM tickets t
-    //   JOIN complaint_types c ON t.complaint_type_id = c.id
-    //   WHERE
-    //     t.created_date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
-    //     AND t.type = 'complaint'
-    //   GROUP BY c.name
-    //   ORDER BY count DESC
-    //   LIMIT 7
-    // `);
-    
-    // Return dummy data for now
-    const complaintData = [
-      { name: 'Transaksi Gagal', count: 65 },
-      { name: 'Layanan Lambat', count: 52 },
-      { name: 'Biaya Admin', count: 48 },
-      { name: 'ATM Rusak', count: 42 },
-      { name: 'Mobile Banking Error', count: 38 },
-      { name: 'Antrian Panjang', count: 35 },
-      { name: 'Lainnya', count: 28 }
-    ];
-    
+    // Fetch data from the database using the query from ticket_complain.txt
+    const result = await query(`
+      SELECT
+        itd.name,
+        COUNT(CASE WHEN t.create_department_id = 1 THEN 1 END) AS "contact_center",
+        COUNT(CASE WHEN t.create_department_id = 2 THEN 1 END) AS "kc"
+      FROM tickets t
+      JOIN inbound_type_sub_category_details itd ON t.ticket_subcategory_id = itd.id
+      WHERE t.create_date
+      AND t.ticket_type_id = 3
+      GROUP BY itd.name
+      ORDER BY itd.name
+      LIMIT 5;
+    `);
+
+    console.log('Ticket Complaint Data:', result);
+
+    // Transform the data to match the expected format in the component
+    const complaintData = result.map((item: any) => ({
+      name: item.name,
+      count: (item.contact_center || 0) + (item.kc || 0), // Total count combining both departments
+      contact_center: item.contact_center || 0,
+      kc: item.kc || 0
+    }));
+
     return NextResponse.json({
-      complaintData,
+      complaintData: complaintData,
       success: true
     });
   } catch (error) {

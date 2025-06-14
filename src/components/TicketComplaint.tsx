@@ -14,14 +14,15 @@ const TicketComplaint: React.FC = () => {
   });
 
   // Default values if data is not loaded yet
+  console.log('TicketComplaint data:', data);
   const complaintData = data?.complaintData || [
-    { name: 'Transaksi Gagal', count: 65 },
-    { name: 'Layanan Lambat', count: 52 },
-    { name: 'Biaya Admin', count: 48 },
-    { name: 'ATM Rusak', count: 42 },
-    { name: 'Mobile Banking Error', count: 38 },
-    { name: 'Antrian Panjang', count: 35 },
-    { name: 'Lainnya', count: 28 }
+    { name: 'Transaksi Gagal', count: 65, contact_center: 40, kc: 25 },
+    { name: 'Layanan Lambat', count: 52, contact_center: 30, kc: 22 },
+    { name: 'Biaya Admin', count: 48, contact_center: 28, kc: 20 },
+    { name: 'ATM Rusak', count: 42, contact_center: 25, kc: 17 },
+    { name: 'Mobile Banking Error', count: 38, contact_center: 22, kc: 16 },
+    { name: 'Antrian Panjang', count: 35, contact_center: 20, kc: 15 },
+    { name: 'Lainnya', count: 28, contact_center: 15, kc: 13 }
   ];
 
   const options = {
@@ -45,30 +46,48 @@ const TicketComplaint: React.FC = () => {
       },
       labels: {
         overflow: 'justify'
+      },
+      stackLabels: {
+        enabled: true,
+        style: {
+          fontWeight: 'bold',
+          color: 'gray'
+        }
       }
     },
     tooltip: {
-      valueSuffix: ' tickets'
+      headerFormat: '<b>{point.x}</b><br/>',
+      pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
     },
     plotOptions: {
       bar: {
+        stacking: 'normal',
         dataLabels: {
           enabled: true
-        },
-        colorByPoint: true
+        }
       }
     },
     legend: {
-      enabled: false
+      enabled: true,
+      align: 'center',
+      verticalAlign: 'bottom',
+      layout: 'horizontal'
     },
     credits: {
       enabled: false
     },
-    series: [{
-      name: 'Complaint',
-      data: complaintData.map(item => item.count)
-    }],
-    colors: ['#EA4335', '#EB6859', '#ED8B7E', '#F0AEA3', '#F2D1C8', '#F5F4ED', '#F8F8F2']
+    series: [
+      {
+        name: 'Contact Center',
+        data: complaintData.map(item => item.contact_center),
+        color: '#EA4335'
+      },
+      {
+        name: 'Kantor Cabang',
+        data: complaintData.map(item => item.kc),
+        color: '#FBBC05'
+      }
+    ]
   };
 
   if (isLoading) return <WidgetCard title="Ticket Complaint">Loading...</WidgetCard>;

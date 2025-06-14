@@ -1,8 +1,6 @@
 'use client';
 
 import React from 'react';
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
 import WidgetCard from './WidgetCard';
 import useSWR from 'swr';
 
@@ -15,87 +13,51 @@ const TotalTicketKantorCabang: React.FC = () => {
 
   // Default values if data is not loaded yet
   const ticketData = data?.ticketData || [
-    { date: '01/05', count: 32 },
-    { date: '02/05', count: 38 },
-    { date: '03/05', count: 35 },
-    { date: '04/05', count: 42 },
-    { date: '05/05', count: 48 },
-    { date: '06/05', count: 45 },
-    { date: '07/05', count: 52 },
-    { date: '08/05', count: 58 },
-    { date: '09/05', count: 55 },
-    { date: '10/05', count: 62 }
+    { type: 'Permohonan', total: 0 },
+    { type: 'Komplaint', total: 0 }
   ];
 
-  const totalTickets = ticketData.reduce((sum: number, item: any) => sum + item.count, 0);
-  const dailyAverage = Math.round(totalTickets / ticketData.length);
-  const todayTickets = ticketData[ticketData.length - 1]?.count || 0;
-  const percentChange = Math.round(((todayTickets - dailyAverage) / dailyAverage) * 100);
+  // Find the maximum total for scaling the bars
+  const maxTotal = Math.max(...ticketData.map((item: any) => item.total));
 
-  const options = {
-    chart: {
-      type: 'area',
-      height: '180px',
-      backgroundColor: 'transparent'
-    },
-    title: null,
-    xAxis: {
-      categories: ticketData.map((item: any) => item.date),
-      labels: {
-        style: {
-          fontSize: '8px'
-        }
-      }
-    },
-    yAxis: {
-      title: {
-        text: 'Tickets'
-      },
-      min: 0
-    },
-    legend: {
-      enabled: false
-    },
-    plotOptions: {
-      area: {
-        fillColor: {
-          linearGradient: {
-            x1: 0,
-            y1: 0,
-            x2: 0,
-            y2: 1
-          },
-          stops: [
-            [0, 'rgba(106, 90, 205, 0.6)'],
-            [1, 'rgba(106, 90, 205, 0.1)']
-          ]
-        },
-        lineColor: '#6A5ACD',
-        marker: {
-          radius: 3,
-          fillColor: '#6A5ACD'
-        }
-      }
-    },
-    series: [{
-      name: 'Tickets',
-      data: ticketData.map((item: any) => item.count)
-    }],
-    credits: {
-      enabled: false
-    }
+  // Calculate the total of all tickets
+  const totalTickets = ticketData.reduce((sum: number, item: any) => sum + item.total, 0);
+
+  // Get data for specific types
+  const getDataByType = (type: string) => {
+    const item = ticketData.find((item: any) => item.type === type);
+    return item ? item.total : 0;
   };
+
+  // Get percentage width for the bars (scaled to max 100%)
+  const getWidthPercentage = (total: number) => {
+    return maxTotal > 0 ? Math.round((total / maxTotal) * 100) : 0;
+  };
+
+  console.log('Ticket Data Kantor Cabang:', ticketData);
+  console.log('Total Tickets Kantor Cabang:', totalTickets);
 
   if (isLoading) return <WidgetCard title="Total Ticket Kantor Cabang">Loading...</WidgetCard>;
   if (error) return <WidgetCard title="Total Ticket Kantor Cabang">Error loading data</WidgetCard>;
 
   return (
     <WidgetCard title="Total Ticket Kantor Cabang">
-      <div className="ticket-chart">
-        <HighchartsReact
-          highcharts={Highcharts}
-          options={options}
-        />
+      {ticketData.map((item: any, index: number) => (
+        <div key={index} className="p-3 rounded-lg">
+          <div className="flex items-center">
+            <div className="text-sm mr-3 w-32">{item.type}</div>
+            <div className="flex-1 flex items-center">
+              <div
+                className="bg-[#6A5ACD] h-6"
+                style={{ width: `${getWidthPercentage(item.total)}%` }}
+              ></div>
+              <div className="ml-2 text-sm font-semibold">{item.total}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+      <div className="p-3 text-right text-sm font-bold">
+        Total: {totalTickets}
       </div>
     </WidgetCard>
   );

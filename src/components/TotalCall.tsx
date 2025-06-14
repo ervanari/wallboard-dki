@@ -14,88 +14,94 @@ const TotalCall: React.FC = () => {
   });
 
   // Default values if data is not loaded yet
-  const callData = data?.callData || [
-    { time: '08:00', inbound: 45, outbound: 32 },
-    { time: '09:00', inbound: 78, outbound: 41 },
-    { time: '10:00', inbound: 95, outbound: 53 },
-    { time: '11:00', inbound: 83, outbound: 47 },
-    { time: '12:00', inbound: 65, outbound: 38 },
-    { time: '13:00', inbound: 72, outbound: 43 },
-    { time: '14:00', inbound: 88, outbound: 51 },
-    { time: '15:00', inbound: 92, outbound: 49 },
-    { time: '16:00', inbound: 75, outbound: 45 }
-  ];
+  console.log('TotalCall data:', data);
+  const totalCallData = data?.totalCallData || [];
+
+  // Process data for the chart
+  const hours = Array.from(new Set(totalCallData.map((item: any) => item.call_hour))).sort();
+  
+  // Calculate total answered and abandoned calls
+  const totalAnswered = totalCallData.reduce((sum: number, item: any) => sum + (item.answered || 0), 0);
+  const totalAbandoned = totalCallData.reduce((sum: number, item: any) => sum + (item.abandon || 0), 0);
+  const totalCalls = totalAnswered + totalAbandoned;
+
+  // Prepare data for hourly chart
+  const answeredByHour = hours.map(hour => {
+    const hourData = totalCallData.filter((item: any) => item.call_hour === hour);
+    return hourData.reduce((sum: number, item: any) => sum + (item.answered || 0), 0);
+  });
+
+  const abandonedByHour = hours.map(hour => {
+    const hourData = totalCallData.filter((item: any) => item.call_hour === hour);
+    return hourData.reduce((sum: number, item: any) => sum + (item.abandon || 0), 0);
+  });
 
   const options = {
     chart: {
-      type: 'line',
+      type: 'column',
       height: '180px',
       backgroundColor: 'transparent'
     },
     title: null,
     xAxis: {
-      categories: callData.map((item: any) => item.time),
-      labels: {
-        style: {
-          fontSize: '9px'
-        }
+      categories: hours.map(hour => `${hour}:00`),
+      title: {
+        text: 'Hour'
       }
     },
     yAxis: {
+      min: 0,
       title: {
         text: 'Number of Calls'
       },
-      min: 0
-    },
-    legend: {
-      align: 'center',
-      verticalAlign: 'top',
-      layout: 'horizontal'
-    },
-    plotOptions: {
-      line: {
-        marker: {
-          enabled: true,
-          radius: 3
+      stackLabels: {
+        enabled: true,
+        style: {
+          fontWeight: 'bold',
+          color: 'gray'
         }
       }
     },
-    series: [
-      {
-        name: 'Inbound',
-        data: callData.map((item: any) => item.inbound),
-        color: '#4285F4'
-      },
-      {
-        name: 'Outbound',
-        data: callData.map((item: any) => item.outbound),
-        color: '#34A853'
+    tooltip: {
+      headerFormat: '<b>{point.x}</b><br/>',
+      pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+    },
+    plotOptions: {
+      column: {
+        stacking: 'normal',
+        dataLabels: {
+          enabled: true
+        }
       }
-    ],
+    },
+    legend: {
+      enabled: true,
+      align: 'center',
+      verticalAlign: 'bottom',
+      layout: 'horizontal'
+    },
     credits: {
       enabled: false
     },
-    responsive: {
-      rules: [{
-        condition: {
-          maxWidth: 250
-        },
-        chartOptions: {
-          legend: {
-            layout: 'horizontal',
-            align: 'center',
-            verticalAlign: 'bottom'
-          }
-        }
-      }]
-    }
+    series: [
+      {
+        name: 'Answered',
+        data: answeredByHour,
+        color: '#34A853'
+      },
+      {
+        name: 'Abandoned',
+        data: abandonedByHour,
+        color: '#EA4335'
+      }
+    ]
   };
 
-  if (isLoading) return <WidgetCard title="Total Call">Loading...</WidgetCard>;
-  if (error) return <WidgetCard title="Total Call">Error loading data</WidgetCard>;
+  if (isLoading) return <WidgetCard title="Total Calls">Loading...</WidgetCard>;
+  if (error) return <WidgetCard title="Total Calls">Error loading data</WidgetCard>;
 
   return (
-    <WidgetCard title="Total Call">
+    <WidgetCard title="Total Calls">
       <div className="total-call-chart">
         <HighchartsReact
           highcharts={Highcharts}

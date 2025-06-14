@@ -14,15 +14,8 @@ const TicketPermohonan: React.FC = () => {
   });
 
   // Default values if data is not loaded yet
-  const requestData = data?.requestData || [
-    { name: 'Informasi Produk', count: 85 },
-    { name: 'Pembukaan Rekening', count: 72 },
-    { name: 'Kartu ATM', count: 65 },
-    { name: 'Mobile Banking', count: 58 },
-    { name: 'Internet Banking', count: 45 },
-    { name: 'Kredit', count: 38 },
-    { name: 'Deposito', count: 32 }
-  ];
+  console.log('TicketPermohonan data:', data);
+  const requestData = data?.requestData || [];
 
   const options = {
     chart: {
@@ -45,30 +38,48 @@ const TicketPermohonan: React.FC = () => {
       },
       labels: {
         overflow: 'justify'
+      },
+      stackLabels: {
+        enabled: true,
+        style: {
+          fontWeight: 'bold',
+          color: 'gray'
+        }
       }
     },
     tooltip: {
-      valueSuffix: ' tickets'
+      headerFormat: '<b>{point.x}</b><br/>',
+      pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
     },
     plotOptions: {
       bar: {
+        stacking: 'normal',
         dataLabels: {
           enabled: true
-        },
-        colorByPoint: true
+        }
       }
     },
     legend: {
-      enabled: false
+      enabled: true,
+      align: 'center',
+      verticalAlign: 'bottom',
+      layout: 'horizontal'
     },
     credits: {
       enabled: false
     },
-    series: [{
-      name: 'Permohonan',
-      data: requestData.map(item => item.count)
-    }],
-    colors: ['#4285F4', '#5E97F6', '#7BAAF7', '#99BDF8', '#B6D0F9', '#D3E3FB', '#F1F8FE']
+    series: [
+      {
+        name: 'Contact Center',
+        data: requestData.map(item => item.contact_center),
+        color: '#4285F4'
+      },
+      {
+        name: 'Kantor Cabang',
+        data: requestData.map(item => item.kc),
+        color: '#34A853'
+      }
+    ]
   };
 
   if (isLoading) return <WidgetCard title="Ticket Permohonan">Loading...</WidgetCard>;

@@ -8,8 +8,7 @@ import Abandoned from '@/components/Abandoned';
 import TotalCall from '@/components/TotalCall';
 import AverageDuration from '@/components/AverageDuration';
 import TicketStatus from '@/components/TicketStatus';
-import TotalTicketCallCenter from '@/components/TotalTicketCallCenter';
-import TotalTicketKantorCabang from '@/components/TotalTicketKantorCabang';
+import TotalTicketCombined from '@/components/TotalTicketCombined';
 import Top5Department from '@/components/Top5Department';
 import Top5KantorCabang from '@/components/Top5KantorCabang';
 import TicketPermohonan from '@/components/TicketPermohonan';
@@ -59,14 +58,11 @@ export default function Home() {
         <div className="col-span-2">
           <AverageDuration />
         </div>
-        <div className="col-span-2">
+        <div className="col-span-5">
           <TicketStatus />
         </div>
-        <div className="col-span-4">
-          <TotalTicketCallCenter />
-        </div>
-        <div className="col-span-4">
-          <TotalTicketKantorCabang />
+        <div className="col-span-5">
+          <TotalTicketCombined />
         </div>
 
         {/* Third Row */}

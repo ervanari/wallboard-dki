@@ -14,8 +14,6 @@ export async function GET() {
       WHERE rci.call_date
     `);
 
-    console.log('Total Call Data:', result);
-
     // Return the data as JSON with a success flag
     return NextResponse.json({
       totalCallData: result,

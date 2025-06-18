@@ -63,7 +63,8 @@ const TicketPermohonan: React.FC = () => {
       enabled: true,
       align: 'center',
       verticalAlign: 'bottom',
-      layout: 'horizontal'
+      layout: 'horizontal',
+      fontSize: '8px',
     },
     credits: {
       enabled: false

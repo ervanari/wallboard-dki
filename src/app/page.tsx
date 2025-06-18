@@ -35,9 +35,6 @@ export default function Home() {
         </div>
         <div className="text-right">
           <div className="text-xl font-semibold">{new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</div>
-          <div className="text-lg" id="clock">
-            {new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
-          </div>
         </div>
       </header>
 

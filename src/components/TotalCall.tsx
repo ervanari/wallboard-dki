@@ -19,6 +19,7 @@ const TotalCall: React.FC = () => {
 
   // Process data for the chart
   const hours = Array.from(new Set(totalCallData.map((item: any) => item.call_hour))).sort();
+  // const hours = Array.from(new Set(totalCallData.map((item: any) => item.call_hour.toString().slice(0, 2)))).sort();
   
   // Calculate total answered and abandoned calls
   const totalAnswered = totalCallData.reduce((sum: number, item: any) => sum + (item.answered || 0), 0);
@@ -44,7 +45,7 @@ const TotalCall: React.FC = () => {
     },
     title: null,
     xAxis: {
-      categories: hours.map(hour => `${hour}:00`),
+      categories: hours.map(hour => `${hour}`),
       title: {
         text: 'Hour'
       }

@@ -117,10 +117,10 @@ export async function GET() {
 
     // Map the query results to the expected format in the component
     return NextResponse.json({
-      avgTalkTime: data.avg_acd || '00:00:00',
-      avgHoldTime: data.avg_asa || '00:00:00',
-      avgHandleTime: data.avg_aht || '00:00:00',
-      avgWrapUpTime: data.avg_acw || '00:00:00',
+      acd: data.avg_acd || '00:00:00',
+      asa: data.avg_asa || '00:00:00',
+      aht: data.avg_aht || '00:00:00',
+      acw: data.avg_acw || '00:00:00',
       success: true
     });
   } catch (error) {

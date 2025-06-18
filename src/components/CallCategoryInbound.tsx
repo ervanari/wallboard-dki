@@ -11,33 +11,23 @@ const CallCategoryInbound: React.FC = () => {
     refreshInterval: 30000 // refresh every 30 seconds
   });
 
-  // Default values if data is not loaded yet
-  const categoryData = data?.categoryData || [
-    { name: 'Informasi Produk', count: 145, icon: '📱' },
-    { name: 'Transaksi', count: 128, icon: '💳' },
-    { name: 'Keluhan', count: 87, icon: '⚠️' },
-    { name: 'Rekening', count: 76, icon: '💰' },
-    { name: 'Kartu Kredit', count: 65, icon: '💳' },
-    { name: 'Mobile Banking', count: 58, icon: '📲' },
-    { name: 'Internet Banking', count: 52, icon: '🖥️' },
-    { name: 'Lainnya', count: 45, icon: '📋' }
-  ];
+  const categoryData = data?.categoryData;
 
   if (isLoading) return <WidgetCard title="Call Category Inbound">Loading...</WidgetCard>;
   if (error) return <WidgetCard title="Call Category Inbound">Error loading data</WidgetCard>;
 
   return (
     <WidgetCard title="Call Category Inbound">
-      <div className="grid grid-cols-4 gap-3">
-        {categoryData.map((category, index) => (
-          <div
-            key={index}
-            className="bg-gray-50 rounded-lg p-3 text-center flex flex-col items-center justify-center"
-          >
-            <div className="text-2xl mb-1">{category.icon}</div>
-            <div className="text-lg font-bold text-blue-600">{category.count}</div>
-            <div className="text-xs text-gray-600 mt-1 line-clamp-1">{category.name}</div>
-          </div>
+      <div className="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-4 gap-3 md:gap-4 mt-6">
+        {categoryData.map((category: { name: string; count: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; }, index: React.Key | null | undefined) => (
+            <div key={index} className="flex items-center justify-between">
+              <div className="flex items-center gap-2 p-2">
+                <span className="text-sm font-semibold">{category.name.trim()}</span>
+              </div>
+              <div className={`px-2 py-0.5 rounded bg-green-200 flex items-center gap-1`}>
+                <span className="text-sm text-green-600">{category.count}</span>
+              </div>
+            </div>
         ))}
       </div>
     </WidgetCard>

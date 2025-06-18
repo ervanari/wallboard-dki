@@ -11,8 +11,7 @@ export async function GET() {
       FROM inbound_types it
       LEFT JOIN tickets t
         ON t.ticket_type_id = it.id
-        AND t.create_date >= CURDATE()
-        AND t.create_date < CURDATE() + INTERVAL 1 DAY
+        AND t.create_date
         AND t.create_department_id = 1
       WHERE it.id IN (2, 3, 4, 5, 6, 7, 8, 9)
       GROUP BY it.id, it.name

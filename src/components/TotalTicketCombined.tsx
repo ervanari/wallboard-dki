@@ -29,7 +29,6 @@ const TotalTicketCombined: React.FC = () => {
     { type: 'Komplaint', total: 0 }
   ];
 
-  // Find the maximum total for scaling the bars across both datasets
   const allTotals = [
     ...callCenterTickets.map((item: any) => item.total),
     ...kantorCabangTickets.map((item: any) => item.total)
@@ -57,18 +56,18 @@ const TotalTicketCombined: React.FC = () => {
   if (hasError) return <WidgetCard title="Total Ticket">Error loading data</WidgetCard>;
 
   return (
-    <div className="rounded-xl shadow-md bg-white p-4 h-[21vh]">
+    <div className="rounded-xl shadow-md bg-white p-4 h-[22vh]">
       <div className="flex justify-between items-center">
         
         <div className="mb-4 w-[50%]">
           <h3 className="text-md font-semibold mb-2">Call Center</h3>
           {callCenterTickets.map((item: any, index: number) => (
-            <div key={`cc-${index}`} className="p-2 rounded-lg mt-10 mb-6">
+            <div key={`cc-${index}`} className="p-2 rounded-lg my-4">
               <div className="flex items-center">
                 <div className="text-sm mr-3 w-32">{item.type}</div>
                 <div className="flex-1 flex items-center">
                   <div
-                    className="bg-[#4472c4] h-6"
+                    className={`${item.type === 'Permohonan' ? "bg-[#4472c4]" : "bg-amber-500"} h-6 rounded-sm`}
                     style={{ width: `${getWidthPercentage(item.total)}%` }}
                   ></div>
                   <div className="ml-2 text-sm font-semibold">{item.total}</div>
@@ -82,12 +81,12 @@ const TotalTicketCombined: React.FC = () => {
         <div className="mb-4 w-[50%]">
           <h3 className="text-md font-semibold mb-2">Kantor Cabang</h3>
           {kantorCabangTickets.map((item: any, index: number) => (
-            <div key={`kc-${index}`} className="p-2 rounded-lg mt-10 mb-6">
+            <div key={`kc-${index}`} className="p-2 rounded-lg my-4">
               <div className="flex items-center">
                 <div className="text-sm mr-3 w-32">{item.type}</div>
                 <div className="flex-1 flex items-center">
                   <div
-                    className="bg-[#6A5ACD] h-6"
+                    className={`${item.type === 'Permohonan' ? "bg-[#4472c4]" : "bg-amber-500"} h-6 rounded-sm`}
                     style={{ width: `${getWidthPercentage(item.total)}%` }}
                   ></div>
                   <div className="ml-2 text-sm font-semibold">{item.total}</div>

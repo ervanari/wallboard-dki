@@ -21,13 +21,16 @@ const TicketStatus: React.FC = () => {
   
   const rawStatusData: StatusItem[] = data?.rawStatusData || [];
   
+  console.log('Ticket Status Data:', {
+    rawStatusData
+  });
+  
   const statusConfig: Record<number, { bg: string; icon?: React.ReactNode }> = {
-    1: { bg: 'bg-blue-100', icon: <span className="text-blue-600">🆕</span> },
-    2: { bg: 'bg-green-100', icon: <span className="text-green-600">✅</span> },
-    4: { bg: 'bg-red-100', icon: <span className="text-red-600">❌</span> },
-    5: { bg: 'bg-yellow-100', icon: <span className="text-yellow-600">⏳</span> },
-    6: { bg: 'bg-gray-100', icon: <span className="text-gray-600">🔓</span> },
-    11: { bg: 'bg-gray-200', icon: <span className="text-gray-500">🔒</span> }
+    1: { bg: 'bg-blue-100', icon: <span className="text-blue-600"><i className='bx bx-time'></i> </span> },
+    2: { bg: 'bg-red-100', icon: <span className="text-red-600">< i className='bx bx-bell' style={{color:'#e80000'}}></i> </span> },
+    3: { bg: 'bg-orange-100', icon: <span className="text-red-600">< i className='bx bx-check'  style={{color:'#d98500'}}></i> </span> },
+    4: { bg: 'bg-green-100', icon: <span className="text-green-600">< i className='bx bx-check-circle'  style={{color:'#08de00'}}></i> </span> },
+    5: { bg: 'bg-gray-100', icon: <span className="text-gray-600">< i className='bx bx-x'  style={{color:'#545454'}}></i> </span> },
   };
   
   if (isLoading) return <WidgetCard title="Ticket Status">Loading...</WidgetCard>;
@@ -35,16 +38,15 @@ const TicketStatus: React.FC = () => {
 
   return (
     <WidgetCard title="Ticket Status">
-      <div className="rounded-xl p-6 bg-white shadow-md w-full max-w-xl">
-        <h2 className="text-center text-xl font-bold mb-4">Ticket Status</h2>
+      <div className="rounded-xl p-6 w-full">
         <div className="grid grid-cols-2 gap-y-4 gap-x-8">
           {rawStatusData.map((item) => {
-            const config = statusConfig[item.status_id];
+            const config = statusConfig[item.no];
             return (
                 <div key={item.no} className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div className={`p-2 rounded ${config?.bg || "bg-gray-100"}`}>
-                      {config?.icon || <Bell className="w-4 h-4 text-gray-600" />}
+                    <div className={`px-2 py-0.5 rounded ${config?.bg || "bg-gray-100"}`}>
+                      {config?.icon}
                     </div>
                     <span className="text-sm font-medium">{item.ticket_status.trim()}</span>
                   </div>

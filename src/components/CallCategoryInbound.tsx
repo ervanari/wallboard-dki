@@ -3,6 +3,8 @@
 import React from 'react';
 import WidgetCard from './WidgetCard';
 import useSWR from 'swr';
+import Loading from "@/components/Loading";
+import Error from "@/components/Error";
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
@@ -12,10 +14,15 @@ const CallCategoryInbound: React.FC = () => {
   });
 
   const categoryData = data?.categoryData;
-
-  if (isLoading) return <WidgetCard title="Call Category Inbound">Loading...</WidgetCard>;
-  if (error) return <WidgetCard title="Call Category Inbound">Error loading data</WidgetCard>;
-
+  
+  if (isLoading) return (
+      <Loading title="Call Category Inbound" />
+  );
+  
+  if (error) return (
+      <Error title="Call Category Inbound" />
+  );
+  
   return (
     <WidgetCard title="Call Category Inbound">
       <div className="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-4 gap-3 md:gap-4 mt-6">

@@ -5,6 +5,8 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import WidgetCard from './WidgetCard';
 import useSWR from 'swr';
+import Loading from "@/components/Loading";
+import Error from "@/components/Error";
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
@@ -97,10 +99,15 @@ const TotalCall: React.FC = () => {
       }
     ]
   };
-
-  if (isLoading) return <WidgetCard title="Total Calls">Loading...</WidgetCard>;
-  if (error) return <WidgetCard title="Total Calls">Error loading data</WidgetCard>;
-
+  
+  if (isLoading) return (
+      <Loading title="Total Calls" />
+  );
+  
+  if (error) return (
+      <Error title="Total Calls" />
+  );
+  
   return (
     <WidgetCard title="Total Calls">
       <div className="total-call-chart">

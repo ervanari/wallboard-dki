@@ -3,6 +3,8 @@
 import React from 'react';
 import WidgetCard from './WidgetCard';
 import useSWR from 'swr';
+import Loading from "@/components/Loading";
+import Error from "@/components/Error";
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
@@ -51,10 +53,15 @@ const TotalTicketCombined: React.FC = () => {
 
   const isLoading = callCenterLoading || kantorCabangLoading;
   const hasError = callCenterError || kantorCabangError;
-
-  if (isLoading) return <WidgetCard title="Total Ticket">Loading...</WidgetCard>;
-  if (hasError) return <WidgetCard title="Total Ticket">Error loading data</WidgetCard>;
-
+  
+  if (isLoading) return (
+      <Loading title="Total Calls Center & Kantor Cabang"/>
+  );
+  
+  if (hasError) return (
+      <Error title="Total Calls Center & Kantor Cabang" />
+  );
+  
   return (
     <div className="rounded-xl shadow-md bg-white p-4 h-[22vh]">
       <div className="flex justify-between items-center">

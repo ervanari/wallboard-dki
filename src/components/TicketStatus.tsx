@@ -3,6 +3,8 @@
 import React from 'react';
 import WidgetCard from './WidgetCard';
 import useSWR from 'swr';
+import Loading from "@/components/Loading";
+import Error from "@/components/Error";
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
@@ -33,9 +35,14 @@ const TicketStatus: React.FC = () => {
     5: { bg: 'bg-gray-100', icon: <span className="text-gray-600">< i className='bx bx-x'  style={{color:'#545454'}}></i> </span> },
   };
   
-  if (isLoading) return <WidgetCard title="Ticket Status">Loading...</WidgetCard>;
-  if (error) return <WidgetCard title="Ticket Status">Error loading data</WidgetCard>;
-
+  if (isLoading) return (
+      <Loading title="Ticket Status" />
+  );
+  
+  if (error) return (
+      <Error title="Ticket Status" />
+  );
+  
   return (
     <WidgetCard title="Ticket Status">
       <div className="rounded-xl p-6 w-full">

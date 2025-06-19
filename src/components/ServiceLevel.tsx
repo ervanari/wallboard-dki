@@ -7,6 +7,8 @@ import highchartsMore from 'highcharts/highcharts-more';
 import solidGauge from 'highcharts/modules/solid-gauge';
 import WidgetCard from './WidgetCard';
 import useSWR from 'swr';
+import Loading from "@/components/Loading";
+import Error from "@/components/Error";
 
 // Initialize the additional Highcharts modules
 if (typeof Highcharts === 'object') {
@@ -87,9 +89,14 @@ const ServiceLevel: React.FC = () => {
       rounded: false,
     }]
   };
-
-  if (isLoading) return <WidgetCard title="Service Level">Loading...</WidgetCard>;
-  if (error) return <WidgetCard title="Service Level">Error loading data</WidgetCard>;
+  
+  if (isLoading) return (
+      <Loading title="Service Level" />
+  );
+  
+  if (error) return (
+      <Error title="Service Level" />
+  );
 
   return (
     <WidgetCard title="Service Level">

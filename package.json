@@ -9,8 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.10",
+    "bcrypt": "^6.0.0",
     "highcharts": "^11.4.0",
     "highcharts-react-official": "^3.2.2",
+    "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.9.2",
     "next": "15.3.3",
     "react": "^19.0.0",

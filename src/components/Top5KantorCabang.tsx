@@ -5,6 +5,8 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import WidgetCard from './WidgetCard';
 import useSWR from 'swr';
+import Loading from "@/components/Loading";
+import Error from "@/components/Error";
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
@@ -54,7 +56,7 @@ const Top5KantorCabang: React.FC = () => {
     series: [{
       name: 'Tickets',
       colorByPoint: true,
-      data: branchData.map(item => ({
+      data: branchData.map((item: { name: any; count: any; }) => ({
         name: item.name,
         y: item.count
       }))
@@ -64,10 +66,15 @@ const Top5KantorCabang: React.FC = () => {
       enabled: false
     }
   };
-
-  if (isLoading) return <WidgetCard title="Top 5 Kantor Cabang">Loading...</WidgetCard>;
-  if (error) return <WidgetCard title="Top 5 Kantor Cabang">Error loading data</WidgetCard>;
-
+  
+  if (isLoading) return (
+      <Loading title="Top 5 Kantor Cabang" />
+  );
+  
+  if (error) return (
+      <Error title="Top 5 Kantor Cabang" />
+  );
+  
   return (
     <WidgetCard title="Top 5 Kantor Cabang">
       <div className="top-branches-chart">

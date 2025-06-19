@@ -5,6 +5,8 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import WidgetCard from './WidgetCard';
 import useSWR from 'swr';
+import Loading from "@/components/Loading";
+import Error from "@/components/Error";
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
@@ -25,7 +27,7 @@ const TicketPermohonan: React.FC = () => {
     },
     title: null,
     xAxis: {
-      categories: requestData.map(item => item.name),
+      categories: requestData.map((item: { name: any; }) => item.name),
       title: {
         text: null
       }
@@ -72,20 +74,25 @@ const TicketPermohonan: React.FC = () => {
     series: [
       {
         name: 'Contact Center',
-        data: requestData.map(item => item.contact_center),
+        data: requestData.map((item: { contact_center: any; }) => item.contact_center),
         color: '#4285F4'
       },
       {
         name: 'Kantor Cabang',
-        data: requestData.map(item => item.kc),
+        data: requestData.map((item: { kc: any; }) => item.kc),
         color: '#34A853'
       }
     ]
   };
-
-  if (isLoading) return <WidgetCard title="Ticket Permohonan">Loading...</WidgetCard>;
-  if (error) return <WidgetCard title="Ticket Permohonan">Error loading data</WidgetCard>;
-
+  
+  if (isLoading) return (
+      <Loading title="Ticket Permohonan" />
+  );
+  
+  if (error) return (
+      <Error title="Ticket Permohonan" />
+  );
+  
   return (
     <WidgetCard title="Ticket Permohonan">
       <div className="ticket-permohonan-chart">

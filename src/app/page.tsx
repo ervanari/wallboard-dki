@@ -1,106 +1,22 @@
 'use client';
 
-import React from 'react';
-import Image from 'next/image';
-import ServiceLevel from '@/components/ServiceLevel';
-import CallActivity from '@/components/CallActivity';
-import Abandoned from '@/components/Abandoned';
-import TotalCall from '@/components/TotalCall';
-import AverageDuration from '@/components/AverageDuration';
-import TicketStatus from '@/components/TicketStatus';
-import TotalTicketCombined from '@/components/TotalTicketCombined';
-import Top5Department from '@/components/Top5Department';
-import Top5KantorCabang from '@/components/Top5KantorCabang';
-import TicketPermohonan from '@/components/TicketPermohonan';
-import TicketComplaint from '@/components/TicketComplaint';
-import CallCategoryInbound from '@/components/CallCategoryInbound';
-import UserActivity from '@/components/UserActivity';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Redirect to wallboard page
+    router.push('/app/wallboard');
+  }, [router]);
+
   return (
-    <main className="min-h-screen bg-gray-50 p-4 overflow-hidden">
-      {/* Header */}
-      <header className="flex justify-between items-center mb-6">
-        <div className="flex items-center">
-          <Image
-            src="/logo-bank.png"
-            alt="Bank DKI Logo"
-            width={100}
-            height={80}
-            className="mr-4"
-          />
-        </div>
-        <div>
-          <h1 className="text-3xl font-bold text-blue-800">CALL CENTER WALLBOARD</h1>
-        </div>
-        <div className="text-right">
-          <div className="text-xl font-semibold">{new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</div>
-        </div>
-      </header>
-
-      {/* Dashboard Grid */}
-      <div className="grid grid-cols-12 gap-4">
-        {/* First Row */}
-        <div className="col-span-2">
-          <ServiceLevel />
-        </div>
-        <div className="col-span-5">
-          <CallActivity />
-        </div>
-        <div className="col-span-5">
-          <TotalCall />
-        </div>
-
-        {/* Second Row */}
-        <div className="col-span-2">
-          <AverageDuration />
-        </div>
-        <div className="col-span-5">
-          <TicketStatus />
-        </div>
-        <div className="col-span-5">
-          <TotalTicketCombined />
-        </div>
-
-        {/* Third Row */}
-        <div className="col-span-3">
-          <Top5Department />
-        </div>
-        <div className="col-span-3">
-          <Top5KantorCabang />
-        </div>
-        <div className="col-span-3">
-          <TicketPermohonan />
-        </div>
-        <div className="col-span-3">
-          <TicketComplaint />
-        </div>
-
-        {/* Fourth Row */}
-        <div className="col-span-6">
-          <CallCategoryInbound />
-        </div>
-        <div className="col-span-6">
-          <UserActivity />
-        </div>
+    <main className="min-h-screen bg-gray-50 p-4 flex items-center justify-center">
+      <div className="text-center">
+        <h1 className="text-2xl font-bold mb-4">Loading...</h1>
+        <p>Redirecting to wallboard...</p>
       </div>
-
-      {/* Clock Update Script */}
-      <script dangerouslySetInnerHTML={{
-        __html: `
-          function updateClock() {
-            const clockElement = document.getElementById('clock');
-            if (clockElement) {
-              clockElement.textContent = new Date().toLocaleTimeString('id-ID', {
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-              });
-            }
-          }
-          setInterval(updateClock, 1000);
-        `
-      }} />
     </main>
   );
 }

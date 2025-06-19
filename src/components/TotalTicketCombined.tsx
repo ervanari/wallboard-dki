@@ -5,11 +5,11 @@ import WidgetCard from './WidgetCard';
 import useSWR from 'swr';
 import Loading from "@/components/Loading";
 import Error from "@/components/Error";
+import Tooltip from "@/components/Tooltip";
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
 const TotalTicketCombined: React.FC = () => {
-  // Fetch data from both endpoints
   const { data: callCenterData, error: callCenterError, isLoading: callCenterLoading } =
     useSWR('/api/total-ticket-call-center', fetcher, {
       refreshInterval: 30000 // refresh every 30 seconds
@@ -67,7 +67,10 @@ const TotalTicketCombined: React.FC = () => {
       <div className="flex justify-between items-center">
         
         <div className="mb-4 w-[50%]">
-          <h3 className="text-md font-semibold mb-2">Call Center</h3>
+          <h3 className="text-md font-semibold mb-2">
+            Total Ticket Call Center
+            <Tooltip name={"Total Ticket Call Center"} position={'bottom'} />
+          </h3>
           {callCenterTickets.map((item: any, index: number) => (
             <div key={`cc-${index}`} className="p-2 rounded-lg my-4">
               <div className="flex items-center">
@@ -86,7 +89,10 @@ const TotalTicketCombined: React.FC = () => {
       
         
         <div className="mb-4 w-[50%]">
-          <h3 className="text-md font-semibold mb-2">Kantor Cabang</h3>
+          <h3 className="text-md font-semibold mb-2">
+            Total Ticket Kantor Cabang
+            <Tooltip name={"Total Ticket Kantor Cabang"} position={'left'} />
+          </h3>
           {kantorCabangTickets.map((item: any, index: number) => (
             <div key={`kc-${index}`} className="p-2 rounded-lg my-4">
               <div className="flex items-center">

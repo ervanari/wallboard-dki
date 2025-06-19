@@ -66,17 +66,17 @@ const Top5Department: React.FC = () => {
       enabled: false
     }
   };
-  
+
   if (isLoading) return (
       <Loading title="Top 5 Department" />
   );
-  
+
   if (error) return (
       <Error title="Top 5 Department" />
   );
-  
+
   return (
-    <WidgetCard title="Top 5 Department">
+    <WidgetCard title="Top 5 Department" tooltipPosition="bottom">
       <div className="top-departments-chart">
         <HighchartsReact
           highcharts={Highcharts}

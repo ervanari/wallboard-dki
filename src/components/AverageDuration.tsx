@@ -19,17 +19,17 @@ const AverageDuration: React.FC = () => {
   const asa = data?.asa || '01:20';
   const aht = data?.aht || '05:15';
   const acw = data?.acw || '02:10';
-  
+
   if (isLoading) return (
       <Loading title="Average Duration"/>
   );
-  
+
   if (error) return (
       <Error title="Average Duration" />
   );
 
   return (
-    <WidgetCard title="Average Duration" className="relative">
+    <WidgetCard title="Average Duration" className="relative" tooltipPosition="right">
       <div className="flex flex-col h-full justify-center mt-5">
         <div className="grid grid-cols-2 gap-3">
           <div className="flex flex-row justify-between items-center p-2">
@@ -68,7 +68,7 @@ const AverageDuration: React.FC = () => {
               <i className='bxr  bx-news'  style={{color:'#c78000'}}></i>
             </div>
           </div>
-         
+
         </div>
       </div>
     </WidgetCard>

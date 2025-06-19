@@ -99,7 +99,7 @@ const ServiceLevel: React.FC = () => {
   );
 
   return (
-    <WidgetCard title="Service Level">
+    <WidgetCard title="Service Level" tooltipPosition="right">
       <HighchartsReact
         highcharts={Highcharts}
         options={options}

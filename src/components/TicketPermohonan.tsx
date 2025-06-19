@@ -84,17 +84,17 @@ const TicketPermohonan: React.FC = () => {
       }
     ]
   };
-  
+
   if (isLoading) return (
       <Loading title="Ticket Permohonan" />
   );
-  
+
   if (error) return (
       <Error title="Ticket Permohonan" />
   );
-  
+
   return (
-    <WidgetCard title="Ticket Permohonan">
+    <WidgetCard title="Ticket Permohonan" tooltipPosition="bottom">
       <div className="ticket-permohonan-chart">
         <HighchartsReact
           highcharts={Highcharts}

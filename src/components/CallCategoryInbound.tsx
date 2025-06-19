@@ -14,17 +14,17 @@ const CallCategoryInbound: React.FC = () => {
   });
 
   const categoryData = data?.categoryData;
-  
+
   if (isLoading) return (
       <Loading title="Call Category Inbound" />
   );
-  
+
   if (error) return (
       <Error title="Call Category Inbound" />
   );
-  
+
   return (
-    <WidgetCard title="Call Category Inbound">
+    <WidgetCard title="Call Category Inbound" tooltipPosition="right">
       <div className="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-4 gap-3 md:gap-4 mt-6">
         {categoryData.map((category: { name: string; count: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; }, index: React.Key | null | undefined) => (
             <div key={index} className="flex items-center justify-between">

@@ -22,7 +22,7 @@ const TotalCall: React.FC = () => {
   // Process data for the chart
   const hours = Array.from(new Set(totalCallData.map((item: any) => item.call_hour))).sort();
   // const hours = Array.from(new Set(totalCallData.map((item: any) => item.call_hour.toString().slice(0, 2)))).sort();
-  
+
   // Calculate total answered and abandoned calls
   const totalAnswered = totalCallData.reduce((sum: number, item: any) => sum + (item.answered || 0), 0);
   const totalAbandoned = totalCallData.reduce((sum: number, item: any) => sum + (item.abandon || 0), 0);
@@ -99,17 +99,17 @@ const TotalCall: React.FC = () => {
       }
     ]
   };
-  
+
   if (isLoading) return (
       <Loading title="Total Calls" />
   );
-  
+
   if (error) return (
       <Error title="Total Calls" />
   );
-  
+
   return (
-    <WidgetCard title="Total Calls">
+    <WidgetCard title="Total Call" tooltipPosition="right">
       <div className="total-call-chart">
         <HighchartsReact
           highcharts={Highcharts}

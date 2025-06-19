@@ -39,11 +39,11 @@ const TotalTicketCallCenter: React.FC = () => {
   console.log('Ticket Data:', ticketData);
   console.log('Total Tickets:', totalTickets);
 
-  if (isLoading) return <WidgetCard title="Total Ticket Call Center">Loading...</WidgetCard>;
-  if (error) return <WidgetCard title="Total Ticket Call Center">Error loading data</WidgetCard>;
+  if (isLoading) return <WidgetCard title="Total Ticket Call Center" tooltipPosition="left">Loading...</WidgetCard>;
+  if (error) return <WidgetCard title="Total Ticket Call Center" tooltipPosition="left">Error loading data</WidgetCard>;
 
   return (
-    <WidgetCard title="Total Ticket Call Center">
+    <WidgetCard title="Total Ticket Call Center" tooltipPosition="left">
       {ticketData.map((item: any, index: number) => (
         <div key={index} className="p-3 rounded-lg">
           <div className="flex items-center">

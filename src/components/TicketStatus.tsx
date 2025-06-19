@@ -20,13 +20,13 @@ const TicketStatus: React.FC = () => {
   const { data, error, isLoading } = useSWR('/api/ticket-status', fetcher, {
     refreshInterval: 30000 // refresh every 30 seconds
   });
-  
+
   const rawStatusData: StatusItem[] = data?.rawStatusData || [];
-  
+
   console.log('Ticket Status Data:', {
     rawStatusData
   });
-  
+
   const statusConfig: Record<number, { bg: string; icon?: React.ReactNode }> = {
     1: { bg: 'bg-blue-100', icon: <span className="text-blue-600"><i className='bx bx-time'></i> </span> },
     2: { bg: 'bg-red-100', icon: <span className="text-red-600">< i className='bx bx-bell' style={{color:'#e80000'}}></i> </span> },
@@ -34,17 +34,17 @@ const TicketStatus: React.FC = () => {
     4: { bg: 'bg-green-100', icon: <span className="text-green-600">< i className='bx bx-check-circle'  style={{color:'#08de00'}}></i> </span> },
     5: { bg: 'bg-gray-100', icon: <span className="text-gray-600">< i className='bx bx-x'  style={{color:'#545454'}}></i> </span> },
   };
-  
+
   if (isLoading) return (
       <Loading title="Ticket Status" />
   );
-  
+
   if (error) return (
       <Error title="Ticket Status" />
   );
-  
+
   return (
-    <WidgetCard title="Ticket Status">
+    <WidgetCard title="Ticket Status" tooltipPosition="top">
       <div className="rounded-xl p-6 w-full">
         <div className="grid grid-cols-2 gap-y-4 gap-x-8">
           {rawStatusData.map((item) => {

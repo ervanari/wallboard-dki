@@ -37,11 +37,11 @@ const TotalTicketKantorCabang: React.FC = () => {
   console.log('Ticket Data Kantor Cabang:', ticketData);
   console.log('Total Tickets Kantor Cabang:', totalTickets);
 
-  if (isLoading) return <WidgetCard title="Total Ticket Kantor Cabang">Loading...</WidgetCard>;
-  if (error) return <WidgetCard title="Total Ticket Kantor Cabang">Error loading data</WidgetCard>;
+  if (isLoading) return <WidgetCard title="Total Ticket Kantor Cabang" tooltipPosition="left">Loading...</WidgetCard>;
+  if (error) return <WidgetCard title="Total Ticket Kantor Cabang" tooltipPosition="left">Error loading data</WidgetCard>;
 
   return (
-    <WidgetCard title="Total Ticket Kantor Cabang">
+    <WidgetCard title="Total Ticket Kantor Cabang" tooltipPosition="left">
       {ticketData.map((item: any, index: number) => (
         <div key={index} className="p-3 rounded-lg">
           <div className="flex items-center">

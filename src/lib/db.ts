@@ -2,10 +2,10 @@ import mysql from 'mysql2/promise';
 
 // Database connection configuration
 const dbConfig = {
-  host: '192.168.3.5',
-  user: 'rootdev',
-  password: '-productD3v3l0pm3nt-',
-  database: 'synergix_bdki'
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'user',
+  password: process.env.DB_PASSWORD || 'password',
+  database: process.env.DB_NAME || 'database',
 };
 
 // Create a connection pool

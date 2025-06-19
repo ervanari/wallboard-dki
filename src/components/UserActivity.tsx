@@ -45,17 +45,17 @@ const UserActivity: React.FC = () => {
       icon: <i className='bx bx-coffee text-blue-500 text-lg'></i>
     }
   };
-  
+
   if (isLoading) return (
       <Loading title="User Activity" />
   );
-  
+
   if (error) return (
       <Error title="User Activity" />
   );
 
   return (
-      <WidgetCard title="User Activity">
+      <WidgetCard title="User Activity" tooltipPosition="top">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 mt-6">
           {agentData.map((agent: AgentData, index: number) => {
             const config = statusConfig[agent.status] || {
@@ -63,7 +63,7 @@ const UserActivity: React.FC = () => {
               textColor: 'text-gray-600',
               icon: <i className='bx bx-user text-gray-500 text-lg'></i>
             };
-  
+
             return (
               <div
                 key={index}

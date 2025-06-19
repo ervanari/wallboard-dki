@@ -91,17 +91,17 @@ const TicketComplaint: React.FC = () => {
       }
     ]
   };
-  
+
   if (isLoading) return (
       <Loading title="Ticket Complaint" />
   );
-  
+
   if (error) return (
       <Error title="Ticket Complaint" />
   );
-  
+
   return (
-    <WidgetCard title="Ticket Complaint">
+    <WidgetCard title="Ticket Complaint" tooltipPosition="bottom">
       <div className="ticket-complaint-chart">
         <HighchartsReact
           highcharts={Highcharts}

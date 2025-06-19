@@ -66,17 +66,17 @@ const Top5KantorCabang: React.FC = () => {
       enabled: false
     }
   };
-  
+
   if (isLoading) return (
       <Loading title="Top 5 Kantor Cabang" />
   );
-  
+
   if (error) return (
       <Error title="Top 5 Kantor Cabang" />
   );
-  
+
   return (
-    <WidgetCard title="Top 5 Kantor Cabang">
+    <WidgetCard title="Top 5 Kantor Cabang" tooltipPosition="bottom">
       <div className="top-branches-chart">
         <HighchartsReact
           highcharts={Highcharts}

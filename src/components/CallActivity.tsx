@@ -4,6 +4,7 @@ import React from 'react';
 import useSWR from 'swr';
 import Loading from "@/components/Loading";
 import Error from "@/components/Error";
+import Tooltip from "@/components/Tooltip";
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
@@ -13,7 +14,7 @@ const CallActivity: React.FC = () => {
   });
 
   console.log('Call Activity Data:', data);
-  
+
   // Default values if data is not loaded yet
   const incomingCall = data?.incomingCall || 0;
   const queueCall = data?.queueCall || 0;
@@ -31,47 +32,53 @@ const CallActivity: React.FC = () => {
   // Find the maximum value for abandoned calls to scale the bars
   const maxAbandoned = Math.max(abandoneIvr, abandoneQueue, abandoneAgent, abandoneTransfer);
   console.log('Max Abandoned Calls:', maxAbandoned);
-  
+
   if (isLoading) return (
       <Loading title="Call Activity & Abandoned"/>
   );
-  
+
   if (error) return (
       <Error title="Call Activity & Abandoned" />
   );
-  
+
   return (
       <>
         <div className={`rounded-xl shadow-md bg-white p-4 h-[22vh]`}>
           <div className="flex justify-between">
 
             <div className="flex-row w-[100%] mr-10 h-full">
-              <h3 className="text-lg font-semibold mb-3">Call Activity</h3>
+              <h3 className="text-lg font-semibold mb-3">
+                Call Activity
+                <Tooltip name={"Call Activity"} position={'top'} />
+              </h3>
               <div className="widget-content">
                 <div className="flex justify-between text-center items-center mb-4">
-                  <div className="text-sm text-gray-600">
+                  <div className="text-sm text-gray-600 flex items-center">
                     <div className="bg-[#d0f7fb] rounded-md p-2 mr-2 inline-flex items-center justify-center">
                       <i className='bx bx-user'></i>
                     </div>
                     Incoming
+                    <Tooltip name="Incoming" position="right" />
                   </div>
                   <div className="text-sm font-bold text-blue-600">{incomingCall}</div>
                 </div>
                 <div className="flex justify-between text-center items-center mb-4">
-                  <div className="text-sm text-gray-600">
+                  <div className="text-sm text-gray-600 flex items-center">
                     <div className="bg-[#d0f7fb] rounded-md p-2 mr-2 inline-flex items-center justify-center">
                       <i className='bx bx-time'></i>
                     </div>
                     Queue
+                    <Tooltip name="Queue" position="right" />
                   </div>
                   <div className="text-sm font-bold text-yellow-600">{queueCall}</div>
                 </div>
                 <div className="flex justify-between text-center items-center">
-                  <div className="text-sm text-gray-600">
+                  <div className="text-sm text-gray-600 flex items-center">
                     <div className="bg-[#d0f7fb] rounded-md p-2 mr-2 inline-flex items-center justify-center">
                       <i className='bx bx-user-check'></i>
                     </div>
                     Answered
+                    <Tooltip name="Answered" position="right" />
                   </div>
                   <div className="text-sm font-bold text-green-600">{answerCall}</div>
                 </div>
@@ -79,7 +86,10 @@ const CallActivity: React.FC = () => {
             </div>
 
             <div className="flex-row w-[100%] h-full">
-              <h3 className="text-lg font-semibold mb-3">Abandoned</h3>
+              <h3 className="text-lg font-semibold mb-3">
+                Abandoned
+                <Tooltip name={"Abandoned"} position={'top'} />
+              </h3>
               <div className="widget-content">
                 <div className="flex flex-row mb-4 h-[14vh]">
                   <div className="flex flex-col items-center mr-7">
@@ -90,9 +100,12 @@ const CallActivity: React.FC = () => {
                           style={{ height: `${calculatePercentage(abandoneIvr, maxAbandoned)}%` }}
                       ></div>
                     </div>
-                    <div className="text-sm mt-2">IVR</div>
+                    <div className="text-sm mt-2 flex items-center">
+                      IVR
+                      <Tooltip name="IVR" position="top" />
+                    </div>
                   </div>
-                  
+
                   <div className="flex flex-col items-center mr-7">
                     <div className="text-sm mb-2">{abandoneQueue}</div>
                     <div className="flex flex-col justify-end h-40 w-8 bg-gray-200 rounded">
@@ -101,9 +114,12 @@ const CallActivity: React.FC = () => {
                           style={{ height: `${calculatePercentage(abandoneQueue, maxAbandoned)}%` }}
                       ></div>
                     </div>
-                    <div className="text-sm mt-2">Queue</div>
+                    <div className="text-sm mt-2 flex items-center">
+                      Queue
+                      <Tooltip name="Queue" position="top" />
+                    </div>
                   </div>
-                  
+
                   <div className="flex flex-col items-center mr-7">
                     <div className="text-sm mb-2">{abandoneAgent}</div>
                     <div className="flex flex-col justify-end h-40 w-8 bg-gray-200 rounded">
@@ -112,9 +128,12 @@ const CallActivity: React.FC = () => {
                           style={{ height: `${calculatePercentage(abandoneAgent, maxAbandoned)}%` }}
                       ></div>
                     </div>
-                    <div className="text-sm mt-2">Agent</div>
+                    <div className="text-sm mt-2 flex items-center">
+                      Agent
+                      <Tooltip name="Agent" position="top" />
+                    </div>
                   </div>
-                  
+
                   <div className="flex flex-col items-center mr-7">
                     <div className="text-sm mb-2">{abandoneTransfer}</div>
                     <div className="flex flex-col justify-end h-40 w-8 bg-gray-200 rounded">
@@ -123,7 +142,10 @@ const CallActivity: React.FC = () => {
                           style={{ height: `${calculatePercentage(abandoneTransfer, maxAbandoned)}%` }}
                       ></div>
                     </div>
-                    <div className="text-sm mt-2">Transfer</div>
+                    <div className="text-sm mt-2 flex items-center">
+                      Transfer
+                      <Tooltip name="Transfer" position="top" />
+                    </div>
                   </div>
                 </div>
               </div>

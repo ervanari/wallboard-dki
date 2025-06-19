@@ -39,7 +39,7 @@ async function verifyJWT(token: string, secret: string): Promise<any> {
 }
 
 // Define the paths that require authentication
-const protectedPaths = ['/', '/app/wallboard'];
+const protectedPaths = ['/', '/wallboard'];
 
 // Define paths that should be excluded from authentication
 const excludedPaths = ['/api/auth/login'];
@@ -151,5 +151,5 @@ export async function middleware(request: NextRequest) {
 
 // Configure the middleware to run only for specific paths
 export const config = {
-  matcher: ['/', '/app/wallboard/:path*', '/login'],
+  matcher: ['/', '/wallboard/:path*', '/login'],
 };

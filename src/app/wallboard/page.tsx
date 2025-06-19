@@ -14,6 +14,7 @@ import TicketPermohonan from '@/components/TicketPermohonan';
 import TicketComplaint from '@/components/TicketComplaint';
 import CallCategoryInbound from '@/components/CallCategoryInbound';
 import UserActivity from '@/components/UserActivity';
+import LogoutButton from '@/components/LogoutButton';
 
 export default function Wallboard() {
     return (
@@ -32,11 +33,12 @@ export default function Wallboard() {
                 <div>
                     <h1 className="text-3xl font-bold text-blue-800">CALL CENTER WALLBOARD</h1>
                 </div>
-                <div className="text-right">
-                    <div className="text-xl font-semibold">{new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                <div className="text-right flex flex-row items-end">
+                    <div className="text-sm mb-2 mr-2">{new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                    <LogoutButton />
                 </div>
             </header>
-            
+
             {/* Dashboard Grid */}
             <div className="grid grid-cols-12 gap-4">
                 {/* First Row */}
@@ -49,7 +51,7 @@ export default function Wallboard() {
                 <div className="col-span-5">
                     <TotalCall />
                 </div>
-                
+
                 {/* Second Row */}
                 <div className="col-span-2">
                     <AverageDuration />
@@ -60,7 +62,7 @@ export default function Wallboard() {
                 <div className="col-span-5">
                     <TotalTicketCombined />
                 </div>
-                
+
                 {/* Third Row */}
                 <div className="col-span-3">
                     <Top5Department />
@@ -74,7 +76,7 @@ export default function Wallboard() {
                 <div className="col-span-3">
                     <TicketComplaint />
                 </div>
-                
+
                 {/* Fourth Row */}
                 <div className="col-span-6">
                     <CallCategoryInbound />
@@ -83,7 +85,7 @@ export default function Wallboard() {
                     <UserActivity />
                 </div>
             </div>
-            
+
             {/* Clock Update Script */}
             <script dangerouslySetInnerHTML={{
                 __html: `

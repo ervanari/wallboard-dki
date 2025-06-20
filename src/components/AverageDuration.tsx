@@ -27,7 +27,7 @@ const AverageDuration: React.FC = () => {
   );
 
   return (
-    <WidgetCard title="Average Duration" className="relative" tooltipPosition="right">
+    <WidgetCard title="Average Duration" className="relative" tooltipPosition="bottom">
       <div className="flex flex-col h-full justify-center mt-5">
         <div className="grid grid-cols-2 gap-3">
           {/* ASA */}
@@ -51,7 +51,7 @@ const AverageDuration: React.FC = () => {
             <div className="relative group">
               <div className="text-xs text-gray-600 mb-1">
                 ACD
-                <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                <div className="absolute bottom-full -translate-x-1/2 w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
                   Average Call Duration merupakan rata-rata lama waktu yang dihabiskan selama satu panggilan telepon berlangsung antara Agent dan nasabah.
                 </div>
               </div>

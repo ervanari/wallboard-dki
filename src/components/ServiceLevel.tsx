@@ -26,7 +26,7 @@ const ServiceLevel: React.FC = () => {
 
   // Default value if data is not loaded yet
   const serviceLevel = data?.serviceLevel !== undefined && data?.serviceLevel !== null ? parseFloat(data.serviceLevel) : 0;
-
+  
   const options = {
     chart: {
       type: 'solidgauge',
@@ -70,11 +70,11 @@ const ServiceLevel: React.FC = () => {
     yAxis: {
       min: 0,
       max: 100,
-      stops: [
-        [0.1, '#DF5353'], // red
-        [0.5, '#DDDF0D'], // yellow
-        [0.9, '#55BF3B']  // green
-      ],
+     stops: [
+       [0.00, '#DF5353'], // red for < 95%
+       [0.9499, '#DF5353'], // red up to just below 95%
+       [0.95, '#55BF3B']    // green for >= 95%
+     ],
       lineWidth: 0,
       minorTickInterval: null,
       tickAmount: 2,
@@ -102,7 +102,7 @@ const ServiceLevel: React.FC = () => {
       name: 'Service Level',
       data: [serviceLevel],
       dataLabels: {
-        format: '<div style="text-align:center"><span style="font-size:clamp(16px, 4vw, 25px);color:black">{y}%</span></div>',
+        format: `<div style="text-align:center"><span style="font-size:clamp(16px, 4vw, 25px);color:${serviceLevel >= 95 ? '#55BF3B' : '#DF5353'}">{y}%</span></div>`,
         style: {
           textOutline: 'none'
         }
@@ -120,13 +120,13 @@ const ServiceLevel: React.FC = () => {
   );
 
   return (
-    <WidgetCard title="Service Level" tooltipPosition="right">
+    <WidgetCard title="Service Level" tooltipPosition="bottom">
       <ChartContainer>
         <HighchartsReact
           highcharts={Highcharts}
           options={options}
           containerProps={{
-            className: 'w-full h-full',
+            className: 'w-full h-[80px] md:h-[100px] lg:h-[120px] xl:h-[150px] 2xl:h-[180px]',
           }}
           immutable={false}
           allowChartUpdate={true}

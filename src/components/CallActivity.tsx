@@ -46,7 +46,7 @@ const CallActivity: React.FC = () => {
             <div className="flex-1 flex flex-col min-w-0 md:mr-4 h-full">
               <h3 className="text-sm md:text-base lg:text-lg font-semibold mb-1 md:mb-2 flex items-center">
                 Call Activity
-                <Tooltip name={"Call Activity"} position={'top'} />
+                <Tooltip name={"Call Activity"} position={'bottom'} />
               </h3>
               <div className="widget-content flex-1 overflow-hidden">
                 {/* Incoming */}
@@ -56,7 +56,7 @@ const CallActivity: React.FC = () => {
                       <i className='bx bx-user'></i>
                     </div>
                     Incoming
-                    <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-40 sm:w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                    <div className="absolute left-full top-1/2 transform -translate-y-1/2 ml-2 w-40 sm:w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
                       Jumlah panggilan masuk ke Call Center.
                     </div>
                   </div>
@@ -84,7 +84,7 @@ const CallActivity: React.FC = () => {
                       <i className='bx bx-user-check'></i>
                     </div>
                     Answered
-                    <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-40 sm:w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                    <div className="absolute left-full top-1/2 transform -translate-y-1/2 ml-2 w-40 sm:w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
                       Jumlah panggilan yang berhasil dijawab oleh Agent.
                     </div>
                   </div>
@@ -97,7 +97,7 @@ const CallActivity: React.FC = () => {
             <div className="flex-1 flex flex-col min-w-0 h-full">
               <h3 className="text-sm md:text-base lg:text-lg font-semibold mb-1 md:mb-2 flex items-center">
                 Abandoned
-                <Tooltip name={"Abandoned"} position={'top'} />
+                <Tooltip name={"Abandoned"} position={'bottom'} />
               </h3>
               <div className="widget-content flex-1 overflow-hidden">
                 <div className="flex flex-row justify-around h-full">
@@ -112,7 +112,7 @@ const CallActivity: React.FC = () => {
                     </div>
                     <div className="text-xs sm:text-sm mt-1 flex items-center relative group">
                       IVR
-                      <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-40 sm:w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                      <div className="absolute left-full transform -translate-y-1/2 ml-2 w-40 sm:w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
                         Jumlah panggilan yang ditutup oleh nasabah saat masih berada di menu IVR (Interactive Voice Response), sebelum masuk ke antrean atau bicara dengan Agent.
                       </div>
                     </div>
@@ -163,7 +163,7 @@ const CallActivity: React.FC = () => {
                     </div>
                     <div className="text-xs sm:text-sm mt-1 flex items-center relative group">
                       Transfer
-                      <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-40 sm:w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                      <div className="absolute right-full transform -translate-y-1/2 mr-2 w-40 sm:w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
                         Jumlah panggilan yang ditutup oleh nasabah saat panggilan sedang dalam proses dialihkan (transfer) ke Agent sebelum transfer berhasil.
                       </div>
                     </div>

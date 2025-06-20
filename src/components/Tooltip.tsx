@@ -59,7 +59,7 @@ const Tooltip: React.FC<TooltipProps> = ({ name, position }) => {
       case 'top':
         return 'bottom-full left-1/2 transform -translate-x-1/2 mb-2';
       case 'right':
-        return 'left-full top-1/2 transform -translate-y-1/2 ml-2';
+        return 'left-full top-5 transform -translate-y-1/2 ml-2';
       case 'left':
         return 'right-full top-1/2 transform -translate-y-1/2 mr-2';
       case 'bottom':
@@ -86,10 +86,10 @@ const Tooltip: React.FC<TooltipProps> = ({ name, position }) => {
   };
 
   return (
-    <div className="inline-flex items-center relative ml-1">
+    <div className="inline-flex z-10 items-center relative ml-1">
       <div
         ref={iconRef}
-        className="w-4 h-4 rounded-full bg-gray-200 flex items-center justify-center text-xs font-semibold cursor-help"
+        className="w-4 h-4 rounded-full bg-gray-200 flex items-center justify-center text-xs cursor-help"
         onMouseEnter={() => setIsVisible(true)}
         onMouseLeave={() => setIsVisible(false)}
       >
@@ -99,7 +99,7 @@ const Tooltip: React.FC<TooltipProps> = ({ name, position }) => {
       {isVisible && (
         <div
           ref={tooltipRef}
-          className={`absolute z-10 w-64 p-2 text-sm text-white bg-gray-800 rounded shadow-lg ${getPositionClasses()}`}
+          className={`absolute z-10 w-64 p-2 text-xs text-white bg-gray-800 rounded shadow-lg ${getPositionClasses()}`}
         >
           {text}
           <div className={`absolute w-0 h-0 border-4 ${getArrowClasses()}`}></div>

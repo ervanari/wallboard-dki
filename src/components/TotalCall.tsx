@@ -18,10 +18,10 @@ const TotalCall: React.FC = () => {
 
   // Default values if data is not loaded yet
   const totalCallData = data?.totalCallData || [];
+  console.log('Total Call Data:', totalCallData);
 
   // Process data for the chart
   const hours = Array.from(new Set(totalCallData.map((item: any) => item.call_hour))).sort();
-  // const hours = Array.from(new Set(totalCallData.map((item: any) => item.call_hour.toString().slice(0, 2)))).sort();
 
   // Calculate total answered and abandoned calls
   const totalAnswered = totalCallData.reduce((sum: number, item: any) => sum + (item.answered || 0), 0);
@@ -41,7 +41,7 @@ const TotalCall: React.FC = () => {
 
   const options = {
     chart: {
-      type: 'column',
+      type: 'line',
       height: null,
       width: null,
       backgroundColor: 'transparent',
@@ -53,7 +53,7 @@ const TotalCall: React.FC = () => {
     },
     title: null,
     xAxis: {
-      categories: hours.map(hour => `${hour}`),
+      categories: hours.map(hour => `${hour.toString().padStart(2, '0')}:00`),
       title: {
         text: 'Hour'
       },
@@ -71,7 +71,7 @@ const TotalCall: React.FC = () => {
       stackLabels: {
         enabled: true,
         style: {
-          fontWeight: 'bold',
+          fontWeight: 'normal',
           color: 'gray',
           fontSize: 'clamp(10px, 1.5vw, 12px)'
         }
@@ -87,15 +87,17 @@ const TotalCall: React.FC = () => {
       pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
     },
     plotOptions: {
-      column: {
+      line: {
         stacking: 'normal',
         dataLabels: {
           enabled: true,
           style: {
             fontSize: 'clamp(9px, 1.5vw, 11px)',
-            textOutline: 'none',
             fontWeight: 'normal'
           }
+        },
+        marker: {
+          enabled: true
         }
       }
     },

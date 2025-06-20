@@ -6,10 +6,10 @@ export async function GET() {
     // Fetch data from the database using the query from total_call.txt
     const result = await query(`
       SELECT
-      rci.call_hour,
-      rci.call_date,
-      rci.answered,
-      rci.abandon
+        EXTRACT(HOUR FROM rci.call_hour) AS call_hour,
+        rci.call_date,
+        rci.answered,
+        rci.abandon
       FROM report_call_in_summaries rci
       WHERE rci.call_date
     `);

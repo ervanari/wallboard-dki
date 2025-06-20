@@ -41,9 +41,9 @@ const TicketStatus: React.FC = () => {
   );
 
   return (
-    <WidgetCard title="Ticket Status" tooltipPosition="top">
+    <WidgetCard title="Ticket Status" tooltipPosition="bottom">
       <div className="rounded-xl p-6 w-full">
-        <div className="grid grid-cols-2 gap-y-4 gap-x-8">
+        <div className="grid grid-cols-2 gap-y-4 gap-x-20">
           {rawStatusData.map((item) => {
             const config = statusConfig[item.no];
             const trimmedStatus = item.ticket_status.trim().toUpperCase();
@@ -57,7 +57,7 @@ const TicketStatus: React.FC = () => {
                       {trimmedStatus}
                     </span>
                     {tooltipText[trimmedStatus] && (
-                        <span className="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                        <span className="absolute left-full top-1/2 transform -translate-y-1/2 ml-2 w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
                           {tooltipText[trimmedStatus]}
                         </span>
                     )}

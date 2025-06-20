@@ -55,8 +55,8 @@ const UserActivity: React.FC = () => {
   );
 
   return (
-      <WidgetCard title="User Activity" tooltipPosition="top">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 mt-6">
+      <WidgetCard title="User Activity" tooltipPosition="bottom">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-5 gap-x-20 mt-6">
           {agentData.map((agent: AgentData, index: number) => {
             const config = statusConfig[agent.status] || {
               bg: 'bg-gray-100',

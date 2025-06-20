@@ -13,6 +13,12 @@ export const tooltipText: Record<string, string> = {
   
   "Total Call": "Jumlah semua panggilan yang masuk ke Call Center dalam satu jam, baik yang dijawab (answered) maupun yang tidak dijawab (abandoned)",
   
+  "OPEN": "Ticket telah diterima dan menunggu penanganan lebih lanjut.",
+  "QUEUE": "Ticket sedang dalam antrian dan menunggu untuk ditangani oleh tim terkait.",
+  "PROCESS": "Ticket sedang dalam penanganan oleh tim terkait.",
+  "DONE": "Ticket telah selesai ditangani dan solusi telah diberikan.",
+  "CLOSED": "Seluruh proses penanganan ticket telah berakhir.",
+  
   "Average Duration": "Rata-rata durasi panggilan",
   "ASA": "Average Speed of Answer merupakan rata-rata waktu yang dibutuhkan Agent dalam menjawab panggilan",
   "ACD": "Average Call Duration merupakan rata-rata lama waktu yang dihabiskan selama satu panggilan telepon berlangsung antara Agent dan nasabah",

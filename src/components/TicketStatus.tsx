@@ -5,6 +5,7 @@ import WidgetCard from './WidgetCard';
 import useSWR from 'swr';
 import Loading from "@/components/Loading";
 import Error from "@/components/Error";
+import { tooltipText } from '@/utils/tooltipText';
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
@@ -49,13 +50,21 @@ const TicketStatus: React.FC = () => {
         <div className="grid grid-cols-2 gap-y-4 gap-x-8">
           {rawStatusData.map((item) => {
             const config = statusConfig[item.no];
+            const trimmedStatus = item.ticket_status.trim().toUpperCase();
             return (
                 <div key={item.no} className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 relative group">
                     <div className={`px-2 py-0.5 rounded ${config?.bg || "bg-gray-100"}`}>
                       {config?.icon}
                     </div>
-                    <span className="text-sm font-medium">{item.ticket_status.trim()}</span>
+                    <span className="text-sm font-medium">
+                      {trimmedStatus}
+                    </span>
+                    {tooltipText[trimmedStatus] && (
+                        <span className="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                          {tooltipText[trimmedStatus]}
+                        </span>
+                    )}
                   </div>
                   <span className="text-sm font-semibold">{item.total}</span>
                 </div>

@@ -52,36 +52,48 @@ const CallActivity: React.FC = () => {
                 <Tooltip name={"Call Activity"} position={'top'} />
               </h3>
               <div className="widget-content">
+                {/* Incoming */}
                 <div className="flex justify-between text-center items-center mb-4">
-                  <div className="text-sm text-gray-600 flex items-center">
+                  <div className="text-sm text-gray-600 flex items-center relative group">
                     <div className="bg-[#d0f7fb] rounded-md p-2 mr-2 inline-flex items-center justify-center">
                       <i className='bx bx-user'></i>
                     </div>
                     Incoming
-                    <Tooltip name="Incoming" position="right" />
+                    <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                      Jumlah panggilan masuk ke Call Center.
+                    </div>
                   </div>
                   <div className="text-sm font-bold text-blue-600">{incomingCall}</div>
                 </div>
-                <div className="flex justify-between text-center items-center mb-4">
-                  <div className="text-sm text-gray-600 flex items-center">
-                    <div className="bg-[#d0f7fb] rounded-md p-2 mr-2 inline-flex items-center justify-center">
-                      <i className='bx bx-time'></i>
-                    </div>
-                    Queue
-                    <Tooltip name="Queue" position="right" />
-                  </div>
-                  <div className="text-sm font-bold text-yellow-600">{queueCall}</div>
-                </div>
+                
+                {/* Queue */}
+                {/*<div className="flex justify-between text-center items-center mb-4">*/}
+                {/*  <div className="text-sm text-gray-600 flex items-center relative group">*/}
+                {/*    <div className="bg-[#d0f7fb] rounded-md p-2 mr-2 inline-flex items-center justify-center">*/}
+                {/*      <i className='bx bx-time'></i>*/}
+                {/*    </div>*/}
+                {/*    Queue*/}
+                {/*    <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">*/}
+                {/*      Jumlah panggilan yang sedang menunggu dalam antrean sebelum dijawab oleh Agent.*/}
+                {/*    </div>*/}
+                {/*  </div>*/}
+                {/*  <div className="text-sm font-bold text-yellow-600">{queueCall}</div>*/}
+                {/*</div>*/}
+                
+                {/* Answered */}
                 <div className="flex justify-between text-center items-center">
-                  <div className="text-sm text-gray-600 flex items-center">
+                  <div className="text-sm text-gray-600 flex items-center relative group">
                     <div className="bg-[#d0f7fb] rounded-md p-2 mr-2 inline-flex items-center justify-center">
                       <i className='bx bx-user-check'></i>
                     </div>
                     Answered
-                    <Tooltip name="Answered" position="right" />
+                    <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                      Jumlah panggilan yang berhasil dijawab oleh Agent.
+                    </div>
                   </div>
                   <div className="text-sm font-bold text-green-600">{answerCall}</div>
                 </div>
+              
               </div>
             </div>
 
@@ -92,6 +104,7 @@ const CallActivity: React.FC = () => {
               </h3>
               <div className="widget-content">
                 <div className="flex flex-row mb-4 h-[14vh]">
+                  {/* IVR */}
                   <div className="flex flex-col items-center mr-7">
                     <div className="text-sm mb-2">{abandoneIvr}</div>
                     <div className="flex flex-col justify-end h-40 w-8 bg-gray-200 rounded">
@@ -100,12 +113,15 @@ const CallActivity: React.FC = () => {
                           style={{ height: `${calculatePercentage(abandoneIvr, maxAbandoned)}%` }}
                       ></div>
                     </div>
-                    <div className="text-sm mt-2 flex items-center">
+                    <div className="text-sm mt-2 flex items-center relative group">
                       IVR
-                      <Tooltip name="IVR" position="top" />
+                      <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                        Jumlah panggilan yang ditutup oleh nasabah saat masih berada di menu IVR (Interactive Voice Response), sebelum masuk ke antrean atau bicara dengan Agent.
+                      </div>
                     </div>
                   </div>
-
+                  
+                  {/* Queue */}
                   <div className="flex flex-col items-center mr-7">
                     <div className="text-sm mb-2">{abandoneQueue}</div>
                     <div className="flex flex-col justify-end h-40 w-8 bg-gray-200 rounded">
@@ -114,12 +130,15 @@ const CallActivity: React.FC = () => {
                           style={{ height: `${calculatePercentage(abandoneQueue, maxAbandoned)}%` }}
                       ></div>
                     </div>
-                    <div className="text-sm mt-2 flex items-center">
+                    <div className="text-sm mt-2 flex items-center relative group">
                       Queue
-                      <Tooltip name="Queue" position="top" />
+                      <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                        Jumlah panggilan yang ditutup oleh nasabah saat sudah masuk antrean, namun belum sempat dijawab oleh Agent.
+                      </div>
                     </div>
                   </div>
-
+                  
+                  {/* Agent */}
                   <div className="flex flex-col items-center mr-7">
                     <div className="text-sm mb-2">{abandoneAgent}</div>
                     <div className="flex flex-col justify-end h-40 w-8 bg-gray-200 rounded">
@@ -128,12 +147,15 @@ const CallActivity: React.FC = () => {
                           style={{ height: `${calculatePercentage(abandoneAgent, maxAbandoned)}%` }}
                       ></div>
                     </div>
-                    <div className="text-sm mt-2 flex items-center">
+                    <div className="text-sm mt-2 flex items-center relative group">
                       Agent
-                      <Tooltip name="Agent" position="top" />
+                      <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                        Jumlah panggilan yang ditutup oleh nasabah saat terhubung ke Agent.
+                      </div>
                     </div>
                   </div>
-
+                  
+                  {/* Transfer */}
                   <div className="flex flex-col items-center mr-7">
                     <div className="text-sm mb-2">{abandoneTransfer}</div>
                     <div className="flex flex-col justify-end h-40 w-8 bg-gray-200 rounded">
@@ -142,11 +164,14 @@ const CallActivity: React.FC = () => {
                           style={{ height: `${calculatePercentage(abandoneTransfer, maxAbandoned)}%` }}
                       ></div>
                     </div>
-                    <div className="text-sm mt-2 flex items-center">
+                    <div className="text-sm mt-2 flex items-center relative group">
                       Transfer
-                      <Tooltip name="Transfer" position="top" />
+                      <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                        Jumlah panggilan yang ditutup oleh nasabah saat panggilan sedang dalam proses dialihkan (transfer) ke Agent sebelum transfer berhasil.
+                      </div>
                     </div>
                   </div>
+                
                 </div>
               </div>
             </div>

@@ -14,7 +14,6 @@ const WidgetCard: React.FC<WidgetCardProps> = ({
   className = '',
   tooltipPosition
 }) => {
-    console.log('WidgetCard title:', tooltipPosition);
   return (
     <div className={`rounded-xl shadow-md bg-white p-4 ${(title === 'User Activity' || title === 'Call Category Inbound') ? 'h-[18vh]' : 'h-[22vh]'} ${className}`}>
       <h3 className="text-lg font-semibold flex items-center">

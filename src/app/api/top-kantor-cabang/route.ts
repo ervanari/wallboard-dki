@@ -14,8 +14,6 @@ export async function GET() {
       LIMIT 3;
     `);
 
-    console.log('Top Kantor Cabang Data:', result);
-
     // Transform the data to match the expected format in the component
     const branchData = result.map((item: any) => ({
       name: item.name,

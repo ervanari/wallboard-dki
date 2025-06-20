@@ -24,7 +24,6 @@ const ServiceLevel: React.FC = () => {
   });
 
   // Default value if data is not loaded yet
-  console.log('Service Level Data:', data?.serviceLevel);
   const serviceLevel = data?.serviceLevel !== undefined && data?.serviceLevel !== null ? parseFloat(data.serviceLevel) : 0;
 
   const options = {

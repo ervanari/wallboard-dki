@@ -13,7 +13,6 @@ const AverageDuration: React.FC = () => {
     refreshInterval: 30000 // refresh every 30 seconds
   });
 
-  console.log('AverageDuration data:', data);
   const acd = data?.acd || '03:45';
   const asa = data?.asa || '01:20';
   const aht = data?.aht || '05:15';

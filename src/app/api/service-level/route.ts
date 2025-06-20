@@ -73,8 +73,6 @@ export async function GET() {
     const serviceLevel = data.service_level !== null && data.service_level !== undefined ?
       parseFloat(data.service_level) : 0;
     
-    console.log('Service Level Data:', serviceLevel);
-
     return NextResponse.json({
       serviceLevel: serviceLevel,
       success: true

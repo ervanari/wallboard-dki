@@ -19,7 +19,6 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      console.log('Submitting login form:', { username, password });
       const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: {
@@ -30,10 +29,7 @@ export default function LoginPage() {
 
       const data = await response.json();
 
-        console.log('Login response:', data);
-
       if (data.success) {
-        console.log('Login successful, redirecting to wallboard...');
         router.push('/wallboard');
       } else {
         // Display error message

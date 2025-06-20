@@ -98,8 +98,6 @@ export async function GET() {
         ) AS avg_aht
     `);
 
-    console.log('Average Duration Data:', result);
-
     if (!result || result.length === 0) {
       return NextResponse.json(
         { success: false, error: 'No data found' },

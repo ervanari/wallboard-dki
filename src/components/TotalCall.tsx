@@ -16,7 +16,6 @@ const TotalCall: React.FC = () => {
   });
 
   // Default values if data is not loaded yet
-  console.log('TotalCall data:', data);
   const totalCallData = data?.totalCallData || [];
 
   // Process data for the chart

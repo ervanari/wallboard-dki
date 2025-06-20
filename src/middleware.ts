@@ -79,11 +79,9 @@ function isProtectedPath(path: string): boolean {
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
-  console.log('Middleware running for path:', path);
-
   // Get the token from the cookies
   const token = request.cookies.get('auth_token')?.value;
-  console.log('Auth token found:', token ? 'Yes' : 'No');
+  // console.log('Auth token found:', token ? 'Yes' : 'No');
 
   // Special handling for login page - redirect to wallboard if already logged in
   if (path === '/login') {
@@ -94,12 +92,10 @@ export async function middleware(request: NextRequest) {
         await verifyJWT(token, secret);
 
         // If token is valid, redirect to wallboard
-        console.log('User already logged in, redirecting to wallboard');
         const url = new URL('/app/wallboard', request.url);
         return NextResponse.redirect(url);
       } catch (error) {
         // If token is invalid, clear it and continue to login page
-        console.log('Invalid token on login page, continuing to login');
         const response = NextResponse.next();
         response.cookies.delete('auth_token');
         return response;
@@ -111,7 +107,6 @@ export async function middleware(request: NextRequest) {
 
   // Only run auth check middleware for protected paths
   if (!isProtectedPath(path)) {
-    console.log('Path is not protected, skipping middleware');
     return NextResponse.next();
   }
 
@@ -124,11 +119,10 @@ export async function middleware(request: NextRequest) {
 
   try {
     // Verify the token
-    const secret = process.env.JWT_SECRET || 'W3bD3v3l0pm3nt_W!54n6G3n1';
+    const secret = process.env.JWT_SECRET || 'secret';
     console.log('Verifying token with secret:', secret ? 'Secret available' : 'No secret');
 
     const decoded = await verifyJWT(token, secret);
-    console.log('Token verified successfully, decoded:', decoded);
 
     // If token is valid, continue with the request
     console.log('Token is valid, continuing with request');
@@ -136,8 +130,6 @@ export async function middleware(request: NextRequest) {
   } catch (error) {
     // If token verification fails, redirect to login
     // Provide more detailed error logging for debugging
-    console.log('Token verification failed');
-
     if (error instanceof Error) {
       console.error('Token verification failed:', error.name, error.message);
     } else {

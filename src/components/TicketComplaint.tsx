@@ -16,7 +16,6 @@ const TicketComplaint: React.FC = () => {
   });
 
   // Default values if data is not loaded yet
-  console.log('TicketComplaint data:', data);
   const complaintData = data?.complaintData || [
     { name: 'Transaksi Gagal', count: 65, contact_center: 40, kc: 25 },
     { name: 'Layanan Lambat', count: 52, contact_center: 30, kc: 22 },

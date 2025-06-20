@@ -18,8 +18,6 @@ export async function GET() {
       GROUP BY it.id, it.name;
     `);
 
-    console.log('Total Ticket Call Center Data:', result);
-
     // Transform the data to match the expected format in the component
     const ticketData = result.map((item: any) => ({
       type: item.inbound_type,

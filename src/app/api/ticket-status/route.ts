@@ -18,9 +18,6 @@ export async function GET() {
         GROUP BY ts.id, ts.name;
     `);
 
-    console.log('Ticket Status Data:', {
-        rawStatusData: ticketStatusResult
-    })
     return NextResponse.json({
       rawStatusData: ticketStatusResult, // Include raw data for debugging if needed
       success: true

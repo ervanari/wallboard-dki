@@ -35,8 +35,6 @@ export async function GET() {
     
     `);
 
-    console.log('Call Activity Data:', result);
-
     // Extract the first row of the result (there should be only one row)
     const callData = result[0] || {
       incoming_call: 0,

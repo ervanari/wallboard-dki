@@ -34,9 +34,6 @@ const TotalTicketKantorCabang: React.FC = () => {
     return maxTotal > 0 ? Math.round((total / maxTotal) * 100) : 0;
   };
 
-  console.log('Ticket Data Kantor Cabang:', ticketData);
-  console.log('Total Tickets Kantor Cabang:', totalTickets);
-
   if (isLoading) return <WidgetCard title="Total Ticket Kantor Cabang" tooltipPosition="left">Loading...</WidgetCard>;
   if (error) return <WidgetCard title="Total Ticket Kantor Cabang" tooltipPosition="left">Error loading data</WidgetCard>;
 

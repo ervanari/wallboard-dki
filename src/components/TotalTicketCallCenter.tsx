@@ -36,9 +36,6 @@ const TotalTicketCallCenter: React.FC = () => {
     return maxTotal > 0 ? Math.round((total / maxTotal) * 100) : 0;
   };
 
-  console.log('Ticket Data:', ticketData);
-  console.log('Total Tickets:', totalTickets);
-
   if (isLoading) return <WidgetCard title="Total Ticket Call Center" tooltipPosition="left">Loading...</WidgetCard>;
   if (error) return <WidgetCard title="Total Ticket Call Center" tooltipPosition="left">Error loading data</WidgetCard>;
 

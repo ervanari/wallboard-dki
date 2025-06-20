@@ -14,8 +14,6 @@ export async function GET() {
       LIMIT 5;
     `);
 
-    console.log('Top Departments Data:', result);
-
     // Transform the data to match the expected format in the component
     const departmentData = result.map((item: any) => ({
       name: item.name,

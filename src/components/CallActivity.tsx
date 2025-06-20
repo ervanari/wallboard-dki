@@ -13,8 +13,6 @@ const CallActivity: React.FC = () => {
     refreshInterval: 30000 // refresh every 30 seconds
   });
 
-  console.log('Call Activity Data:', data);
-
   // Default values if data is not loaded yet
   const incomingCall = data?.incomingCall || 0;
   const queueCall = data?.queueCall || 0;
@@ -31,7 +29,6 @@ const CallActivity: React.FC = () => {
 
   // Find the maximum value for abandoned calls to scale the bars
   const maxAbandoned = Math.max(abandoneIvr, abandoneQueue, abandoneAgent, abandoneTransfer);
-  console.log('Max Abandoned Calls:', maxAbandoned);
 
   if (isLoading) return (
       <Loading title="Call Activity & Abandoned"/>

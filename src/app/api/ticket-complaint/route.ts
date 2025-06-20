@@ -18,8 +18,6 @@ export async function GET() {
       LIMIT 5;
     `);
 
-    console.log('Ticket Complaint Data:', result);
-
     // Transform the data to match the expected format in the component
     const complaintData = result.map((item: any) => ({
       name: item.name,

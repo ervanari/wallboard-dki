@@ -16,7 +16,6 @@ const TicketPermohonan: React.FC = () => {
   });
 
   // Default values if data is not loaded yet
-  console.log('TicketPermohonan data:', data);
   const requestData = data?.requestData || [];
 
   const options = {

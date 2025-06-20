@@ -9,8 +9,6 @@ export async function POST(request: Request) {
     // Parse the request body
     const body = await request.json();
 
-    console.log('Login request body:', body);
-
     // Check if username and password are provided
     if (!body.username || !body.password) {
       return NextResponse.json(
@@ -35,14 +33,11 @@ export async function POST(request: Request) {
 
     const user = users[0];
 
-    console.log('User object:', user);
-
     // Determine which field contains the password hash
     let passwordHash = user.password_hash;
 
     // If password_hash doesn't exist, try 'password' field
     if (!passwordHash && user.password) {
-      console.log('Using password field instead of password_hash');
       passwordHash = user.password;
     }
 
@@ -77,7 +72,6 @@ export async function POST(request: Request) {
       );
     }
 
-    console.log('Comparing password with hash. Password length:', body.password.length, 'Hash length:', passwordHash.length);
     const passwordMatch = await bcrypt.compare(body.password, passwordHash);
     if (!passwordMatch) {
       return NextResponse.json(
@@ -95,9 +89,6 @@ export async function POST(request: Request) {
       { expiresIn: '1d' }
     );
 
-    console.log('Generated JWT token:', token);
-    console.log('User authenticated:', user.username);
-
     // Create response with success message
     const response = NextResponse.json({ success: true });
 
@@ -112,7 +103,6 @@ export async function POST(request: Request) {
       path: '/' // Set path to restrict cookie to wallboard
     });
 
-    console.log('JWT set in cookie', response);
     return response;
 
   } catch (error) {

@@ -24,10 +24,6 @@ const TicketStatus: React.FC = () => {
 
   const rawStatusData: StatusItem[] = data?.rawStatusData || [];
 
-  console.log('Ticket Status Data:', {
-    rawStatusData
-  });
-
   const statusConfig: Record<number, { bg: string; icon?: React.ReactNode }> = {
     1: { bg: 'bg-blue-100', icon: <span className="text-blue-600"><i className='bx bx-time'></i> </span> },
     2: { bg: 'bg-red-100', icon: <span className="text-red-600">< i className='bx bx-bell' style={{color:'#e80000'}}></i> </span> },

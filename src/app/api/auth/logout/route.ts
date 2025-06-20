@@ -5,7 +5,7 @@ import { cookies } from 'next/headers';
 export async function POST() {
   try {
     // Get the cookie store
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     
     // Check if the auth_token cookie exists
     const token = cookieStore.get('auth_token');

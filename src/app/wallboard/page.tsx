@@ -25,13 +25,13 @@ export default function Wallboard() {
                     <Image
                         src="/logo-bank.png"
                         alt="Bank DKI Logo"
-                        width={100}
-                        height={80}
+                        width={120}
+                        height={100}
                         className="mr-4"
                     />
                 </div>
                 <div>
-                    <h1 className="text-3xl font-bold text-blue-800">CALL CENTER WALLBOARD</h1>
+                    <h1 className="text-3xl font-extrabold text-black">CALL CENTER WALLBOARD</h1>
                 </div>
                 <div className="text-right flex flex-row items-end">
                     <div className="text-sm mb-2 mr-2">{new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</div>

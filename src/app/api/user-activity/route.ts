@@ -67,9 +67,19 @@ export async function GET() {
          AND (\`user_levels\`.\`is_agent\` = 1 OR \`user_levels\`.\`is_spv\` = 1)) AS \`break_user\`
     `);
 
-    // Format the data for the UI component
+    // Define a type for the activity counts
+    type ActivityCounts = {
+      login_count: number;
+      not_available: number;
+      ready_in: number;
+      online_in: number;
+      paperwork: number;
+      break_user: number;
+    };
+
+    // Format the data for the UI component with proper type assertion
     const activityCounts = Array.isArray(userActivityResult) && userActivityResult.length > 0
-      ? userActivityResult[0]
+      ? userActivityResult[0] as ActivityCounts
       : {
           login_count: 0,
           not_available: 0,

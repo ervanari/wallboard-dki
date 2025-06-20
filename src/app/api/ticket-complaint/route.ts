@@ -18,12 +18,28 @@ export async function GET() {
       LIMIT 5;
     `);
 
+    // Define type for each item in the result
+    type ComplaintItem = {
+      name: string;
+      contact_center: number | null;
+      kc: number | null;
+    };
+
+    // Check if result is an array before using map
+    if (!Array.isArray(result)) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid data format received' },
+        { status: 500 }
+      );
+    }
+
     // Transform the data to match the expected format in the component
+    // Use a type assertion for each item in the array
     const complaintData = result.map((item: any) => ({
-      name: item.name,
-      count: (item.contact_center || 0) + (item.kc || 0), // Total count combining both departments
-      contact_center: item.contact_center || 0,
-      kc: item.kc || 0
+      name: item.name || '',
+      count: (Number(item.contact_center) || 0) + (Number(item.kc) || 0), // Total count combining both departments
+      contact_center: Number(item.contact_center) || 0,
+      kc: Number(item.kc) || 0
     }));
 
     return NextResponse.json({

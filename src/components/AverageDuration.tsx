@@ -28,7 +28,7 @@ const AverageDuration: React.FC = () => {
 
   return (
     <WidgetCard title="Average Duration" className="relative" tooltipPosition="bottom">
-      <div className="flex flex-col h-full justify-center mt-5">
+      <div className="flex flex-col h-full justify-center">
         <div className="grid grid-cols-2 gap-3">
           {/* ASA */}
           <div className="flex flex-row justify-between items-center p-2">

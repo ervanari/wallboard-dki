@@ -21,7 +21,7 @@ const TotalCall: React.FC = () => {
   console.log('Total Call Data:', totalCallData);
 
   // Process data for the chart
-  const hours = Array.from(new Set(totalCallData.map((item: any) => item.call_hour))).sort();
+  const hours = Array.from(new Set(totalCallData.map((item: any) => item.call_hour))).sort() as number[];
 
   // Calculate total answered and abandoned calls
   const totalAnswered = totalCallData.reduce((sum: number, item: any) => sum + (item.answered || 0), 0);
@@ -29,12 +29,12 @@ const TotalCall: React.FC = () => {
   const totalCalls = totalAnswered + totalAbandoned;
 
   // Prepare data for hourly chart
-  const answeredByHour = hours.map(hour => {
+  const answeredByHour = hours.map((hour: number) => {
     const hourData = totalCallData.filter((item: any) => item.call_hour === hour);
     return hourData.reduce((sum: number, item: any) => sum + (item.answered || 0), 0);
   });
 
-  const abandonedByHour = hours.map(hour => {
+  const abandonedByHour = hours.map((hour: number) => {
     const hourData = totalCallData.filter((item: any) => item.call_hour === hour);
     return hourData.reduce((sum: number, item: any) => sum + (item.abandon || 0), 0);
   });
@@ -53,7 +53,7 @@ const TotalCall: React.FC = () => {
     },
     title: null,
     xAxis: {
-      categories: hours.map(hour => `${hour.toString().padStart(2, '0')}:00`),
+      categories: hours.map((hour: number) => `${hour.toString().padStart(2, '0')}:00`),
       title: {
         text: 'Hour'
       },

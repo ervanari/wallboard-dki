@@ -14,10 +14,18 @@ export async function GET() {
       LIMIT 3;
     `);
 
+    // Check if result is an array before using map
+    if (!Array.isArray(result)) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid data format received' },
+        { status: 500 }
+      );
+    }
+
     // Transform the data to match the expected format in the component
     const branchData = result.map((item: any) => ({
-      name: item.name,
-      count: item.total
+      name: item.name || '',
+      count: Number(item.total) || 0
     }));
 
     return NextResponse.json({

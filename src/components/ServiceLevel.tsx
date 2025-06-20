@@ -41,7 +41,7 @@ const ServiceLevel: React.FC = () => {
     },
     title: null,
     pane: {
-      center: ['50%', '85%'],
+      center: ['50%', '65%'],
       size: '90%',
       startAngle: -90,
       endAngle: 90,
@@ -126,7 +126,7 @@ const ServiceLevel: React.FC = () => {
           highcharts={Highcharts}
           options={options}
           containerProps={{
-            className: 'w-full h-[80px] md:h-[100px] lg:h-[120px] xl:h-[150px] 2xl:h-[180px]',
+            className: 'w-full h-full md:h-[120px] lg:h-[160px] xl:h-[200px] 2xl:h-[240px]',
           }}
           immutable={false}
           allowChartUpdate={true}

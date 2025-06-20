@@ -18,10 +18,18 @@ export async function GET() {
       GROUP BY it.id, it.name;
     `);
 
+    // Check if result is an array before using map
+    if (!Array.isArray(result)) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid data format received' },
+        { status: 500 }
+      );
+    }
+
     // Transform the data to match the expected format in the component
     const ticketData = result.map((item: any) => ({
       type: item.inbound_type,
-      total: item.total
+      total: Number(item.total)
     }));
 
     return NextResponse.json({

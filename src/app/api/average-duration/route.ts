@@ -98,14 +98,22 @@ export async function GET() {
         ) AS avg_aht
     `);
 
-    if (!result || result.length === 0) {
+    if (!result || !Array.isArray(result) || result.length === 0) {
       return NextResponse.json(
         { success: false, error: 'No data found' },
         { status: 404 }
       );
     }
 
-    const data = result[0];
+    // Add type assertion for the database result
+    type ResultRow = {
+      avg_acd?: string;
+      avg_asa?: string;
+      avg_aht?: string;
+      avg_acw?: string;
+    };
+    
+    const data = result[0] as ResultRow;
     if (!data) {
       return NextResponse.json(
         { success: false, error: 'No data found' },

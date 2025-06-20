@@ -54,13 +54,21 @@ export async function GET() {
 
     const result = await query(sql);
     
-    if (!result || result.length === 0) {
+    // Define a type for the expected result structure
+    type ServiceLevelResult = {
+      service_level: number | string | null;
+    };
+    
+    // Check if result is an array before accessing length property
+    if (!result || !Array.isArray(result) || result.length === 0) {
       return NextResponse.json(
         { success: false, error: 'No data found' },
         { status: 404 }
       );
     }
-    const data = result[0];
+    
+    // Use type assertion for the data
+    const data = result[0] as ServiceLevelResult;
     if (!data) {
       return NextResponse.json(
         { success: false, error: 'No data found' },
@@ -70,8 +78,14 @@ export async function GET() {
     // Return the service level data
 
     // Ensure service_level is a valid number, default to 0 if not
-    const serviceLevel = data.service_level !== null && data.service_level !== undefined ?
-      parseFloat(data.service_level) : 0;
+    let serviceLevel = 0;
+    if (data.service_level !== null && data.service_level !== undefined) {
+      if (typeof data.service_level === 'string') {
+        serviceLevel = parseFloat(data.service_level);
+      } else if (typeof data.service_level === 'number') {
+        serviceLevel = data.service_level;
+      }
+    }
     
     return NextResponse.json({
       serviceLevel: serviceLevel,

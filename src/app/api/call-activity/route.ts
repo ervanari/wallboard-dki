@@ -1,6 +1,17 @@
 import { NextResponse } from 'next/server';
 import { query } from '@/lib/db';
 
+// Define the type for the expected result row
+type CallActivityData = {
+  incoming_call: number;
+  queue_call: number;
+  answer_call: number;
+  abandone_ivr: number;
+  abandone_queue: number;
+  abandone_agent: number;
+  abandone_transfer: number;
+};
+
 export async function GET() {
   try {
     // Fetch data from the database using the query from call_activity&abandone.txt
@@ -35,8 +46,8 @@ export async function GET() {
     
     `);
 
-    // Extract the first row of the result (there should be only one row)
-    const callData = result[0] || {
+    // Check if the result is an array and extract the first row
+    let callData: CallActivityData = {
       incoming_call: 0,
       queue_call: 0,
       answer_call: 0,
@@ -45,6 +56,20 @@ export async function GET() {
       abandone_agent: 0,
       abandone_transfer: 0
     };
+    
+    if (Array.isArray(result) && result.length > 0) {
+      // Cast the first row to our expected type
+      const firstRow = result[0] as CallActivityData;
+      callData = {
+        incoming_call: Number(firstRow.incoming_call) || 0,
+        queue_call: Number(firstRow.queue_call) || 0,
+        answer_call: Number(firstRow.answer_call) || 0,
+        abandone_ivr: Number(firstRow.abandone_ivr) || 0,
+        abandone_queue: Number(firstRow.abandone_queue) || 0,
+        abandone_agent: Number(firstRow.abandone_agent) || 0,
+        abandone_transfer: Number(firstRow.abandone_transfer) || 0
+      };
+    }
 
     return NextResponse.json({
       incomingCall: callData.incoming_call,

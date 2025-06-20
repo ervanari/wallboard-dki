@@ -17,12 +17,20 @@ export async function GET() {
       LIMIT 5;
     `);
     
+    // Check if result is an array before using map
+    if (!Array.isArray(result)) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid data format received' },
+        { status: 500 }
+      );
+    }
+    
     // Transform the data to match the expected format in the component
     const requestData = result.map((item: any) => ({
-      name: item.name,
-      contact_center: item.contact_center || 0,
-      kc: item.kc || 0,
-      count: (item.contact_center || 0) + (item.kc || 0) // Total count for backward compatibility
+      name: item.name || '',
+      contact_center: Number(item.contact_center) || 0,
+      kc: Number(item.kc) || 0,
+      count: (Number(item.contact_center) || 0) + (Number(item.kc) || 0) // Total count for backward compatibility
     }));
 
     return NextResponse.json({

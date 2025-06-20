@@ -48,7 +48,7 @@ const CallActivity: React.FC = () => {
                 Call Activity
                 <Tooltip name={"Call Activity"} position={'bottom'} />
               </h3>
-              <div className="widget-content flex-1 overflow-hidden">
+              <div className="widget-content flex-1 overflow-hidden mt-5">
                 {/* Incoming */}
                 <div className="flex justify-between text-center items-center mb-2 md:mb-4">
                   <div className="text-xs sm:text-sm text-gray-600 flex items-center relative group">

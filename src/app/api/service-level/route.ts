@@ -5,51 +5,53 @@ export async function GET() {
   try {
 
     const sql = `
-        SELECT ROUND(
-          (
-            (
-              SELECT COUNT(calls.id)
-              FROM calls
-              WHERE
-                calls.direction_id = 1
-                AND calls.call_date
-                AND (calls.hangup_date IS NOT NULL OR calls.pickup_date IS NOT NULL)
-            ) -
-            (
-              (
-                SELECT COUNT(calls.id)
-                FROM calls
-                WHERE
-                  calls.direction_id = 1
-                  AND calls.media_status_id = 13
-                  AND calls.media_status_detail_id = 4
-                  AND calls.call_date
-              ) +
-              (
-                SELECT COUNT(calls.id)
-                FROM calls
-                WHERE
-                  calls.direction_id = 1
-                  AND calls.media_status_id = 12
-                  AND calls.call_date
-                  AND TIME_TO_SEC(TIMEDIFF(calls.transfer_date, calls.queue_date)) > 20
-              )
-            )
-          )
-          /
+    SELECT ROUND(
+      (
+        (
+          SELECT COUNT(calls.id)
+          FROM calls
+          WHERE
+            calls.direction_id = 1
+            AND calls.call_date >= CURDATE()
+            AND calls.call_date < CURDATE() + INTERVAL 1 DAY
+            AND (calls.hangup_date IS NOT NULL OR calls.pickup_date IS NOT NULL)
+        ) -
+        (
           (
             SELECT COUNT(calls.id)
             FROM calls
             WHERE
               calls.direction_id = 1
-              AND calls.call_date
-              AND (calls.hangup_date IS NOT NULL OR calls.pickup_date IS NOT NULL)
+              AND calls.media_status_id = 13
+              AND calls.media_status_detail_id = 4
+              AND calls.call_date >= CURDATE()
+              AND calls.call_date < CURDATE() + INTERVAL 1 DAY
+          ) +
+          (
+            SELECT COUNT(calls.id)
+            FROM calls
+            WHERE
+              calls.direction_id = 1
+              AND calls.media_status_id = 12
+              AND calls.call_date >= CURDATE()
+              AND calls.call_date < CURDATE() + INTERVAL 1 DAY
+              AND TIME_TO_SEC(TIMEDIFF(calls.transfer_date, calls.queue_date)) > 20
           )
-          * 100,
-          1
         )
-       AS service_level;
-
+      )
+      /
+      (
+        SELECT COUNT(calls.id)
+        FROM calls
+        WHERE
+          calls.direction_id = 1
+          AND calls.call_date >= CURDATE()
+          AND calls.call_date < CURDATE() + INTERVAL 1 DAY
+          AND (calls.hangup_date IS NOT NULL OR calls.pickup_date IS NOT NULL)
+      )
+      * 100,
+      1
+    ) AS service_level;
     `;
 
     const result = await query(sql);

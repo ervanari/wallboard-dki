@@ -5,17 +5,21 @@ export async function GET() {
   try {
     // Fetch call category inbound data from the database
     const callCategoryResult = await query(`
-      SELECT
-        it.name,
-        COUNT(t.id) AS count
+      SELECT it.name     AS name,
+             COUNT(c.id) AS total
       FROM inbound_types it
-      LEFT JOIN tickets t
-        ON t.ticket_type_id = it.id
-        AND t.create_date
-        AND t.create_department_id = 1
-      WHERE it.id IN (2, 3, 4, 5, 6, 7, 8, 9)
-      GROUP BY it.id, it.name
-      ORDER BY count DESC
+             LEFT JOIN
+           media_categories m ON it.id = m.inbound_type_id
+             AND m.is_active = 1
+             LEFT JOIN
+           calls c ON m.media_record_id = c.id
+             AND c.call_date >= CURDATE()
+             AND c.call_date < CURDATE() + INTERVAL 1 DAY
+        AND c.direction_id = 1
+        AND c.media_status_id =12
+      WHERE it.is_active =1 AND it.is_cc =1
+      GROUP BY
+        it.id, it.name
     `);
 
     // Map database results to the expected format with icons

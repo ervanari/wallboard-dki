@@ -11,7 +11,7 @@ export async function GET() {
         rci.answered,
         rci.abandon
       FROM report_call_in_summaries rci
-      WHERE rci.call_date
+      WHERE rci.call_date >= CURDATE() AND rci.call_date < CURDATE() + INTERVAL 1 DAY
     `);
 
     // Return the data as JSON with a success flag

@@ -7,11 +7,13 @@ export async function GET() {
     const result = await query(`
       SELECT b.name, COUNT(t.id) AS total
       FROM tickets t
-      JOIN branches b ON t.create_branch_id = b.id
-      WHERE t.create_date
+             JOIN branches b ON t.create_branch_id = b.id
+      WHERE t.create_date >= CURDATE() AND t.create_date < CURDATE() + INTERVAL 1 DAY
+        AND t.create_branch_id != 297
+        AND ticket_no IS NOT NULL
       GROUP BY b.name
       ORDER BY total DESC
-      LIMIT 3;
+        LIMIT 5;
     `);
 
     // Check if result is an array before using map

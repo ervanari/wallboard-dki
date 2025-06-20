@@ -5,17 +5,18 @@ export async function GET() {
   try {
     // Fetch data from the database using the query from ticket_call_center.txt
     const result = await query(`
-      SELECT
-        ROW_NUMBER() OVER (ORDER BY it.id) AS no,
+      SELECT ROW_NUMBER() OVER (ORDER BY it.id) AS no,
         it.name AS inbound_type,
         COUNT(t.id) AS total
-      FROM inbound_types it
-      LEFT JOIN tickets t
-        ON t.ticket_type_id = it.id
-        AND t.create_date
-        AND t.create_department_id = 1
-      WHERE it.id IN (2,3)
-      GROUP BY it.id, it.name;
+            FROM inbound_types it
+              LEFT JOIN tickets t
+            ON t.ticket_type_id = it.id
+              AND t.create_date >= CURDATE()
+              AND t.create_date < CURDATE() + INTERVAL 1 DAY
+              AND t.create_department_id = 1
+              AND t.ticket_no IS NOT NULL
+            WHERE it.id IN (2, 3)
+            GROUP BY it.id, it.name;
     `);
 
     // Check if result is an array before using map

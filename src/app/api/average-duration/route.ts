@@ -5,97 +5,98 @@ export async function GET() {
   try {
     // Fetch data from the database using the query from service_level&avg_duration.txt
     const result = await query(`
-      SELECT
-        (
-          SELECT IFNULL(
-            CONVERT(
-              TIME_FORMAT(
+SELECT
+    -- Average Speed of Answer (ASA)
+    (SELECT IFNULL(
+        CONVERT(
+            TIME_FORMAT(
+                ROUND(SEC_TO_TIME(AVG(TIMEDIFF(calls.pickup_date, calls.ringing_date))), 0),
+                '%H:%i:%s'
+            ) USING utf8mb4
+        ),
+        '00:00:00'
+    )
+    FROM calls
+    WHERE calls.call_date >= CURDATE()
+        AND calls.call_date < CURDATE() + INTERVAL 1 DAY
+        AND calls.direction_id = 1
+        AND calls.media_status_id = 12
+    ) AS avg_asa,
+
+    -- Average Call Duration (ACD)
+    (SELECT IFNULL(
+        CONVERT(
+            TIME_FORMAT(
                 SEC_TO_TIME(AVG(TIME_TO_SEC(IFNULL(TIMEDIFF(calls.dropcall_date, calls.pickup_date), '00:00:00')))),
-              '%H:%i:%s'
-            ) USING utf8mb4),
-            '00:00:00'
-          )
-          FROM calls
-          WHERE
-            calls.direction_id = 1
-            AND calls.media_status_id = 12
-            AND calls.call_date
-        ) AS avg_acd,
+                '%H:%i:%s'
+            ) USING utf8mb4
+        ),
+        '00:00:00'
+    )
+    FROM calls
+    WHERE calls.direction_id = 1
+        AND calls.media_status_id = 12
+        AND calls.call_date >= CURDATE()
+        AND calls.call_date < CURDATE() + INTERVAL 1 DAY
+    ) AS avg_acd,
 
-        (
-          SELECT
-            IFNULL(
-              CONVERT(
-                TIME_FORMAT(
-                  ROUND(SEC_TO_TIME(AVG(TIMEDIFF(calls.pickup_date, calls.ringing_date))), 0),
-                '%H:%i:%s') USING utf8mb4),
-              '00:00:00'
-            )
-          FROM calls
-          WHERE
-            calls.call_date >= CURDATE()
-            AND calls.call_date < CURDATE() + INTERVAL 1 DAY
-            AND calls.direction_id = 1
-            AND calls.media_status_id = 12
-        ) AS avg_asa,
-
-        (
-          SELECT IFNULL(
-            CONVERT(
-              TIME_FORMAT(
+    -- Average After Call Work (ACW)
+    (SELECT IFNULL(
+        CONVERT(
+            TIME_FORMAT(
                 SEC_TO_TIME(AVG(TIME_TO_SEC(IFNULL(calls.acw_duration, '00:00:00')))),
-              '%H:%i:%s'
-            ) USING utf8mb4),
-            '00:00:00'
-          )
-          FROM calls
-          WHERE
-            calls.direction_id = 1
-            AND calls.media_status_id = 12
-            AND calls.call_date
-        ) AS avg_acw,
+                '%H:%i:%s'
+            ) USING utf8mb4
+        ),
+        '00:00:00'
+    )
+    FROM calls
+    WHERE calls.direction_id = 1
+        AND calls.media_status_id = 12
+        AND calls.call_date >= CURDATE()
+        AND calls.call_date < CURDATE() + INTERVAL 1 DAY
+    ) AS avg_acw,
 
-        (
-          SELECT TIME_FORMAT(
-            SEC_TO_TIME(
-              TIME_TO_SEC(
-                (
-                  SELECT IFNULL(
+    -- Average Handle Time (AHT) = ACD + ACW
+    (SELECT TIME_FORMAT(
+        SEC_TO_TIME(
+            TIME_TO_SEC(
+                (SELECT IFNULL(
                     CONVERT(
-                      TIME_FORMAT(
-                        SEC_TO_TIME(AVG(TIME_TO_SEC(IFNULL(TIMEDIFF(calls.dropcall_date, calls.pickup_date), '00:00:00')))),
-                      '%H:%i:%s'
-                    ) USING utf8mb4),
+                        TIME_FORMAT(
+                            SEC_TO_TIME(AVG(TIME_TO_SEC(IFNULL(TIMEDIFF(calls.dropcall_date, calls.pickup_date), '00:00:00')))),
+                            '%H:%i:%s'
+                        ) USING utf8mb4
+                    ),
                     '00:00:00'
-                  )
-                  FROM calls
-                  WHERE
-                    calls.direction_id = 1
-                    AND calls.media_status_id = 12
-                    AND calls.call_date
                 )
-              ) +
-              TIME_TO_SEC(
-                (
-                  SELECT IFNULL(
+                FROM calls
+                WHERE calls.direction_id = 1
+                    AND calls.media_status_id = 12
+                    AND calls.call_date >= CURDATE()
+                    AND calls.call_date < CURDATE() + INTERVAL 1 DAY
+                )
+            ) +
+            TIME_TO_SEC(
+                (SELECT IFNULL(
                     CONVERT(
-                      TIME_FORMAT(
-                        SEC_TO_TIME(AVG(TIME_TO_SEC(IFNULL(calls.acw_duration, '00:00:00')))),
-                      '%H:%i:%s'
-                    ) USING utf8mb4),
+                        TIME_FORMAT(
+                            SEC_TO_TIME(AVG(TIME_TO_SEC(IFNULL(calls.acw_duration, '00:00:00')))),
+                            '%H:%i:%s'
+                        ) USING utf8mb4
+                    ),
                     '00:00:00'
-                  )
-                  FROM calls
-                  WHERE
-                    calls.direction_id = 1
-                    AND calls.media_status_id = 12
-                    AND calls.call_date
                 )
-              )
-            ),
-            '%H:%i:%s'
-          )
-        ) AS avg_aht
+                FROM calls
+                WHERE calls.direction_id = 1
+                    AND calls.media_status_id = 12
+                    AND calls.call_date >= CURDATE()
+                    AND calls.call_date < CURDATE() + INTERVAL 1 DAY
+                )
+            )
+        ),
+        '%H:%i:%s'
+    )) AS avg_aht;
     `);
 
     if (!result || !Array.isArray(result) || result.length === 0) {

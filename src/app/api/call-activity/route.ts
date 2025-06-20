@@ -16,33 +16,34 @@ export async function GET() {
   try {
     // Fetch data from the database using the query from call_activity&abandone.txt
     const result = await query(`
-      SELECT COUNT(id)                 AS incoming_call,
-             SUM(
-                 call_state_id = 2
-                   AND media_status_detail_id IS NULL
-             )                         AS queue_call,
-             SUM(media_status_id = 12) AS answer_call,
-             SUM(
-                 media_status_id = 13
-                   AND \`calls\`.\`hangup_date\` IS NOT NULL
-                   AND \`calls\`.\`media_status_detail_id\` = 3
-             )                         AS abandone_ivr,
-             SUM(
-                 media_status_id = 13
-                   AND \`calls\`.\`media_status_detail_id\` = 4
-             )                         AS abandone_queue,
-             SUM(
-                 media_status_id = 13
-                   AND \`calls\`.\`media_status_detail_id\` = 5
-             )                         AS abandone_agent,
-             SUM(
-                 media_status_id = 13
-                   AND \`calls\`.\`media_status_detail_id\` = 34
-                   AND \`calls\`.\`hangup_date\` IS NOT NULL
-             )                         AS abandone_transfer
-      FROM calls
-      WHERE direction_id = 1
-        AND calls.call_date;
+        SELECT COUNT(id)                 AS incoming_call,
+               SUM(
+                       call_state_id = 2
+                           AND media_status_detail_id IS NULL
+               )                         AS queue_call,
+               SUM(media_status_id = 12) AS answer_call,
+               SUM(
+                       media_status_id = 13
+                           AND \`calls\`.\`hangup_date\` IS NOT NULL
+                           AND \`calls\`.\`media_status_detail_id\` = 3
+               )                         AS abandone_ivr,
+               SUM(
+                       media_status_id = 13
+                           AND \`calls\`.\`media_status_detail_id\` = 4
+               )                         AS abandone_queue,
+               SUM(
+                       media_status_id = 13
+                           AND \`calls\`.\`media_status_detail_id\` = 5
+               )                         AS abandone_agent,
+               SUM(
+                       media_status_id = 13
+                           AND \`calls\`.\`media_status_detail_id\` = 34
+                           AND \`calls\`.\`hangup_date\` IS NOT NULL
+               )                         AS abandone_transfer
+        FROM calls
+        WHERE direction_id = 1
+          AND calls.call_date >= CURDATE()
+          AND calls.call_date < CURDATE() + INTERVAL 1 DAY
     
     `);
 

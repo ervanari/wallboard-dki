@@ -8,14 +8,16 @@ export async function GET() {
       SELECT
         itd.name,
         COUNT(CASE WHEN t.create_department_id = 1 THEN 1 END) AS "contact_center",
-        COUNT(CASE WHEN t.create_department_id = 2 THEN 1 END) AS "kc"
+        COUNT(CASE WHEN t.create_department_id = 2 THEN 1 END) AS "kc",
+        (COUNT(CASE WHEN t.create_department_id = 1 THEN 1 END) + COUNT(CASE WHEN t.create_department_id = 2 THEN 1 END)) AS total
       FROM tickets t
-      JOIN inbound_type_sub_category_details itd ON t.ticket_subcategory_id = itd.id
-      WHERE t.create_date
-      AND t.ticket_type_id = 3
+             JOIN inbound_type_sub_category_details itd ON t.ticket_subcategory_id = itd.id
+      WHERE t.create_date >= CURDATE() AND t.create_date < CURDATE() + INTERVAL 1 DAY
+        AND t.ticket_type_id = 3
+        AND t.ticket_no IS NOT NULL
       GROUP BY itd.name
-      ORDER BY itd.name
-      LIMIT 5;
+      ORDER BY total DESC
+        LIMIT 5;
     `);
 
     // Define type for each item in the result

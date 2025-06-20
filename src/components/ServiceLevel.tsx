@@ -6,6 +6,7 @@ import HighchartsReact from 'highcharts-react-official';
 import highchartsMore from 'highcharts/highcharts-more';
 import solidGauge from 'highcharts/modules/solid-gauge';
 import WidgetCard from './WidgetCard';
+import ChartContainer from './ChartContainer';
 import useSWR from 'swr';
 import Loading from "@/components/Loading";
 import Error from "@/components/Error";
@@ -29,8 +30,14 @@ const ServiceLevel: React.FC = () => {
   const options = {
     chart: {
       type: 'solidgauge',
-      height: '180px',
-      backgroundColor: 'transparent'
+      height: null,
+      width: null,
+      backgroundColor: 'transparent',
+      marginTop: 0,
+      marginBottom: 0,
+      style: {
+        overflow: 'visible'
+      }
     },
     title: null,
     pane: {
@@ -44,6 +51,18 @@ const ServiceLevel: React.FC = () => {
         outerRadius: '100%',
         shape: 'arc'
       }
+    },
+    responsive: {
+      rules: [{
+        condition: {
+          maxWidth: 500
+        },
+        chartOptions: {
+          pane: {
+            size: '85%'
+          }
+        }
+      }]
     },
     tooltip: {
       enabled: false
@@ -83,26 +102,36 @@ const ServiceLevel: React.FC = () => {
       name: 'Service Level',
       data: [serviceLevel],
       dataLabels: {
-        format: '<div style="text-align:center"><span style="font-size:25px;color:black">{y}%</span></div>'
+        format: '<div style="text-align:center"><span style="font-size:clamp(16px, 4vw, 25px);color:black">{y}%</span></div>',
+        style: {
+          textOutline: 'none'
+        }
       },
       rounded: false,
     }]
   };
-  
+
   if (isLoading) return (
       <Loading title="Service Level" />
   );
-  
+
   if (error) return (
       <Error title="Service Level" />
   );
 
   return (
     <WidgetCard title="Service Level" tooltipPosition="right">
-      <HighchartsReact
-        highcharts={Highcharts}
-        options={options}
-      />
+      <ChartContainer>
+        <HighchartsReact
+          highcharts={Highcharts}
+          options={options}
+          containerProps={{
+            className: 'w-full h-full',
+          }}
+          immutable={false}
+          allowChartUpdate={true}
+        />
+      </ChartContainer>
     </WidgetCard>
   );
 };

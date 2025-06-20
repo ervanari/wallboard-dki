@@ -40,135 +40,135 @@ const CallActivity: React.FC = () => {
 
   return (
       <>
-        <div className={`rounded-xl shadow-md bg-white p-4 h-[22vh]`}>
-          <div className="flex justify-between">
+        <div className={`rounded-xl shadow-md bg-white p-2 sm:p-3 md:p-4 h-[22vh] overflow-hidden`}>
+          <div className="flex flex-col md:flex-row justify-between h-full">
 
-            <div className="flex-row w-[100%] mr-10 h-full">
-              <h3 className="text-lg font-semibold mb-3">
+            <div className="flex-1 flex flex-col min-w-0 md:mr-4 h-full">
+              <h3 className="text-sm md:text-base lg:text-lg font-semibold mb-1 md:mb-2 flex items-center">
                 Call Activity
                 <Tooltip name={"Call Activity"} position={'top'} />
               </h3>
-              <div className="widget-content">
+              <div className="widget-content flex-1 overflow-hidden">
                 {/* Incoming */}
-                <div className="flex justify-between text-center items-center mb-4">
-                  <div className="text-sm text-gray-600 flex items-center relative group">
-                    <div className="bg-[#d0f7fb] rounded-md p-2 mr-2 inline-flex items-center justify-center">
+                <div className="flex justify-between text-center items-center mb-2 md:mb-4">
+                  <div className="text-xs sm:text-sm text-gray-600 flex items-center relative group">
+                    <div className="bg-[#d0f7fb] rounded-md p-1 sm:p-2 mr-1 sm:mr-2 inline-flex items-center justify-center">
                       <i className='bx bx-user'></i>
                     </div>
                     Incoming
-                    <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                    <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-40 sm:w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
                       Jumlah panggilan masuk ke Call Center.
                     </div>
                   </div>
-                  <div className="text-sm font-bold text-blue-600">{incomingCall}</div>
+                  <div className="text-xs sm:text-sm font-bold text-blue-600">{incomingCall}</div>
                 </div>
-                
+
                 {/* Queue */}
-                {/*<div className="flex justify-between text-center items-center mb-4">*/}
-                {/*  <div className="text-sm text-gray-600 flex items-center relative group">*/}
-                {/*    <div className="bg-[#d0f7fb] rounded-md p-2 mr-2 inline-flex items-center justify-center">*/}
+                {/*<div className="flex justify-between text-center items-center mb-2 md:mb-4">*/}
+                {/*  <div className="text-xs sm:text-sm text-gray-600 flex items-center relative group">*/}
+                {/*    <div className="bg-[#d0f7fb] rounded-md p-1 sm:p-2 mr-1 sm:mr-2 inline-flex items-center justify-center">*/}
                 {/*      <i className='bx bx-time'></i>*/}
                 {/*    </div>*/}
                 {/*    Queue*/}
-                {/*    <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">*/}
+                {/*    <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-40 sm:w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">*/}
                 {/*      Jumlah panggilan yang sedang menunggu dalam antrean sebelum dijawab oleh Agent.*/}
                 {/*    </div>*/}
                 {/*  </div>*/}
-                {/*  <div className="text-sm font-bold text-yellow-600">{queueCall}</div>*/}
+                {/*  <div className="text-xs sm:text-sm font-bold text-yellow-600">{queueCall}</div>*/}
                 {/*</div>*/}
-                
+
                 {/* Answered */}
                 <div className="flex justify-between text-center items-center">
-                  <div className="text-sm text-gray-600 flex items-center relative group">
-                    <div className="bg-[#d0f7fb] rounded-md p-2 mr-2 inline-flex items-center justify-center">
+                  <div className="text-xs sm:text-sm text-gray-600 flex items-center relative group">
+                    <div className="bg-[#d0f7fb] rounded-md p-1 sm:p-2 mr-1 sm:mr-2 inline-flex items-center justify-center">
                       <i className='bx bx-user-check'></i>
                     </div>
                     Answered
-                    <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                    <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-40 sm:w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
                       Jumlah panggilan yang berhasil dijawab oleh Agent.
                     </div>
                   </div>
-                  <div className="text-sm font-bold text-green-600">{answerCall}</div>
+                  <div className="text-xs sm:text-sm font-bold text-green-600">{answerCall}</div>
                 </div>
-              
+
               </div>
             </div>
 
-            <div className="flex-row w-[100%] h-full">
-              <h3 className="text-lg font-semibold mb-3">
+            <div className="flex-1 flex flex-col min-w-0 h-full">
+              <h3 className="text-sm md:text-base lg:text-lg font-semibold mb-1 md:mb-2 flex items-center">
                 Abandoned
                 <Tooltip name={"Abandoned"} position={'top'} />
               </h3>
-              <div className="widget-content">
-                <div className="flex flex-row mb-4 h-[14vh]">
+              <div className="widget-content flex-1 overflow-hidden">
+                <div className="flex flex-row justify-around h-full">
                   {/* IVR */}
-                  <div className="flex flex-col items-center mr-7">
-                    <div className="text-sm mb-2">{abandoneIvr}</div>
-                    <div className="flex flex-col justify-end h-40 w-8 bg-gray-200 rounded">
+                  <div className="flex flex-col items-center flex-1">
+                    <div className="text-xs sm:text-sm mb-1">{abandoneIvr}</div>
+                    <div className="flex flex-col justify-end flex-1 w-6 sm:w-8 bg-gray-200 rounded">
                       <div
                           className="bg-amber-500 w-full rounded-t"
                           style={{ height: `${calculatePercentage(abandoneIvr, maxAbandoned)}%` }}
                       ></div>
                     </div>
-                    <div className="text-sm mt-2 flex items-center relative group">
+                    <div className="text-xs sm:text-sm mt-1 flex items-center relative group">
                       IVR
-                      <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                      <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-40 sm:w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
                         Jumlah panggilan yang ditutup oleh nasabah saat masih berada di menu IVR (Interactive Voice Response), sebelum masuk ke antrean atau bicara dengan Agent.
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Queue */}
-                  <div className="flex flex-col items-center mr-7">
-                    <div className="text-sm mb-2">{abandoneQueue}</div>
-                    <div className="flex flex-col justify-end h-40 w-8 bg-gray-200 rounded">
+                  <div className="flex flex-col items-center flex-1">
+                    <div className="text-xs sm:text-sm mb-1">{abandoneQueue}</div>
+                    <div className="flex flex-col justify-end flex-1 w-6 sm:w-8 bg-gray-200 rounded">
                       <div
                           className="bg-amber-500 w-full rounded-t"
                           style={{ height: `${calculatePercentage(abandoneQueue, maxAbandoned)}%` }}
                       ></div>
                     </div>
-                    <div className="text-sm mt-2 flex items-center relative group">
+                    <div className="text-xs sm:text-sm mt-1 flex items-center relative group">
                       Queue
-                      <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                      <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-40 sm:w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
                         Jumlah panggilan yang ditutup oleh nasabah saat sudah masuk antrean, namun belum sempat dijawab oleh Agent.
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Agent */}
-                  <div className="flex flex-col items-center mr-7">
-                    <div className="text-sm mb-2">{abandoneAgent}</div>
-                    <div className="flex flex-col justify-end h-40 w-8 bg-gray-200 rounded">
+                  <div className="flex flex-col items-center flex-1">
+                    <div className="text-xs sm:text-sm mb-1">{abandoneAgent}</div>
+                    <div className="flex flex-col justify-end flex-1 w-6 sm:w-8 bg-gray-200 rounded">
                       <div
                           className="bg-amber-500 w-full rounded-t"
                           style={{ height: `${calculatePercentage(abandoneAgent, maxAbandoned)}%` }}
                       ></div>
                     </div>
-                    <div className="text-sm mt-2 flex items-center relative group">
+                    <div className="text-xs sm:text-sm mt-1 flex items-center relative group">
                       Agent
-                      <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                      <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-40 sm:w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
                         Jumlah panggilan yang ditutup oleh nasabah saat terhubung ke Agent.
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Transfer */}
-                  <div className="flex flex-col items-center mr-7">
-                    <div className="text-sm mb-2">{abandoneTransfer}</div>
-                    <div className="flex flex-col justify-end h-40 w-8 bg-gray-200 rounded">
+                  <div className="flex flex-col items-center flex-1">
+                    <div className="text-xs sm:text-sm mb-1">{abandoneTransfer}</div>
+                    <div className="flex flex-col justify-end flex-1 w-6 sm:w-8 bg-gray-200 rounded">
                       <div
                           className="bg-amber-500 w-full rounded-t"
                           style={{ height: `${calculatePercentage(abandoneTransfer, maxAbandoned)}%` }}
                       ></div>
                     </div>
-                    <div className="text-sm mt-2 flex items-center relative group">
+                    <div className="text-xs sm:text-sm mt-1 flex items-center relative group">
                       Transfer
-                      <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                      <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-40 sm:w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
                         Jumlah panggilan yang ditutup oleh nasabah saat panggilan sedang dalam proses dialihkan (transfer) ke Agent sebelum transfer berhasil.
                       </div>
                     </div>
                   </div>
-                
+
                 </div>
               </div>
             </div>

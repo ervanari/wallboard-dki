@@ -4,6 +4,7 @@ import React from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import WidgetCard from './WidgetCard';
+import ChartContainer from './ChartContainer';
 import useSWR from 'swr';
 import Loading from "@/components/Loading";
 import Error from "@/components/Error";
@@ -41,14 +42,25 @@ const TotalCall: React.FC = () => {
   const options = {
     chart: {
       type: 'column',
-      height: '180px',
-      backgroundColor: 'transparent'
+      height: null,
+      width: null,
+      backgroundColor: 'transparent',
+      marginTop: 10,
+      marginBottom: 80,
+      style: {
+        overflow: 'visible'
+      }
     },
     title: null,
     xAxis: {
       categories: hours.map(hour => `${hour}`),
       title: {
         text: 'Hour'
+      },
+      labels: {
+        style: {
+          fontSize: 'clamp(10px, 1.5vw, 12px)'
+        }
       }
     },
     yAxis: {
@@ -60,7 +72,13 @@ const TotalCall: React.FC = () => {
         enabled: true,
         style: {
           fontWeight: 'bold',
-          color: 'gray'
+          color: 'gray',
+          fontSize: 'clamp(10px, 1.5vw, 12px)'
+        }
+      },
+      labels: {
+        style: {
+          fontSize: 'clamp(10px, 1.5vw, 12px)'
         }
       }
     },
@@ -72,9 +90,42 @@ const TotalCall: React.FC = () => {
       column: {
         stacking: 'normal',
         dataLabels: {
-          enabled: true
+          enabled: true,
+          style: {
+            fontSize: 'clamp(9px, 1.5vw, 11px)',
+            textOutline: 'none',
+            fontWeight: 'normal'
+          }
         }
       }
+    },
+    responsive: {
+      rules: [{
+        condition: {
+          maxWidth: 500
+        },
+        chartOptions: {
+          legend: {
+            itemStyle: {
+              fontSize: '10px'
+            }
+          },
+          xAxis: {
+            labels: {
+              style: {
+                fontSize: '9px'
+              }
+            }
+          },
+          yAxis: {
+            labels: {
+              style: {
+                fontSize: '9px'
+              }
+            }
+          }
+        }
+      }]
     },
     legend: {
       enabled: true,
@@ -109,12 +160,17 @@ const TotalCall: React.FC = () => {
 
   return (
     <WidgetCard title="Total Call" tooltipPosition="right">
-      <div className="total-call-chart">
+      <ChartContainer>
         <HighchartsReact
           highcharts={Highcharts}
           options={options}
+          containerProps={{
+            className: 'w-full h-full',
+          }}
+          immutable={false}
+          allowChartUpdate={true}
         />
-      </div>
+      </ChartContainer>
     </WidgetCard>
   );
 };

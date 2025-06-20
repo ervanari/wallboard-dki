@@ -4,6 +4,7 @@ import React from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import WidgetCard from './WidgetCard';
+import ChartContainer from './ChartContainer';
 import useSWR from 'swr';
 import Loading from "@/components/Loading";
 import Error from "@/components/Error";
@@ -17,18 +18,24 @@ const Top5Department: React.FC = () => {
 
   // Default values if data is not loaded yet
   const departmentData = data?.departmentData || [
-    { name: 'Customer Service', count: 145 },
-    { name: 'IT Support', count: 98 },
-    { name: 'Finance', count: 76 },
-    { name: 'Operations', count: 65 },
-    { name: 'Marketing', count: 42 }
+    { name: 'Customer Service', count: 0 },
+    { name: 'IT Support', count: 0 },
+    { name: 'Finance', count: 0 },
+    { name: 'Operations', count: 0 },
+    { name: 'Marketing', count: 0 }
   ];
 
   const options = {
     chart: {
       type: 'pie',
-      height: '180px',
-      backgroundColor: 'transparent'
+      height: null,
+      width: null,
+      backgroundColor: 'transparent',
+      marginTop: 0,
+      marginBottom: 30,
+      style: {
+        overflow: 'visible'
+      }
     },
     title: null,
     tooltip: {
@@ -39,6 +46,29 @@ const Top5Department: React.FC = () => {
         valueSuffix: '%'
       }
     },
+    responsive: {
+      rules: [{
+        condition: {
+          maxWidth: 500
+        },
+        chartOptions: {
+          legend: {
+            itemStyle: {
+              fontSize: '10px'
+            }
+          },
+          plotOptions: {
+            pie: {
+              dataLabels: {
+                style: {
+                  fontSize: '9px'
+                }
+              }
+            }
+          }
+        }
+      }]
+    },
     plotOptions: {
       pie: {
         allowPointSelect: true,
@@ -47,6 +77,7 @@ const Top5Department: React.FC = () => {
           enabled: true,
           format: '{point.percentage:.1f} %',
           style: {
+            fontSize: 'clamp(10px, 1.5vw, 12px)',
             textOutline: 'none'
           }
         },
@@ -61,7 +92,7 @@ const Top5Department: React.FC = () => {
         y: item.count
       }))
     }],
-    colors: ['#4285F4', '#34A853', '#FBBC05', '#EA4335', '#8E24AA'],
+    colors: ['#5b9cd5', '#4472c4', '#ee7d31', '#ffc002', '#a5a5a5'],
     credits: {
       enabled: false
     }
@@ -77,12 +108,17 @@ const Top5Department: React.FC = () => {
 
   return (
     <WidgetCard title="Top 5 Department" tooltipPosition="bottom">
-      <div className="top-departments-chart">
+      <ChartContainer>
         <HighchartsReact
           highcharts={Highcharts}
           options={options}
+          containerProps={{
+            className: 'w-full h-full',
+          }}
+          immutable={false}
+          allowChartUpdate={true}
         />
-      </div>
+      </ChartContainer>
     </WidgetCard>
   );
 };

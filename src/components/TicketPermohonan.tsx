@@ -4,6 +4,7 @@ import React from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import WidgetCard from './WidgetCard';
+import ChartContainer from './ChartContainer';
 import useSWR from 'swr';
 import Loading from "@/components/Loading";
 import Error from "@/components/Error";
@@ -21,30 +22,48 @@ const TicketPermohonan: React.FC = () => {
   const options = {
     chart: {
       type: 'bar',
-      height: '180px',
-      backgroundColor: 'transparent'
+      height: null,
+      width: null,
+      backgroundColor: 'transparent',
+      marginTop: 10,
+      marginBottom: 80,
+      style: {
+        overflow: 'visible'
+      }
     },
     title: null,
     xAxis: {
       categories: requestData.map((item: { name: any; }) => item.name),
       title: {
         text: null
+      },
+      labels: {
+        style: {
+          fontSize: 'clamp(10px, 1.5vw, 12px)'
+        }
       }
     },
     yAxis: {
       min: 0,
       title: {
         text: 'Jumlah Ticket',
-        align: 'high'
+        align: 'high',
+        style: {
+          fontSize: 'clamp(10px, 1.5vw, 12px)'
+        }
       },
       labels: {
-        overflow: 'justify'
+        overflow: 'justify',
+        style: {
+          fontSize: 'clamp(10px, 1.5vw, 12px)'
+        }
       },
       stackLabels: {
         enabled: true,
         style: {
           fontWeight: 'bold',
-          color: 'gray'
+          color: 'gray',
+          fontSize: 'clamp(10px, 1.5vw, 12px)'
         }
       }
     },
@@ -56,16 +75,51 @@ const TicketPermohonan: React.FC = () => {
       bar: {
         stacking: 'normal',
         dataLabels: {
-          enabled: true
+          enabled: true,
+          style: {
+            fontSize: 'clamp(9px, 1.5vw, 11px)',
+            textOutline: 'none',
+            fontWeight: 'normal'
+          }
         }
       }
+    },
+    responsive: {
+      rules: [{
+        condition: {
+          maxWidth: 500
+        },
+        chartOptions: {
+          legend: {
+            itemStyle: {
+              fontSize: '10px'
+            }
+          },
+          xAxis: {
+            labels: {
+              style: {
+                fontSize: '9px'
+              }
+            }
+          },
+          yAxis: {
+            labels: {
+              style: {
+                fontSize: '9px'
+              }
+            }
+          }
+        }
+      }]
     },
     legend: {
       enabled: true,
       align: 'center',
       verticalAlign: 'bottom',
       layout: 'horizontal',
-      fontSize: '8px',
+      itemStyle: {
+        fontSize: 'clamp(8px, 1.5vw, 10px)'
+      }
     },
     credits: {
       enabled: false
@@ -74,12 +128,12 @@ const TicketPermohonan: React.FC = () => {
       {
         name: 'Contact Center',
         data: requestData.map((item: { contact_center: any; }) => item.contact_center),
-        color: '#4285F4'
+        color: '#2c62c2'
       },
       {
         name: 'Kantor Cabang',
         data: requestData.map((item: { kc: any; }) => item.kc),
-        color: '#34A853'
+        color: '#e96812'
       }
     ]
   };
@@ -94,12 +148,17 @@ const TicketPermohonan: React.FC = () => {
 
   return (
     <WidgetCard title="Ticket Permohonan" tooltipPosition="bottom">
-      <div className="ticket-permohonan-chart">
+      <ChartContainer>
         <HighchartsReact
           highcharts={Highcharts}
           options={options}
+          containerProps={{
+            className: 'w-full h-full',
+          }}
+          immutable={false}
+          allowChartUpdate={true}
         />
-      </div>
+      </ChartContainer>
     </WidgetCard>
   );
 };

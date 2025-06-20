@@ -15,12 +15,17 @@ const WidgetCard: React.FC<WidgetCardProps> = ({
   tooltipPosition
 }) => {
   return (
-    <div className={`rounded-xl shadow-md bg-white p-4 ${(title === 'User Activity' || title === 'Call Category Inbound') ? 'h-[18vh]' : 'h-[22vh]'} ${className}`}>
-      <h3 className="text-lg font-semibold flex items-center">
+    <div className={`
+      rounded-xl shadow-md bg-white p-2 sm:p-3 md:p-4
+      ${(title === 'User Activity' || title === 'Call Category Inbound') ? 'h-[18vh]' : 'h-[22vh]'}
+      ${className}
+      overflow-hidden
+    `}>
+      <h3 className="text-sm md:text-base lg:text-lg font-semibold flex items-center mb-1 md:mb-2">
         {title}
         <Tooltip name={title} position={tooltipPosition} />
       </h3>
-      <div className="widget-content">
+      <div className="widget-content h-[calc(100%-2rem)] w-full overflow-hidden">
         {children}
       </div>
     </div>

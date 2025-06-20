@@ -4,6 +4,7 @@ import React from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import WidgetCard from './WidgetCard';
+import ChartContainer from './ChartContainer';
 import useSWR from 'swr';
 import Loading from "@/components/Loading";
 import Error from "@/components/Error";
@@ -27,8 +28,14 @@ const Top5KantorCabang: React.FC = () => {
   const options = {
     chart: {
       type: 'pie',
-      height: '180px',
-      backgroundColor: 'transparent'
+      height: null,
+      width: null,
+      backgroundColor: 'transparent',
+      marginTop: 0,
+      marginBottom: 50,
+      style: {
+        overflow: 'visible'
+      }
     },
     title: null,
     tooltip: {
@@ -39,6 +46,29 @@ const Top5KantorCabang: React.FC = () => {
         valueSuffix: '%'
       }
     },
+    responsive: {
+      rules: [{
+        condition: {
+          maxWidth: 500
+        },
+        chartOptions: {
+          legend: {
+            itemStyle: {
+              fontSize: '10px'
+            }
+          },
+          plotOptions: {
+            pie: {
+              dataLabels: {
+                style: {
+                  fontSize: '9px'
+                }
+              }
+            }
+          }
+        }
+      }]
+    },
     plotOptions: {
       pie: {
         allowPointSelect: true,
@@ -47,6 +77,7 @@ const Top5KantorCabang: React.FC = () => {
           enabled: true,
           format: '{point.percentage:.1f} %',
           style: {
+            fontSize: 'clamp(10px, 1.5vw, 12px)',
             textOutline: 'none'
           }
         },
@@ -61,7 +92,7 @@ const Top5KantorCabang: React.FC = () => {
         y: item.count
       }))
     }],
-    colors: ['#6A5ACD', '#8A2BE2', '#9370DB', '#BA55D3', '#DA70D6'],
+    colors: ['#5b9cd5', '#4472c4', '#ee7d31', '#ffc002', '#a5a5a5'],
     credits: {
       enabled: false
     }
@@ -77,12 +108,17 @@ const Top5KantorCabang: React.FC = () => {
 
   return (
     <WidgetCard title="Top 5 Kantor Cabang" tooltipPosition="bottom">
-      <div className="top-branches-chart">
+      <ChartContainer>
         <HighchartsReact
           highcharts={Highcharts}
           options={options}
+          containerProps={{
+            className: 'w-full h-full',
+          }}
+          immutable={false}
+          allowChartUpdate={true}
         />
-      </div>
+      </ChartContainer>
     </WidgetCard>
   );
 };

@@ -55,30 +55,38 @@ const TotalCall: React.FC = () => {
     xAxis: {
       categories: hours.map((hour: number) => `${hour.toString().padStart(2, '0')}:00`),
       title: {
-        text: 'Hour'
+        text: 'Hour',
+        style: {
+          color: 'black'
+        }
       },
       labels: {
         style: {
-          fontSize: 'clamp(10px, 1.5vw, 12px)'
+          fontSize: 'clamp(10px, 1.5vw, 12px)',
+          color: 'black'
         }
       }
     },
     yAxis: {
       min: 0,
       title: {
-        text: 'Number of Calls'
+        text: 'Number of Calls',
+        style: {
+          color: 'black'
+        }
       },
       stackLabels: {
         enabled: true,
         style: {
           fontWeight: 'normal',
-          color: 'gray',
+          color: 'black',
           fontSize: 'clamp(10px, 1.5vw, 12px)'
         }
       },
       labels: {
         style: {
-          fontSize: 'clamp(10px, 1.5vw, 12px)'
+          fontSize: 'clamp(10px, 1.5vw, 12px)',
+          color: 'black'
         }
       }
     },
@@ -115,14 +123,16 @@ const TotalCall: React.FC = () => {
           xAxis: {
             labels: {
               style: {
-                fontSize: '9px'
+                fontSize: '9px',
+                color: 'black'
               }
             }
           },
           yAxis: {
             labels: {
               style: {
-                fontSize: '9px'
+                fontSize: '9px',
+                color: 'black'
               }
             }
           }

@@ -73,7 +73,7 @@ const UserActivity: React.FC = () => {
                   <div className={`flex p-2 rounded-md items-center justify-center`}>
                     {config.icon}
                   </div>
-                  <span className="text-sm font-medium truncate max-w-[120px]">{agent.name}</span>
+                  <span className="text-sm font-medium truncate max-w-[120px] text-black">{agent.name}</span>
                 </div>
                 <div className={`px-2 py-1 rounded ${config.bg} flex items-center gap-1`}>
                   <span className={`text-sm font-semibold ${config.textColor}`}>

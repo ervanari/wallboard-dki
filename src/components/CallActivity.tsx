@@ -44,14 +44,14 @@ const CallActivity: React.FC = () => {
           <div className="flex flex-col md:flex-row justify-between h-full">
 
             <div className="flex-1 flex flex-col min-w-0 md:mr-4 h-full">
-              <h3 className="text-sm md:text-base lg:text-lg font-semibold mb-1 md:mb-2 flex items-center">
+              <h3 className="text-sm md:text-base lg:text-lg font-semibold mb-1 md:mb-2 flex items-center text-black">
                 Call Activity
                 <Tooltip name={"Call Activity"} position={'bottom'} />
               </h3>
               <div className="widget-content flex-1 overflow-hidden mt-5">
                 {/* Incoming */}
                 <div className="flex justify-between text-center items-center mb-2 md:mb-4">
-                  <div className="text-xs sm:text-sm text-gray-600 flex items-center relative group">
+                  <div className="text-xs sm:text-sm text-black flex items-center relative group">
                     <div className="bg-[#d0f7fb] rounded-md p-1 sm:p-2 mr-1 sm:mr-2 inline-flex items-center justify-center">
                       <i className='bx bx-user'></i>
                     </div>
@@ -79,7 +79,7 @@ const CallActivity: React.FC = () => {
 
                 {/* Answered */}
                 <div className="flex justify-between text-center items-center">
-                  <div className="text-xs sm:text-sm text-gray-600 flex items-center relative group">
+                  <div className="text-xs sm:text-sm text-black flex items-center relative group">
                     <div className="bg-[#d0f7fb] rounded-md p-1 sm:p-2 mr-1 sm:mr-2 inline-flex items-center justify-center">
                       <i className='bx bx-user-check'></i>
                     </div>
@@ -95,7 +95,7 @@ const CallActivity: React.FC = () => {
             </div>
 
             <div className="flex-1 flex flex-col min-w-0 h-full">
-              <h3 className="text-sm md:text-base lg:text-lg font-semibold mb-1 md:mb-2 flex items-center">
+              <h3 className="text-sm md:text-base lg:text-lg font-semibold mb-1 md:mb-2 flex items-center text-black">
                 Abandoned
                 <Tooltip name={"Abandoned"} position={'bottom'} />
               </h3>
@@ -103,14 +103,14 @@ const CallActivity: React.FC = () => {
                 <div className="flex flex-row justify-around h-full">
                   {/* IVR */}
                   <div className="flex flex-col items-center flex-1">
-                    <div className="text-xs sm:text-sm mb-1">{abandoneIvr}</div>
+                    <div className="text-xs sm:text-sm mb-1 text-black">{abandoneIvr}</div>
                     <div className="flex flex-col justify-end flex-1 w-6 sm:w-8 bg-gray-200 rounded">
                       <div
                           className="bg-amber-500 w-full rounded-t"
                           style={{ height: `${calculatePercentage(abandoneIvr, maxAbandoned)}%` }}
                       ></div>
                     </div>
-                    <div className="text-xs sm:text-sm mt-1 flex items-center relative group">
+                    <div className="text-xs sm:text-sm mt-1 flex items-center relative group text-black">
                       IVR
                       <div className="absolute left-full transform -translate-y-1/2 ml-2 w-40 sm:w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
                         Jumlah panggilan yang ditutup oleh nasabah saat masih berada di menu IVR (Interactive Voice Response), sebelum masuk ke antrean atau bicara dengan Agent.
@@ -120,14 +120,14 @@ const CallActivity: React.FC = () => {
 
                   {/* Queue */}
                   <div className="flex flex-col items-center flex-1">
-                    <div className="text-xs sm:text-sm mb-1">{abandoneQueue}</div>
+                    <div className="text-xs sm:text-sm mb-1 text-black">{abandoneQueue}</div>
                     <div className="flex flex-col justify-end flex-1 w-6 sm:w-8 bg-gray-200 rounded">
                       <div
                           className="bg-amber-500 w-full rounded-t"
                           style={{ height: `${calculatePercentage(abandoneQueue, maxAbandoned)}%` }}
                       ></div>
                     </div>
-                    <div className="text-xs sm:text-sm mt-1 flex items-center relative group">
+                    <div className="text-xs sm:text-sm mt-1 flex items-center relative group text-black">
                       Queue
                       <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-40 sm:w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
                         Jumlah panggilan yang ditutup oleh nasabah saat sudah masuk antrean, namun belum sempat dijawab oleh Agent.
@@ -137,14 +137,14 @@ const CallActivity: React.FC = () => {
 
                   {/* Agent */}
                   <div className="flex flex-col items-center flex-1">
-                    <div className="text-xs sm:text-sm mb-1">{abandoneAgent}</div>
+                    <div className="text-xs sm:text-sm mb-1 text-black">{abandoneAgent}</div>
                     <div className="flex flex-col justify-end flex-1 w-6 sm:w-8 bg-gray-200 rounded">
                       <div
                           className="bg-amber-500 w-full rounded-t"
                           style={{ height: `${calculatePercentage(abandoneAgent, maxAbandoned)}%` }}
                       ></div>
                     </div>
-                    <div className="text-xs sm:text-sm mt-1 flex items-center relative group">
+                    <div className="text-xs sm:text-sm mt-1 flex items-center relative group text-black">
                       Agent
                       <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-40 sm:w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
                         Jumlah panggilan yang ditutup oleh nasabah saat terhubung ke Agent.
@@ -154,14 +154,14 @@ const CallActivity: React.FC = () => {
 
                   {/* Transfer */}
                   <div className="flex flex-col items-center flex-1">
-                    <div className="text-xs sm:text-sm mb-1">{abandoneTransfer}</div>
+                    <div className="text-xs sm:text-sm mb-1 text-black">{abandoneTransfer}</div>
                     <div className="flex flex-col justify-end flex-1 w-6 sm:w-8 bg-gray-200 rounded">
                       <div
                           className="bg-amber-500 w-full rounded-t"
                           style={{ height: `${calculatePercentage(abandoneTransfer, maxAbandoned)}%` }}
                       ></div>
                     </div>
-                    <div className="text-xs sm:text-sm mt-1 flex items-center relative group">
+                    <div className="text-xs sm:text-sm mt-1 flex items-center relative group text-black">
                       Transfer
                       <div className="absolute right-full transform -translate-y-1/2 mr-2 w-40 sm:w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
                         Jumlah panggilan yang ditutup oleh nasabah saat panggilan sedang dalam proses dialihkan (transfer) ke Agent sebelum transfer berhasil.

@@ -21,7 +21,7 @@ const WidgetCard: React.FC<WidgetCardProps> = ({
       ${className}
       overflow-hidden
     `}>
-      <h3 className="text-sm md:text-base lg:text-lg font-semibold flex items-center mb-1 md:mb-2">
+      <h3 className="text-sm md:text-base lg:text-lg font-semibold flex items-center mb-1 md:mb-2 text-black">
         {title}
         <Tooltip name={title} position={tooltipPosition} />
       </h3>

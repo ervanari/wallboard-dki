@@ -67,20 +67,20 @@ const TotalTicketCombined: React.FC = () => {
       <div className="flex justify-between items-center">
         
         <div className="mb-4 w-[50%]">
-          <h3 className="text-md font-semibold mb-2">
+          <h3 className="text-md font-semibold mb-2 text-black">
             Total Ticket Call Center
             <Tooltip name={"Total Ticket Call Center"} position={'bottom'} />
           </h3>
           {callCenterTickets.map((item: any, index: number) => (
             <div key={`cc-${index}`} className="p-2 rounded-lg my-4">
               <div className="flex items-center">
-                <div className="text-sm mr-3 w-32">{item.type}</div>
+                <div className="text-sm mr-3 w-32 text-black">{item.type}</div>
                 <div className="flex-1 flex items-center">
                   <div
                     className={`${item.type === 'Permohonan' ? "bg-[#4472c4]" : "bg-amber-500"} h-6 rounded-sm`}
                     style={{ width: `${getWidthPercentage(item.total)}%` }}
                   ></div>
-                  <div className="ml-2 text-sm font-semibold">{item.total}</div>
+                  <div className="ml-2 text-sm font-semibold text-black">{item.total}</div>
                 </div>
               </div>
             </div>
@@ -89,20 +89,20 @@ const TotalTicketCombined: React.FC = () => {
       
         
         <div className="mb-4 w-[50%]">
-          <h3 className="text-md font-semibold mb-2">
+          <h3 className="text-md font-semibold mb-2 text-black">
             Total Ticket Kantor Cabang
             <Tooltip name={"Total Ticket Kantor Cabang"} position={'left'} />
           </h3>
           {kantorCabangTickets.map((item: any, index: number) => (
             <div key={`kc-${index}`} className="p-2 rounded-lg my-4">
               <div className="flex items-center">
-                <div className="text-sm mr-3 w-32">{item.type}</div>
+                <div className="text-sm mr-3 w-32 text-black">{item.type}</div>
                 <div className="flex-1 flex items-center">
                   <div
                     className={`${item.type === 'Permohonan' ? "bg-[#4472c4]" : "bg-amber-500"} h-6 rounded-sm`}
                     style={{ width: `${getWidthPercentage(item.total)}%` }}
                   ></div>
-                  <div className="ml-2 text-sm font-semibold">{item.total}</div>
+                  <div className="ml-2 text-sm font-semibold text-black">{item.total}</div>
                 </div>
               </div>
             </div>

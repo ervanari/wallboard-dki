@@ -26,7 +26,7 @@ const ServiceLevel: React.FC = () => {
 
   // Default value if data is not loaded yet
   const serviceLevel = data?.serviceLevel !== undefined && data?.serviceLevel !== null ? parseFloat(data.serviceLevel) : 0;
-  
+
   const options = {
     chart: {
       type: 'solidgauge',
@@ -80,10 +80,16 @@ const ServiceLevel: React.FC = () => {
       tickAmount: 2,
       title: {
         y: -50,
-        text: 'Service Level'
+        text: 'Service Level',
+        style: {
+          color: 'black'
+        }
       },
       labels: {
-        y: 16
+        y: 16,
+        style: {
+          color: 'black'
+        }
       }
     },
     plotOptions: {

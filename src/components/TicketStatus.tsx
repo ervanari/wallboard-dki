@@ -53,7 +53,7 @@ const TicketStatus: React.FC = () => {
                     <div className={`px-2 py-0.5 rounded ${config?.bg || "bg-gray-100"}`}>
                       {config?.icon}
                     </div>
-                    <span className="text-sm font-medium">
+                    <span className="text-sm font-medium text-black">
                       {trimmedStatus}
                     </span>
                     {tooltipText[trimmedStatus] && (
@@ -62,7 +62,7 @@ const TicketStatus: React.FC = () => {
                         </span>
                     )}
                   </div>
-                  <span className="text-sm font-semibold">{item.total}</span>
+                  <span className="text-sm font-semibold text-black">{item.total}</span>
                 </div>
             );
           })}

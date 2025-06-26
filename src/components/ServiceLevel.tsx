@@ -223,12 +223,6 @@ const ServiceLevel: React.FC<ServiceLevelProps> = ({ containerWidth, containerHe
             options={options}
             containerProps={{
               className: 'w-full h-full',
-              style: {
-                width: '100%',
-                height: '100%',
-                minWidth: 0,
-                minHeight: 0
-              }
             }}
             immutable={false}
             allowChartUpdate={true}

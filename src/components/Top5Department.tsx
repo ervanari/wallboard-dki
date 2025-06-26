@@ -85,14 +85,18 @@ const Top5Department: React.FC = () => {
         cursor: 'pointer',
         dataLabels: {
           enabled: true,
-          format: '{point.percentage:.1f} %',
+          format: '<span><b>{point.name}</b>' +
+              '</span><br>' +
+              '<span style="opacity: 0.6">{point.percentage:.1f} ' +
+              '%</span>',
+          connectorColor: 'rgba(128,128,128,0.5)',
           style: {
             fontSize: 'clamp(10px, 1.5vw, 12px)',
             color: isDarkMode ? '#fff' : '#000',
             textOutline: isDarkMode ? '1px contrast' : 'none'
           }
         },
-        showInLegend: true
+        showInLegend: false
       }
     },
     series: [{

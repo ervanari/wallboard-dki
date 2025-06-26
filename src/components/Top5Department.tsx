@@ -8,6 +8,7 @@ import ChartContainer from './ChartContainer';
 import useSWR from 'swr';
 import Loading from "@/components/Loading";
 import Error from "@/components/Error";
+import { useTheme } from '@/context/ThemeContext';
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
@@ -15,6 +16,8 @@ const Top5Department: React.FC = () => {
   const { data, error, isLoading } = useSWR('/api/top-departments', fetcher, {
     refreshInterval: 30000 // refresh every 30 seconds
   });
+  const { theme } = useTheme();
+  const isDarkMode = theme === 'dark';
 
   // Default values if data is not loaded yet
   const departmentData = data?.departmentData || [
@@ -39,7 +42,11 @@ const Top5Department: React.FC = () => {
     },
     title: null,
     tooltip: {
-      pointFormat: '{series.name}: <b>{point.y} ({point.percentage:.1f}%)</b>'
+      pointFormat: '{series.name}: <b>{point.y} ({point.percentage:.1f}%)</b>',
+      backgroundColor: isDarkMode ? '#374151' : '#fff',
+      style: {
+        color: isDarkMode ? '#fff' : '#000'
+      }
     },
     accessibility: {
       point: {
@@ -54,14 +61,17 @@ const Top5Department: React.FC = () => {
         chartOptions: {
           legend: {
             itemStyle: {
-              fontSize: '10px'
+              fontSize: '10px',
+              color: isDarkMode ? '#fff' : '#000'
             }
           },
           plotOptions: {
             pie: {
               dataLabels: {
                 style: {
-                  fontSize: '9px'
+                  fontSize: '9px',
+                  color: isDarkMode ? '#fff' : '#000',
+                  textOutline: isDarkMode ? '1px contrast' : 'none'
                 }
               }
             }
@@ -78,7 +88,8 @@ const Top5Department: React.FC = () => {
           format: '{point.percentage:.1f} %',
           style: {
             fontSize: 'clamp(10px, 1.5vw, 12px)',
-            textOutline: 'none'
+            color: isDarkMode ? '#fff' : '#000',
+            textOutline: isDarkMode ? '1px contrast' : 'none'
           }
         },
         showInLegend: true
@@ -93,6 +104,15 @@ const Top5Department: React.FC = () => {
       }))
     }],
     colors: ['#5b9cd5', '#4472c4', '#ee7d31', '#ffc002', '#a5a5a5'],
+    legend: {
+      enabled: true,
+      align: 'center',
+      verticalAlign: 'bottom',
+      layout: 'horizontal',
+      itemStyle: {
+        color: isDarkMode ? '#fff' : '#000'
+      }
+    },
     credits: {
       enabled: false
     }

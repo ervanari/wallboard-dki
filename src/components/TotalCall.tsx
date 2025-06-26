@@ -8,6 +8,7 @@ import ChartContainer from './ChartContainer';
 import useSWR from 'swr';
 import Loading from "@/components/Loading";
 import Error from "@/components/Error";
+import { useTheme } from '@/context/ThemeContext';
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
@@ -15,6 +16,8 @@ const TotalCall: React.FC = () => {
   const { data, error, isLoading } = useSWR('/api/total-call', fetcher, {
     refreshInterval: 30000 // refresh every 30 seconds
   });
+  const { theme } = useTheme();
+  const isDarkMode = theme === 'dark';
 
   // Default values if data is not loaded yet
   const totalCallData = data?.totalCallData || [];
@@ -57,13 +60,13 @@ const TotalCall: React.FC = () => {
       title: {
         text: 'Hour',
         style: {
-          color: 'black'
+          color: isDarkMode ? '#fff' : '#000'
         }
       },
       labels: {
         style: {
           fontSize: 'clamp(10px, 1.5vw, 12px)',
-          color: 'black'
+          color: isDarkMode ? '#fff' : '#000'
         }
       }
     },
@@ -72,27 +75,31 @@ const TotalCall: React.FC = () => {
       title: {
         text: 'Number of Calls',
         style: {
-          color: 'black'
+          color: isDarkMode ? '#fff' : '#000'
         }
       },
       stackLabels: {
         enabled: true,
         style: {
           fontWeight: 'normal',
-          color: 'black',
+          color: isDarkMode ? '#fff' : '#000',
           fontSize: 'clamp(10px, 1.5vw, 12px)'
         }
       },
       labels: {
         style: {
           fontSize: 'clamp(10px, 1.5vw, 12px)',
-          color: 'black'
+          color: isDarkMode ? '#fff' : '#000'
         }
       }
     },
     tooltip: {
       headerFormat: '<b>{point.x}</b><br/>',
-      pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+      pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}',
+      backgroundColor: isDarkMode ? '#374151' : '#fff',
+      style: {
+        color: isDarkMode ? '#fff' : '#000'
+      }
     },
     plotOptions: {
       line: {
@@ -101,7 +108,9 @@ const TotalCall: React.FC = () => {
           enabled: true,
           style: {
             fontSize: 'clamp(9px, 1.5vw, 11px)',
-            fontWeight: 'normal'
+            fontWeight: 'normal',
+            color: isDarkMode ? '#fff' : '#000',
+            textOutline: isDarkMode ? '1px contrast' : 'none'
           }
         },
         marker: {
@@ -117,14 +126,15 @@ const TotalCall: React.FC = () => {
         chartOptions: {
           legend: {
             itemStyle: {
-              fontSize: '10px'
+              fontSize: '10px',
+              color: isDarkMode ? '#fff' : '#000'
             }
           },
           xAxis: {
             labels: {
               style: {
                 fontSize: '9px',
-                color: 'black'
+                color: isDarkMode ? '#fff' : '#000'
               }
             }
           },
@@ -132,7 +142,7 @@ const TotalCall: React.FC = () => {
             labels: {
               style: {
                 fontSize: '9px',
-                color: 'black'
+                color: isDarkMode ? '#fff' : '#000'
               }
             }
           }
@@ -143,7 +153,10 @@ const TotalCall: React.FC = () => {
       enabled: true,
       align: 'center',
       verticalAlign: 'bottom',
-      layout: 'horizontal'
+      layout: 'horizontal',
+      itemStyle: {
+        color: isDarkMode ? '#fff' : '#000'
+      }
     },
     credits: {
       enabled: false

@@ -8,6 +8,7 @@ import ChartContainer from './ChartContainer';
 import useSWR from 'swr';
 import Loading from "@/components/Loading";
 import Error from "@/components/Error";
+import { useTheme } from '@/context/ThemeContext';
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
@@ -15,6 +16,8 @@ const TicketComplaint: React.FC = () => {
   const { data, error, isLoading } = useSWR('/api/ticket-complaint', fetcher, {
     refreshInterval: 30000 // refresh every 30 seconds
   });
+  const { theme } = useTheme();
+  const isDarkMode = theme === 'dark';
 
   // Default values if data is not loaded yet
   const complaintData = data?.complaintData || [
@@ -47,7 +50,8 @@ const TicketComplaint: React.FC = () => {
       },
       labels: {
         style: {
-          fontSize: 'clamp(10px, 1.5vw, 12px)'
+          fontSize: 'clamp(10px, 1.5vw, 12px)',
+          color: isDarkMode ? '#fff' : '#000'
         }
       }
     },
@@ -57,27 +61,33 @@ const TicketComplaint: React.FC = () => {
         text: 'Jumlah Complaint',
         align: 'high',
         style: {
-          fontSize: 'clamp(10px, 1.5vw, 12px)'
+          fontSize: 'clamp(10px, 1.5vw, 12px)',
+          color: isDarkMode ? '#fff' : '#000'
         }
       },
       labels: {
         overflow: 'justify',
         style: {
-          fontSize: 'clamp(10px, 1.5vw, 12px)'
+          fontSize: 'clamp(10px, 1.5vw, 12px)',
+          color: isDarkMode ? '#fff' : '#000'
         }
       },
       stackLabels: {
         enabled: true,
         style: {
           fontWeight: 'bold',
-          color: 'gray',
+          color: isDarkMode ? '#fff' : 'gray',
           fontSize: 'clamp(10px, 1.5vw, 12px)'
         }
       }
     },
     tooltip: {
       headerFormat: '<b>{point.x}</b><br/>',
-      pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+      pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}',
+      backgroundColor: isDarkMode ? '#374151' : '#fff',
+      style: {
+        color: isDarkMode ? '#fff' : '#000'
+      }
     },
     plotOptions: {
       bar: {
@@ -86,8 +96,9 @@ const TicketComplaint: React.FC = () => {
           enabled: true,
           style: {
             fontSize: 'clamp(9px, 1.5vw, 11px)',
-            textOutline: 'none',
-            fontWeight: 'normal'
+            textOutline: isDarkMode ? '1px contrast' : 'none',
+            fontWeight: 'normal',
+            color: isDarkMode ? '#fff' : '#000'
           }
         }
       }
@@ -100,20 +111,23 @@ const TicketComplaint: React.FC = () => {
         chartOptions: {
           legend: {
             itemStyle: {
-              fontSize: '10px'
+              fontSize: '10px',
+              color: isDarkMode ? '#fff' : '#000'
             }
           },
           xAxis: {
             labels: {
               style: {
-                fontSize: '9px'
+                fontSize: '9px',
+                color: isDarkMode ? '#fff' : '#000'
               }
             }
           },
           yAxis: {
             labels: {
               style: {
-                fontSize: '9px'
+                fontSize: '9px',
+                color: isDarkMode ? '#fff' : '#000'
               }
             }
           }
@@ -126,7 +140,8 @@ const TicketComplaint: React.FC = () => {
       verticalAlign: 'bottom',
       layout: 'horizontal',
       itemStyle: {
-        fontSize: 'clamp(8px, 1.5vw, 10px)'
+        fontSize: 'clamp(8px, 1.5vw, 10px)',
+        color: isDarkMode ? '#fff' : '#000'
       }
     },
     credits: {

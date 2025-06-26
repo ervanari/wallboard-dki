@@ -89,7 +89,7 @@ const Tooltip: React.FC<TooltipProps> = ({ name, position }) => {
     <div className="inline-flex z-10 items-center relative ml-1">
       <div
         ref={iconRef}
-        className="w-4 h-4 rounded-full bg-gray-200 flex items-center justify-center text-xs cursor-help"
+        className="w-4 h-4 rounded-full bg-gray-200 dark:bg-gray-600 flex items-center justify-center text-xs text-gray-700 dark:text-gray-200 cursor-help transition-colors duration-200"
         onMouseEnter={() => setIsVisible(true)}
         onMouseLeave={() => setIsVisible(false)}
       >
@@ -99,10 +99,10 @@ const Tooltip: React.FC<TooltipProps> = ({ name, position }) => {
       {isVisible && (
         <div
           ref={tooltipRef}
-          className={`absolute z-10 w-64 p-2 text-xs text-white bg-gray-800 rounded shadow-lg ${getPositionClasses()}`}
+          className={`absolute z-10 w-64 p-2 text-xs text-white bg-gray-800 dark:bg-gray-700 rounded shadow-lg transition-colors duration-200 ${getPositionClasses()}`}
         >
           {text}
-          <div className={`absolute w-0 h-0 border-4 ${getArrowClasses()}`}></div>
+          <div className={`absolute w-0 h-0 border-4 border-gray-800 dark:border-gray-700 ${getArrowClasses()}`}></div>
         </div>
       )}
     </div>

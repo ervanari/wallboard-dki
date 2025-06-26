@@ -10,6 +10,7 @@ import ChartContainer from './ChartContainer';
 import useSWR from 'swr';
 import Loading from "@/components/Loading";
 import Error from "@/components/Error";
+import { useTheme } from '@/context/ThemeContext';
 
 // Initialize the additional Highcharts modules
 if (typeof Highcharts === 'object') {
@@ -23,6 +24,8 @@ const ServiceLevel: React.FC = () => {
   const { data, error, isLoading } = useSWR('/api/service-level', fetcher, {
     refreshInterval: 30000 // refresh every 30 seconds
   });
+  const { theme } = useTheme();
+  const isDarkMode = theme === 'dark';
 
   // Default value if data is not loaded yet
   const serviceLevel = data?.serviceLevel !== undefined && data?.serviceLevel !== null ? parseFloat(data.serviceLevel) : 0;
@@ -46,7 +49,7 @@ const ServiceLevel: React.FC = () => {
       startAngle: -90,
       endAngle: 90,
       background: {
-        backgroundColor: '#EEE',
+        backgroundColor: isDarkMode ? '#374151' : '#EEE', // dark:gray-700 for dark mode
         innerRadius: '60%',
         outerRadius: '100%',
         shape: 'arc'
@@ -82,13 +85,13 @@ const ServiceLevel: React.FC = () => {
         y: -50,
         text: 'Service Level',
         style: {
-          color: 'black'
+          color: isDarkMode ? '#fff' : '#000'
         }
       },
       labels: {
         y: 16,
         style: {
-          color: 'black'
+          color: isDarkMode ? '#fff' : '#000'
         }
       }
     },

@@ -16,12 +16,12 @@ const WidgetCard: React.FC<WidgetCardProps> = ({
 }) => {
   return (
     <div className={`
-      rounded-xl shadow-md bg-white p-2 sm:p-3 md:p-4
+      rounded-xl shadow-md bg-white dark:bg-gray-800 p-2 sm:p-3 md:p-4
       ${(title === 'User Activity' || title === 'Call Category Inbound') ? 'h-[18vh]' : 'h-[22vh]'}
       ${className}
-      overflow-hidden
+      overflow-hidden transition-colors duration-200
     `}>
-      <h3 className="text-sm md:text-base lg:text-lg font-semibold flex items-center mb-1 md:mb-2 text-black">
+      <h3 className="text-sm md:text-base lg:text-lg font-semibold flex items-center mb-1 md:mb-2 text-black dark:text-white">
         {title}
         <Tooltip name={title} position={tooltipPosition} />
       </h3>

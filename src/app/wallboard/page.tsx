@@ -18,7 +18,7 @@ import LogoutButton from '@/components/LogoutButton';
 
 export default function Wallboard() {
     return (
-        <main className="min-h-screen bg-gray-50 p-4 overflow-hidden">
+        <main className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4 overflow-hidden transition-colors duration-200">
             {/* Header */}
             <header className="flex justify-between items-center mb-6">
                 <div className="flex items-center">
@@ -31,7 +31,7 @@ export default function Wallboard() {
                     />
                 </div>
                 <div>
-                    <h1 className="text-3xl font-extrabold text-black">CALL CENTER WALLBOARD</h1>
+                    <h1 className="text-3xl font-extrabold text-black dark:text-white">CALL CENTER WALLBOARD</h1>
                 </div>
                 <div className="text-right flex flex-row items-end">
                     <div className="text-sm mb-2 mr-2">{new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</div>

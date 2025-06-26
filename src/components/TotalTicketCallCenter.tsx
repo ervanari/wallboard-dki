@@ -44,18 +44,18 @@ const TotalTicketCallCenter: React.FC = () => {
       {ticketData.map((item: any, index: number) => (
         <div key={index} className="p-3 rounded-lg">
           <div className="flex items-center">
-            <div className="text-sm mr-3 w-32">{item.type}</div>
+            <div className="text-sm mr-3 w-32 text-black dark:text-white">{item.type}</div>
             <div className="flex-1 flex items-center">
               <div
                 className="bg-[#4472c4] h-6"
                 style={{ width: `80%` }}
               ></div>
-              <div className="ml-2 text-sm font-semibold">{item.total}</div>
+              <div className="ml-2 text-sm font-semibold text-black dark:text-white">{item.total}</div>
             </div>
           </div>
         </div>
       ))}
-      <div className="p-3 text-right text-sm font-bold">
+      <div className="p-3 text-right text-sm font-bold text-black dark:text-white">
         Total: {totalTickets}
       </div>
     </WidgetCard>

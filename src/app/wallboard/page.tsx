@@ -15,6 +15,7 @@ import TicketComplaint from '@/components/TicketComplaint';
 import CallCategoryInbound from '@/components/CallCategoryInbound';
 import UserActivity from '@/components/UserActivity';
 import LogoutButton from '@/components/LogoutButton';
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Wallboard() {
     return (
@@ -34,7 +35,8 @@ export default function Wallboard() {
                     <h1 className="text-3xl font-extrabold text-black dark:text-white">CALL CENTER WALLBOARD</h1>
                 </div>
                 <div className="text-right flex flex-row items-end">
-                    <div className="text-sm mb-2 mr-2">{new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                    <div className="text-sm mb-2">{new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                    <ThemeToggle />
                     <LogoutButton />
                 </div>
             </header>

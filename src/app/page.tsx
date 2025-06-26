@@ -8,7 +8,7 @@ export default function Home() {
 
   useEffect(() => {
     // Redirect to wallboard page
-    router.push('/app/wallboard');
+    router.push('/wallboard');
   }, [router]);
 
   return (

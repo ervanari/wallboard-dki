@@ -25,11 +25,11 @@ const CallCategoryInbound: React.FC = () => {
 
   return (
     <WidgetCard title="Call Category Inbound" tooltipPosition="bottom">
-      <div className="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-4 gap-y-5 gap-x-14 mt-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-4">
         {categoryData.map((category: { name: string; count: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; }, index: React.Key | null | undefined) => (
             <div key={index} className="flex items-center justify-between">
-              <div className="flex items-center gap-2 p-2">
-                <span className="text-sm font-semibold text-black dark:text-white">{category.name.trim()}</span>
+              <div className="flex items-center gap-2">
+                <span className="text-xs md:text-sm lg:text-md font-medium text-black dark:text-white">{category.name.trim()}</span>
               </div>
               <div className={`px-2 py-0.5 rounded bg-green-200 dark:bg-green-900 flex items-center gap-1`}>
                 <span className="text-sm text-green-600 dark:text-green-400">{category.count}</span>

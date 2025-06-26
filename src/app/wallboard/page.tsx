@@ -44,28 +44,6 @@ export default function Wallboard() {
             {/* Dashboard Grid */}
             <div className="grid grid-cols-12 gap-4">
                 {/* First Row */}
-                <div className="col-span-2">
-                    <ServiceLevel />
-                </div>
-                <div className="col-span-5">
-                    <CallActivity />
-                </div>
-                <div className="col-span-5">
-                    <TotalCall />
-                </div>
-
-                {/* Second Row */}
-                <div className="col-span-2">
-                    <AverageDuration />
-                </div>
-                <div className="col-span-5">
-                    <TicketStatus />
-                </div>
-                <div className="col-span-5">
-                    <TotalTicketCombined />
-                </div>
-
-                {/* Third Row */}
                 <div className="col-span-3">
                     <Top5Department />
                 </div>
@@ -78,14 +56,37 @@ export default function Wallboard() {
                 <div className="col-span-3">
                     <TicketComplaint />
                 </div>
-
-                {/* Fourth Row */}
-                <div className="col-span-6">
+                
+                {/* Second Row */}
+                <div className="col-span-2">
+                    <ServiceLevel />
+                </div>
+                <div className="col-span-2">
+                    <AverageDuration />
+                </div>
+                <div className="col-span-5">
+                    <CallActivity />
+                </div>
+                <div className="col-span-3">
+                    <TicketStatus />
+                </div>
+                
+                {/* Third Row */}
+                <div className="col-span-4">
+                    <TotalTicketCombined />
+                </div>
+                <div className="col-span-4">
                     <CallCategoryInbound />
                 </div>
-                <div className="col-span-6">
+                <div className="col-span-4">
                     <UserActivity />
                 </div>
+                
+                {/* Fourth Row */}
+                <div className="col-span-12">
+                    <TotalCall />
+                </div>
+                
             </div>
 
             {/* Clock Update Script */}

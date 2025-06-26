@@ -43,7 +43,7 @@ const TicketStatus: React.FC = () => {
   return (
     <WidgetCard title="Ticket Status" tooltipPosition="bottom">
       <div className="rounded-xl p-6 w-full">
-        <div className="grid grid-cols-2 gap-y-4 gap-x-20">
+        <div className="grid grid-cols-2 gap-y-2 gap-x-20">
           {rawStatusData.map((item) => {
             const config = statusConfig[item.no];
             const trimmedStatus = item.ticket_status.trim().toUpperCase();

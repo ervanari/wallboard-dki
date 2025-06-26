@@ -16,8 +16,7 @@ const WidgetCard: React.FC<WidgetCardProps> = ({
 }) => {
   return (
     <div className={`
-      rounded-xl shadow-md bg-white dark:bg-gray-800 p-2 sm:p-3 md:p-4
-      ${(title === 'User Activity' || title === 'Call Category Inbound') ? 'h-[18vh]' : 'h-[22vh]'}
+      rounded-xl shadow-md bg-white dark:bg-gray-800 p-2 sm:p-3 md:p-4 h-[22vh]
       ${className}
       overflow-hidden transition-colors duration-200
     `}>

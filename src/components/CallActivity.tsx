@@ -63,20 +63,6 @@ const CallActivity: React.FC = () => {
                   <div className="text-xs sm:text-sm font-bold text-blue-600 dark:text-blue-400">{incomingCall}</div>
                 </div>
 
-                {/* Queue */}
-                {/*<div className="flex justify-between text-center items-center mb-2 md:mb-4">*/}
-                {/*  <div className="text-xs sm:text-sm text-gray-600 flex items-center relative group">*/}
-                {/*    <div className="bg-[#d0f7fb] rounded-md p-1 sm:p-2 mr-1 sm:mr-2 inline-flex items-center justify-center">*/}
-                {/*      <i className='bx bx-time'></i>*/}
-                {/*    </div>*/}
-                {/*    Queue*/}
-                {/*    <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-40 sm:w-52 rounded bg-gray-800 text-white text-[10px] p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">*/}
-                {/*      Jumlah panggilan yang sedang menunggu dalam antrean sebelum dijawab oleh Agent.*/}
-                {/*    </div>*/}
-                {/*  </div>*/}
-                {/*  <div className="text-xs sm:text-sm font-bold text-yellow-600">{queueCall}</div>*/}
-                {/*</div>*/}
-
                 {/* Answered */}
                 <div className="flex justify-between text-center items-center">
                   <div className="text-xs sm:text-sm text-black dark:text-white flex items-center relative group">

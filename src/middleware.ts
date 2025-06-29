@@ -92,7 +92,7 @@ export async function middleware(request: NextRequest) {
         await verifyJWT(token, secret);
 
         // If token is valid, redirect to wallboard
-        const url = new URL('/app/wallboard', request.url);
+        const url = new URL('/wallboard', request.url);
         return NextResponse.redirect(url);
       } catch (error) {
         // If token is invalid, clear it and continue to login page

@@ -43,17 +43,17 @@ const TicketStatus: React.FC = () => {
   return (
     <WidgetCard title="Ticket Status" tooltipPosition="bottom">
       <div className="rounded-xl p-6 w-full">
-        <div className="grid grid-cols-2 gap-y-2 gap-x-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-y-2 gap-x-20">
           {rawStatusData.map((item) => {
             const config = statusConfig[item.no];
             const trimmedStatus = item.ticket_status.trim().toUpperCase();
             return (
                 <div key={item.no} className="flex items-center justify-between">
                   <div className="flex items-center gap-2 relative group">
-                    <div className={`px-2 py-0.5 rounded ${config?.bg || "bg-gray-100"}`}>
+                    <div className={`px-1 sm:px-1.5 md:px-1 py-0.5 sm:py-0 md:py-0 rounded ${config?.bg || "bg-gray-100"}`}>
                       {config?.icon}
                     </div>
-                    <span className="text-sm font-medium text-black dark:text-white">
+                    <span className="text-xs font-medium text-black dark:text-white">
                       {trimmedStatus}
                     </span>
                     {tooltipText[trimmedStatus] && (

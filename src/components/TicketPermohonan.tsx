@@ -18,6 +18,19 @@ const TicketPermohonan: React.FC = () => {
   });
   const { theme } = useTheme();
   const isDarkMode = theme === 'dark';
+  const chartRef = React.useRef<any>(null);
+
+  // Effect to resize chart when container size changes
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (chartRef.current && chartRef.current.chart) {
+        chartRef.current.chart.reflow();
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Default values if data is not loaded yet
   const requestData = data?.requestData || [];
@@ -28,8 +41,8 @@ const TicketPermohonan: React.FC = () => {
       height: null,
       width: null,
       backgroundColor: 'transparent',
-      marginTop: 10,
-      marginBottom: 80,
+      marginTop: 0,
+      marginBottom: 0,
       style: {
         overflow: 'visible'
       }
@@ -53,14 +66,14 @@ const TicketPermohonan: React.FC = () => {
         text: 'Jumlah Ticket',
         align: 'high',
         style: {
-          fontSize: 'clamp(10px, 1.5vw, 12px)',
+          fontSize: 'clamp(7px, 1.5vw, 9px)',
           color: isDarkMode ? '#fff' : '#000'
         }
       },
       labels: {
         overflow: 'justify',
         style: {
-          fontSize: 'clamp(10px, 1.5vw, 12px)',
+          fontSize: 'clamp(7px, 1.5vw, 9px)',
           color: isDarkMode ? '#fff' : '#000'
         }
       },
@@ -69,7 +82,7 @@ const TicketPermohonan: React.FC = () => {
         style: {
           fontWeight: 'bold',
           color: isDarkMode ? '#fff' : 'gray',
-          fontSize: 'clamp(10px, 1.5vw, 12px)'
+          fontSize: 'clamp(7px, 1.5vw, 9px)'
         }
       }
     },
@@ -96,35 +109,83 @@ const TicketPermohonan: React.FC = () => {
       }
     },
     responsive: {
-      rules: [{
-        condition: {
-          maxWidth: 500
-        },
-        chartOptions: {
-          legend: {
-            itemStyle: {
-              fontSize: '10px',
-              color: isDarkMode ? '#fff' : '#000'
-            }
+      rules: [
+        {
+          condition: {
+            maxWidth: 1366
           },
-          xAxis: {
-            labels: {
-              style: {
-                fontSize: '9px',
-                color: isDarkMode ? '#fff' : '#000'
+          chartOptions: {
+            chart: {
+              marginBottom: 70,
+            },
+            legend: {
+              itemStyle: {
+                fontSize: '9px'
+              },
+              symbolHeight: 8,
+              symbolWidth: 8,
+              symbolRadius: 4
+            },
+            xAxis: {
+              labels: {
+                style: {
+                  fontSize: '10px'
+                }
+              }
+            },
+            yAxis: {
+              labels: {
+                style: {
+                  fontSize: '10px'
+                }
+              },
+              stackLabels: {
+                style: {
+                  fontSize: '9px'
+                }
+              }
+            },
+            plotOptions: {
+              bar: {
+                dataLabels: {
+                  style: {
+                    fontSize: '9px'
+                  }
+                }
               }
             }
+          }
+        },
+        {
+          condition: {
+            maxWidth: 500
           },
-          yAxis: {
-            labels: {
-              style: {
-                fontSize: '9px',
+          chartOptions: {
+            legend: {
+              itemStyle: {
+                fontSize: '8px',
                 color: isDarkMode ? '#fff' : '#000'
+              }
+            },
+            xAxis: {
+              labels: {
+                style: {
+                  fontSize: '8px',
+                  color: isDarkMode ? '#fff' : '#000'
+                }
+              }
+            },
+            yAxis: {
+              labels: {
+                style: {
+                  fontSize: '8px',
+                  color: isDarkMode ? '#fff' : '#000'
+                }
               }
             }
           }
         }
-      }]
+      ]
     },
     legend: {
       enabled: true,
@@ -165,6 +226,7 @@ const TicketPermohonan: React.FC = () => {
     <WidgetCard title="Ticket Permohonan" tooltipPosition="bottom">
       <ChartContainer>
         <HighchartsReact
+          ref={chartRef}
           highcharts={Highcharts}
           options={options}
           containerProps={{

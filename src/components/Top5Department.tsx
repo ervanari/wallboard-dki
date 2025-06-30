@@ -35,7 +35,7 @@ const Top5Department: React.FC = () => {
       width: null,
       backgroundColor: 'transparent',
       marginTop: 0,
-      marginBottom: 30,
+      marginBottom: 5,
       style: {
         overflow: 'visible'
       }
@@ -61,7 +61,7 @@ const Top5Department: React.FC = () => {
         chartOptions: {
           legend: {
             itemStyle: {
-              fontSize: '10px',
+              fontSize: '8px',
               color: isDarkMode ? '#fff' : '#000'
             }
           },
@@ -69,7 +69,7 @@ const Top5Department: React.FC = () => {
             pie: {
               dataLabels: {
                 style: {
-                  fontSize: '9px',
+                  fontSize: '8px',
                   color: isDarkMode ? '#fff' : '#000',
                   textOutline: isDarkMode ? '1px contrast' : 'none'
                 }
@@ -91,7 +91,7 @@ const Top5Department: React.FC = () => {
               '%</span>',
           connectorColor: 'rgba(128,128,128,0.5)',
           style: {
-            fontSize: 'clamp(10px, 1.5vw, 12px)',
+            fontSize: 'clamp(7px, 1.5vw, 9px)',
             color: isDarkMode ? '#fff' : '#000',
             textOutline: isDarkMode ? '1px contrast' : 'none'
           }

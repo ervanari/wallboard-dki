@@ -21,13 +21,13 @@ export default function Wallboard() {
     return (
         <main className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4 overflow-hidden transition-colors duration-200">
             {/* Header */}
-            <header className="flex flex-col sm:flex-row justify-between items-center mb-4 md:mb-6 gap-2 sm:gap-4">
+            <header className="flex flex-col sm:flex-row justify-between items-center mb-2 md:mb-4 gap-2 sm:gap-4">
                 <div className="flex items-center">
                     <Image
-                        src="/logo-bank.png"
+                        src="/logo-bank-dki.jpg"
                         alt="Bank DKI Logo"
-                        width={120}
-                        height={100}
+                        width={110}
+                        height={90}
                         className="mr-2 sm:mr-4 w-[80px] h-auto sm:w-[100px] md:w-[120px]"
                         priority
                     />

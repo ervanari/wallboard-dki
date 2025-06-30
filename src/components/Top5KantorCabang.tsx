@@ -35,7 +35,7 @@ const Top5KantorCabang: React.FC = () => {
       width: null,
       backgroundColor: 'transparent',
       marginTop: 0,
-      marginBottom: 50,
+      marginBottom: 5,
       style: {
         overflow: 'visible'
       }
@@ -61,7 +61,7 @@ const Top5KantorCabang: React.FC = () => {
         chartOptions: {
           legend: {
             itemStyle: {
-              fontSize: '10px',
+              fontSize: '8px',
               color: isDarkMode ? '#fff' : '#000'
             }
           },
@@ -69,7 +69,7 @@ const Top5KantorCabang: React.FC = () => {
             pie: {
               dataLabels: {
                 style: {
-                  fontSize: '9px',
+                  fontSize: '8px',
                   color: isDarkMode ? '#fff' : '#000',
                   textOutline: isDarkMode ? '1px contrast' : 'none'
                 }
@@ -90,7 +90,7 @@ const Top5KantorCabang: React.FC = () => {
               '<span style="opacity: 0.6">{point.percentage:.1f} ' +
               '%</span>',
           style: {
-            fontSize: 'clamp(8px, 1.5vw, 10px)',
+            fontSize: 'clamp(7px, 1.5vw, 9px)',
             color: isDarkMode ? '#fff' : '#000',
             textOutline: isDarkMode ? '1px contrast' : 'none'
           }

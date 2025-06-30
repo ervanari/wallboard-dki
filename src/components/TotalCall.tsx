@@ -23,15 +23,13 @@ const TotalCall: React.FC = () => {
   const totalCallData = data?.totalCallData || [];
   console.log('Total Call Data:', totalCallData);
 
-  // Process data for the chart
-  const hours = Array.from(new Set(totalCallData.map((item: any) => item.call_hour))).sort() as number[];
+  const hours = Array.from({ length: 24 }, (_, i) => i);
 
   // Calculate total answered and abandoned calls
   const totalAnswered = totalCallData.reduce((sum: number, item: any) => sum + (item.answered || 0), 0);
   const totalAbandoned = totalCallData.reduce((sum: number, item: any) => sum + (item.abandon || 0), 0);
   const totalCalls = totalAnswered + totalAbandoned;
 
-  // Prepare data for hourly chart
   const answeredByHour = hours.map((hour: number) => {
     const hourData = totalCallData.filter((item: any) => item.call_hour === hour);
     return hourData.reduce((sum: number, item: any) => sum + (item.answered || 0), 0);
@@ -48,7 +46,7 @@ const TotalCall: React.FC = () => {
       height: null,
       width: null,
       backgroundColor: 'transparent',
-      marginTop: 10,
+      marginTop: 0,
       marginBottom: 80,
       style: {
         overflow: 'visible'
@@ -65,7 +63,7 @@ const TotalCall: React.FC = () => {
       },
       labels: {
         style: {
-          fontSize: 'clamp(10px, 1.5vw, 12px)',
+          fontSize: 'clamp(7px, 1.5vw, 9px)',
           color: isDarkMode ? '#fff' : '#000'
         }
       }
@@ -83,12 +81,12 @@ const TotalCall: React.FC = () => {
         style: {
           fontWeight: 'normal',
           color: isDarkMode ? '#fff' : '#000',
-          fontSize: 'clamp(10px, 1.5vw, 12px)'
+          fontSize: 'clamp(7px, 1.5vw, 9px)'
         }
       },
       labels: {
         style: {
-          fontSize: 'clamp(10px, 1.5vw, 12px)',
+          fontSize: 'clamp(7px, 1.5vw, 9px)',
           color: isDarkMode ? '#fff' : '#000'
         }
       }
@@ -107,7 +105,7 @@ const TotalCall: React.FC = () => {
         dataLabels: {
           enabled: true,
           style: {
-            fontSize: 'clamp(9px, 1.5vw, 11px)',
+            fontSize: 'clamp(7px, 1.5vw, 9px)',
             fontWeight: 'normal',
             color: isDarkMode ? '#fff' : '#000',
             textOutline: isDarkMode ? '1px contrast' : 'none'
@@ -126,14 +124,14 @@ const TotalCall: React.FC = () => {
         chartOptions: {
           legend: {
             itemStyle: {
-              fontSize: '10px',
+              fontSize: '8px',
               color: isDarkMode ? '#fff' : '#000'
             }
           },
           xAxis: {
             labels: {
               style: {
-                fontSize: '9px',
+                fontSize: '8px',
                 color: isDarkMode ? '#fff' : '#000'
               }
             }
@@ -141,7 +139,7 @@ const TotalCall: React.FC = () => {
           yAxis: {
             labels: {
               style: {
-                fontSize: '9px',
+                fontSize: '8px',
                 color: isDarkMode ? '#fff' : '#000'
               }
             }

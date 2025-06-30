@@ -36,8 +36,8 @@ const TicketComplaint: React.FC = () => {
       height: null,
       width: null,
       backgroundColor: 'transparent',
-      marginTop: 10,
-      marginBottom: 80,
+      marginTop: 0,
+      marginBottom: 0,
       style: {
         overflow: 'visible'
       }
@@ -61,14 +61,14 @@ const TicketComplaint: React.FC = () => {
         text: 'Jumlah Complaint',
         align: 'high',
         style: {
-          fontSize: 'clamp(10px, 1.5vw, 12px)',
+          fontSize: 'clamp(7px, 1.5vw, 9px)',
           color: isDarkMode ? '#fff' : '#000'
         }
       },
       labels: {
         overflow: 'justify',
         style: {
-          fontSize: 'clamp(10px, 1.5vw, 12px)',
+          fontSize: 'clamp(7px, 1.5vw, 9px)',
           color: isDarkMode ? '#fff' : '#000'
         }
       },
@@ -77,7 +77,7 @@ const TicketComplaint: React.FC = () => {
         style: {
           fontWeight: 'bold',
           color: isDarkMode ? '#fff' : 'gray',
-          fontSize: 'clamp(10px, 1.5vw, 12px)'
+          fontSize: 'clamp(7px, 1.5vw, 9px)'
         }
       }
     },
@@ -128,6 +128,52 @@ const TicketComplaint: React.FC = () => {
               style: {
                 fontSize: '9px',
                 color: isDarkMode ? '#fff' : '#000'
+              }
+            }
+          }
+        }
+      },
+      {
+        condition: {
+          maxWidth: 1366
+        },
+        chartOptions: {
+          chart: {
+            marginBottom: 70,
+          },
+          legend: {
+            itemStyle: {
+              fontSize: '9px'
+            },
+            symbolHeight: 8,
+            symbolWidth: 8,
+            symbolRadius: 4
+          },
+          xAxis: {
+            labels: {
+              style: {
+                fontSize: '10px'
+              }
+            }
+          },
+          yAxis: {
+            labels: {
+              style: {
+                fontSize: '10px'
+              }
+            },
+            stackLabels: {
+              style: {
+                fontSize: '9px'
+              }
+            }
+          },
+          plotOptions: {
+            bar: {
+              dataLabels: {
+                style: {
+                  fontSize: '9px'
+                }
               }
             }
           }

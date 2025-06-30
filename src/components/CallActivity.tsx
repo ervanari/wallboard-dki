@@ -70,7 +70,7 @@ const CallActivity: React.FC<CallActivityProps> = ({ containerWidth, containerHe
           style={{ fontSize: sectionTitleFontSize }}
         >
           Call Activity
-          <Tooltip name={"Call Activity"} position={'bottom'} />
+          <Tooltip name={"Call Activity"} position={'right'} />
         </h3>
         <div className="flex-1 overflow-hidden flex flex-col justify-center">
           {/* Incoming */}
@@ -265,7 +265,7 @@ const CallActivity: React.FC<CallActivityProps> = ({ containerWidth, containerHe
   );
 
   return (
-    <WidgetCard title="Call Activity & Abandoned">
+    <WidgetCard title="Call Activity & Abandoned" tooltipPosition="bottom">
       {content}
     </WidgetCard>
   );

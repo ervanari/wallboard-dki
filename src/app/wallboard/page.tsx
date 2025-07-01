@@ -22,7 +22,6 @@ export default function Wallboard() {
   const themeContext = useContext(ThemeContext);
   const theme = themeContext?.theme || "light";
 
-  console.log("Current theme:", theme);
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4 overflow-hidden transition-colors duration-200">
       {/* Header */}
@@ -37,7 +36,7 @@ export default function Wallboard() {
             alt="Bank DKI Logo"
             width={110}
             height={90}
-            className="mr-2 sm:mr-4 w-[80px] h-auto sm:w-[100px] md:w-[120px]"
+            className="mr-2 sm:mr-4 w-[80px] h-auto sm:w-[100px] md:w-[120px] rounded-lg"
             priority
           />
         </div>

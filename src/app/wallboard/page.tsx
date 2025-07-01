@@ -1,109 +1,118 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Image from 'next/image';
-import ServiceLevel from '@/components/ServiceLevel';
-import CallActivity from '@/components/CallActivity';
-import TotalCall from '@/components/TotalCall';
-import AverageDuration from '@/components/AverageDuration';
-import TicketStatus from '@/components/TicketStatus';
-import TotalTicketCombined from '@/components/TotalTicketCombined';
-import Top5Department from '@/components/Top5Department';
-import Top5KantorCabang from '@/components/Top5KantorCabang';
-import TicketPermohonan from '@/components/TicketPermohonan';
-import TicketComplaint from '@/components/TicketComplaint';
-import CallCategoryInbound from '@/components/CallCategoryInbound';
-import UserActivity from '@/components/UserActivity';
-import LogoutButton from '@/components/LogoutButton';
+import React, { useContext } from "react";
+import Image from "next/image";
+import { ThemeContext } from "@/context/ThemeContext";
+import ServiceLevel from "@/components/ServiceLevel";
+import CallActivity from "@/components/CallActivity";
+import TotalCall from "@/components/TotalCall";
+import AverageDuration from "@/components/AverageDuration";
+import TicketStatus from "@/components/TicketStatus";
+import TotalTicketCombined from "@/components/TotalTicketCombined";
+import Top5Department from "@/components/Top5Department";
+import Top5KantorCabang from "@/components/Top5KantorCabang";
+import TicketPermohonan from "@/components/TicketPermohonan";
+import TicketComplaint from "@/components/TicketComplaint";
+import CallCategoryInbound from "@/components/CallCategoryInbound";
+import UserActivity from "@/components/UserActivity";
+import LogoutButton from "@/components/LogoutButton";
 import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Wallboard() {
-    return (
-        <main className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4 overflow-hidden transition-colors duration-200">
-            {/* Header */}
-            <header className="flex flex-col sm:flex-row justify-between items-center mb-2 md:mb-4 gap-2 sm:gap-4">
-                <div className="flex items-center">
-                    <Image
-                        src="/logo-bank-dki.jpg"
-                        alt="Bank DKI Logo"
-                        width={110}
-                        height={90}
-                        className="mr-2 sm:mr-4 w-[80px] h-auto sm:w-[100px] md:w-[120px]"
-                        priority
-                    />
-                </div>
-                <div className="text-center sm:text-left">
-                    <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-black dark:text-white text-[clamp(18px,5vw,32px)]">
-                        CALL CENTER WALLBOARD
-                    </h1>
-                </div>
-                <div className="flex flex-col sm:flex-row items-center sm:items-end gap-2">
-                    <div className="text-xs sm:text-sm text-center sm:text-right text-[clamp(10px,2vw,14px)] mb-0 sm:mb-2">
-                        {new Date().toLocaleDateString('id-ID', {
-                            weekday: 'long',
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric'
-                        })}
-                    </div>
-                    <div className="flex flex-row gap-1 sm:gap-2">
-                        <ThemeToggle />
-                        <LogoutButton />
-                    </div>
-                </div>
-            </header>
+  const themeContext = useContext(ThemeContext);
+  const theme = themeContext?.theme || "light";
 
-            {/* Dashboard Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-2 md:gap-3 lg:gap-4">
-                {/* First Row */}
-                <div className="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-3">
-                    <Top5Department />
-                </div>
-                <div className="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-3">
-                    <Top5KantorCabang />
-                </div>
-                <div className="col-span-1 sm:col-span-1 md:col-span-3 lg:col-span-3">
-                    <TicketPermohonan />
-                </div>
-                <div className="col-span-1 sm:col-span-1 md:col-span-3 lg:col-span-3">
-                    <TicketComplaint />
-                </div>
+  console.log("Current theme:", theme);
+  return (
+    <main className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4 overflow-hidden transition-colors duration-200">
+      {/* Header */}
+      <header className="flex flex-col sm:flex-row justify-between items-center mb-2 md:mb-4 gap-2 sm:gap-4">
+        <div className="flex items-center">
+          <Image
+            src={
+              theme === "dark"
+                ? "/logo-bank-dki.jpg"
+                : "/logo-bank-dki-white.jpg"
+            }
+            alt="Bank DKI Logo"
+            width={110}
+            height={90}
+            className="mr-2 sm:mr-4 w-[80px] h-auto sm:w-[100px] md:w-[120px]"
+            priority
+          />
+        </div>
+        <div className="text-center sm:text-left">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-black dark:text-white text-[clamp(18px,5vw,32px)]">
+            CALL CENTER WALLBOARD
+          </h1>
+        </div>
+        <div className="flex flex-col sm:flex-row items-center sm:items-end gap-2">
+          <div className="text-xs sm:text-sm text-center sm:text-right text-[clamp(10px,2vw,14px)] mb-0 sm:mb-2">
+            {new Date().toLocaleDateString("id-ID", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </div>
+          <div className="flex flex-row gap-1 sm:gap-2">
+            <ThemeToggle />
+            <LogoutButton />
+          </div>
+        </div>
+      </header>
 
-                {/* Second Row */}
-                <div className="col-span-1 sm:col-span-1 md:col-span-2 lg:col-span-2">
-                    <ServiceLevel />
-                </div>
-                <div className="col-span-1 sm:col-span-1 md:col-span-2 lg:col-span-3">
-                    <AverageDuration />
-                </div>
-                <div className="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-4">
-                    <CallActivity />
-                </div>
-                <div className="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-3">
-                    <TicketStatus />
-                </div>
+      {/* Dashboard Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-2 md:gap-3 lg:gap-4">
+        {/* First Row */}
+        <div className="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-3">
+          <Top5Department />
+        </div>
+        <div className="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-3">
+          <Top5KantorCabang />
+        </div>
+        <div className="col-span-1 sm:col-span-1 md:col-span-3 lg:col-span-3">
+          <TicketPermohonan />
+        </div>
+        <div className="col-span-1 sm:col-span-1 md:col-span-3 lg:col-span-3">
+          <TicketComplaint />
+        </div>
 
-                {/* Third Row */}
-                <div className="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-4">
-                    <TotalTicketCombined />
-                </div>
-                <div className="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-4">
-                    <CallCategoryInbound />
-                </div>
-                <div className="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-4">
-                    <UserActivity />
-                </div>
+        {/* Second Row */}
+        <div className="col-span-1 sm:col-span-1 md:col-span-2 lg:col-span-2">
+          <ServiceLevel />
+        </div>
+        <div className="col-span-1 sm:col-span-1 md:col-span-2 lg:col-span-3">
+          <AverageDuration />
+        </div>
+        <div className="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-4">
+          <CallActivity />
+        </div>
+        <div className="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-3">
+          <TicketStatus />
+        </div>
 
-                {/* Fourth Row */}
-                <div className="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-12">
-                    <TotalCall />
-                </div>
+        {/* Third Row */}
+        <div className="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-4">
+          <TotalTicketCombined />
+        </div>
+        <div className="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-4">
+          <CallCategoryInbound />
+        </div>
+        <div className="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-4">
+          <UserActivity />
+        </div>
 
-            </div>
+        {/* Fourth Row */}
+        <div className="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-12">
+          <TotalCall />
+        </div>
+      </div>
 
-            {/* Clock Update Script */}
-            <script dangerouslySetInnerHTML={{
-                __html: `
+      {/* Clock Update Script */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
           function updateClock() {
             const clockElement = document.getElementById('clock');
             if (clockElement) {
@@ -115,8 +124,9 @@ export default function Wallboard() {
             }
           }
           setInterval(updateClock, 1000);
-        `
-            }} />
-        </main>
-    );
+        `,
+        }}
+      />
+    </main>
+  );
 }

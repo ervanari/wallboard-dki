@@ -19,13 +19,10 @@ const TotalCall: React.FC = () => {
   const { theme } = useTheme();
   const isDarkMode = theme === 'dark';
 
-  // Default values if data is not loaded yet
   const totalCallData = data?.totalCallData || [];
-  console.log('Total Call Data:', totalCallData);
 
   const hours = Array.from({ length: 24 }, (_, i) => i);
 
-  // Calculate total answered and abandoned calls
   const totalAnswered = totalCallData.reduce((sum: number, item: any) => sum + (item.answered || 0), 0);
   const totalAbandoned = totalCallData.reduce((sum: number, item: any) => sum + (item.abandon || 0), 0);
   const totalCalls = totalAnswered + totalAbandoned;

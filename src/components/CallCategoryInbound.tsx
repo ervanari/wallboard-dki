@@ -18,7 +18,6 @@ const CallCategoryInbound: React.FC<CallCategoryInboundProps> = ({ containerWidt
   const contentRef = useRef<HTMLDivElement>(null);
   const { width, height } = useResizeObserver(contentRef);
 
-  // Use container dimensions if provided, otherwise use measured dimensions
   const effectiveWidth = containerWidth || width;
   const effectiveHeight = containerHeight || height;
 
@@ -28,7 +27,6 @@ const CallCategoryInbound: React.FC<CallCategoryInboundProps> = ({ containerWidt
 
   const categoryData = data?.categoryData;
 
-  // Calculate dynamic font sizes based on container width
   const categoryNameFontSize = `clamp(10px, ${Math.max(effectiveWidth * 0.012, 1)}px, 16px)`;
   const countFontSize = `clamp(11px, ${Math.max(effectiveWidth * 0.014, 1)}px, 18px)`;
 
